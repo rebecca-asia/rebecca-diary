@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Phase 1+ collected data
+data/
+
+# IDE
+.claude/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
