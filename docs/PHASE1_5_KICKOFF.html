@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Phase 1.5 キックオフ — ドメインレイヤー確立</title>
+<style>
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+    color: #37474F;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ===== Page Layout ===== */
+  .page {
+    width: 297mm; height: 210mm;
+    padding: 13mm 18mm 10mm 18mm;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* ===== Title Bar ===== */
+  .title-bar {
+    background: #1A1A2E;
+    color: #fff;
+    margin: -13mm -18mm 10px -18mm;
+    padding: 8px 18mm 7px 18mm;
+  }
+  .title-bar h1 {
+    font-size: 19pt;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .title-bar .sub {
+    font-size: 9pt;
+    color: #B0BEC5;
+    margin-top: 2px;
+  }
+
+  /* ===== Section Headers ===== */
+  h2 {
+    font-size: 11pt;
+    color: #546E7A;
+    border-bottom: 2px solid #E0E0E0;
+    padding-bottom: 3px;
+    margin-bottom: 6px;
+  }
+  h3 {
+    font-size: 9.5pt;
+    margin-bottom: 4px;
+  }
+
+  /* ===== Common ===== */
+  .row { display: flex; gap: 10px; }
+  .col { flex: 1; }
+  .col-2 { flex: 2; }
+  .col-3 { flex: 3; }
+  .text-small { font-size: 7.5pt; line-height: 1.45; }
+  .text-body { font-size: 8pt; line-height: 1.4; }
+  .text-muted { color: #90A4AE; font-size: 7pt; }
+  .mt { margin-top: 8px; }
+  .mt-s { margin-top: 5px; }
+  .mb { margin-bottom: 8px; }
+
+  /* ===== Boxes ===== */
+  .box {
+    border-radius: 5px;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+  }
+  .box-red { background: #FFEBEE; border: 2px solid #E53935; }
+  .box-red h3 { color: #C62828; }
+  .box-green { background: #E8F5E9; border: 2px solid #43A047; }
+  .box-green h3 { color: #2E7D32; }
+  .box-blue { background: #E3F2FD; border: 2px solid #1565C0; }
+  .box-blue h3 { color: #0D47A1; }
+  .box-pink { background: #FCE4EC; border: 2px solid #C2185B; }
+  .box-pink h3 { color: #880E4F; }
+  .box-amber { background: #FFF8E1; border: 2px solid #F9A825; }
+  .box-amber h3 { color: #F57F17; }
+  .box-purple { background: #F3E5F5; border: 2px solid #7B1FA2; }
+  .box-purple h3 { color: #4A148C; }
+  .box-gray { background: #FAFAFA; border: 1px solid #E0E0E0; }
+  .box-dark { background: #1A1A2E; color: #E0E0E0; border: none; }
+  .box-dark b { color: #fff; }
+  .box-indigo { background: #E8EAF6; border: 2px solid #7986CB; }
+  .box-indigo h3 { color: #283593; }
+
+  /* ===== Tags ===== */
+  .tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 8pt;
+    font-weight: 700;
+  }
+  .tag-done { background: #C8E6C9; color: #1B5E20; }
+  .tag-now { background: #C2185B; color: #fff; }
+  .tag-future { background: #EEEEEE; color: #757575; }
+  .tag-new { background: #C2185B; color: #fff; font-size: 8.5pt; }
+  .tag-scope-new { background: #C8E6C9; color: #1B5E20; }
+  .tag-scope-mod { background: #FFF9C4; color: #F57F17; }
+  .tag-scope-no { background: #ECEFF1; color: #546E7A; }
+
+  /* ===== Timeline ===== */
+  .timeline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 5px 0 8px 0;
+  }
+  .timeline .phase {
+    text-align: center;
+    padding: 5px 14px;
+    border-radius: 6px;
+    font-size: 8.5pt;
+    font-weight: 600;
+    min-width: 120px;
+  }
+  .timeline .arrow {
+    font-size: 14pt;
+    color: #BDBDBD;
+    padding: 0 5px;
+  }
+  .timeline .arrow-accent { color: #C2185B; font-weight: 700; }
+  .phase-done { background: #C8E6C9; color: #1B5E20; }
+  .phase-now { background: #FCE4EC; color: #880E4F; border: 3px solid #C2185B; box-shadow: 0 2px 8px rgba(194,24,91,0.2); }
+  .phase-future { background: #F5F5F5; color: #9E9E9E; border: 1px dashed #BDBDBD; }
+
+  /* ===== Layer Diagrams ===== */
+  .layer {
+    border-radius: 8px;
+    padding: 6px 10px;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .layer-title {
+    font-size: 9pt;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .layer-collection { background: #E3F2FD; border: 2px solid #1565C0; }
+  .layer-collection .layer-title { color: #1565C0; }
+  .layer-domain { background: #FCE4EC; border: 3px solid #C2185B; box-shadow: 0 2px 10px rgba(194,24,91,0.15); }
+  .layer-domain .layer-title { color: #C2185B; }
+  .layer-persistence { background: #FFF8E1; border: 2px solid #F9A825; }
+  .layer-persistence .layer-title { color: #F57F17; }
+  .layer-presentation { background: #E8F5E9; border: 2px solid #43A047; }
+  .layer-presentation .layer-title { color: #2E7D32; }
+
+  .layer-arrow {
+    text-align: center;
+    color: #78909C;
+    font-size: 9pt;
+    padding: 1px 0;
+  }
+
+  /* ===== Modules inside layers ===== */
+  .modules {
+    display: flex;
+    gap: 5px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+  .module {
+    background: #fff;
+    border: 1px solid #F48FB1;
+    border-radius: 6px;
+    padding: 3px 7px;
+    font-size: 7.5pt;
+    text-align: center;
+  }
+  .module b { display: block; color: #880E4F; }
+  .module-stub { border-style: dashed; }
+  .module-phase2 { border-color: #CE93D8; }
+  .module-phase2 b { color: #4A148C; }
+
+  /* ===== Problem markers ===== */
+  .problem-marker {
+    background: #FFEBEE;
+    border: 2px solid #E53935;
+    border-radius: 6px;
+    padding: 3px 7px;
+    font-size: 7.5pt;
+    color: #C62828;
+    display: inline-block;
+    margin: 1px 3px;
+  }
+  .ok-marker {
+    background: #fff;
+    border: 1px solid #90CAF9;
+    border-radius: 6px;
+    padding: 3px 7px;
+    font-size: 7.5pt;
+    color: #37474F;
+    display: inline-block;
+    margin: 1px 3px;
+  }
+
+  /* ===== Metrics ===== */
+  .metric-row { display: flex; gap: 8px; }
+  .metric {
+    flex: 1;
+    background: #FAFAFA;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    padding: 5px 8px;
+    text-align: center;
+  }
+  .metric .label { font-size: 7.5pt; color: #78909C; margin-bottom: 2px; }
+  .metric .value { font-size: 9pt; }
+  .metric .before { color: #C62828; }
+  .metric .after { color: #2E7D32; font-weight: 700; }
+
+  /* ===== Decision chips ===== */
+  .decisions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .decision {
+    background: #E3F2FD;
+    border: 1px solid #1565C0;
+    border-radius: 14px;
+    padding: 2px 10px;
+    font-size: 7.5pt;
+    color: #0D47A1;
+  }
+
+  /* ===== WBS ===== */
+  .wbs-phases { display: flex; gap: 6px; }
+  .wbs-phase { flex: 1; }
+  .wbs-phase-header {
+    text-align: center;
+    border-radius: 6px;
+    padding: 3px 0;
+    font-size: 8pt;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .wbs-wg {
+    border-radius: 6px;
+    padding: 5px 8px;
+    margin-bottom: 4px;
+    font-size: 7.5pt;
+    line-height: 1.4;
+  }
+  .wbs-wg h4 { font-size: 8pt; margin-bottom: 2px; }
+  .wbs-wg ul { padding-left: 12px; }
+
+  /* ===== Comparison ===== */
+  .comparison { display: flex; gap: 10px; align-items: stretch; }
+  .comp-col { flex: 1; }
+  .comp-item {
+    background: #fff;
+    border-radius: 6px;
+    padding: 4px 8px;
+    margin-bottom: 4px;
+    font-size: 8pt;
+    line-height: 1.35;
+  }
+  .comp-before .comp-item { border-left: 3px solid #E53935; }
+  .comp-after .comp-item { border-left: 3px solid #43A047; }
+  .comp-arrow {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24pt; color: #546E7A; flex: 0 0 40px;
+  }
+
+  /* ===== Page Number ===== */
+  .page-num {
+    position: absolute;
+    bottom: 6mm;
+    right: 18mm;
+    font-size: 7pt;
+    color: #BDBDBD;
+  }
+
+  /* ===== Narrative Text ===== */
+  .narrative {
+    background: #FAFAFA;
+    border-left: 4px solid #B0BEC5;
+    padding: 5px 10px;
+    font-size: 8pt;
+    line-height: 1.45;
+    color: #455A64;
+    border-radius: 0 6px 6px 0;
+  }
+  .narrative b { color: #1A1A2E; }
+
+  /* ===== Quote ===== */
+  .quote {
+    font-size: 11pt;
+    font-style: italic;
+    color: #1A1A2E;
+    padding: 4px 0;
+  }
+
+  /* ===== Scope table ===== */
+  .scope-table { width: 100%; border-collapse: collapse; font-size: 7.5pt; }
+  .scope-table td { padding: 3px 6px; border-bottom: 1px solid #ECEFF1; vertical-align: top; }
+  .scope-table td:first-child { width: 70px; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE 1: エグゼクティブサマリー                                  -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="title-bar">
+    <h1>Phase 1.5 キックオフ — ドメインレイヤー確立</h1>
+    <div class="sub">Rebecca's Room アーキテクチャ改善提案　|　2026-02-13　|　PO 承認依頼</div>
+  </div>
+
+  <div class="quote">"哲学で定義された Rebecca の「魂」を、テスト可能なコードにする。"</div>
+
+  <div class="mt-s">
+    <h2>プロジェクトタイムライン</h2>
+    <div class="timeline">
+      <div class="phase phase-done">Phase 0<br><b>静的日記</b></div>
+      <div class="arrow">→</div>
+      <div class="phase phase-done">Phase 1<br><b>Room Status + Health</b></div>
+      <div class="arrow arrow-accent">→</div>
+      <div class="phase phase-now">Phase 1.5<br><b>ドメイン確立</b> <span class="tag tag-now">NOW</span></div>
+      <div class="arrow">⇢</div>
+      <div class="phase phase-future">Phase 2<br>Nurture System</div>
+    </div>
+  </div>
+
+  <div class="narrative mb">
+    Phase 0（静的日記）と Phase 1（Room Status + Health）は完了し、Rebecca は「記録する存在」から「そこにいる存在」になりました。
+    しかし Phase 1 完了後のアーキテクチャ俯瞰で<b>構造的な課題</b>が見つかりました。
+    このまま Phase 2（Nurture System）に進むと技術的負債が累積し、変更コストが指数的に増大します。
+    Phase 1.5 はこの課題を解決し、Phase 2 の「受け皿」を作る構造改善フェーズです。
+  </div>
+
+  <div class="row">
+    <div class="col box box-red">
+      <h3>課題：ドメインロジックの散在</h3>
+      <p class="text-small mt-s">
+        Rebecca の状態分類・スコア計算・アラート判定といった<b>ドメインロジック</b>が、
+        Collection 層（Python）と Presentation 層（JavaScript）に散らばっています。<br><br>
+        <b>1.</b> アラートメッセージが Python と JS の両方にハードコード（二重管理）<br>
+        <b>2.</b> 変更時に 2-3 ファイルの修正が必要（不整合リスク大）<br>
+        <b>3.</b> ドメインロジックの単体テストが不可能<br>
+        <b>4.</b> Phase 2 の Nurture System を追加する構造的な場所がない
+      </p>
+    </div>
+    <div class="col box box-green">
+      <h3>解決：domain/ レイヤーの新設</h3>
+      <p class="text-small mt-s">
+        新たに <b>domain/</b> ディレクトリを作成し、全ドメインロジックを集約します。
+        Collector は計測のみ、app.js はレンダリングのみに責務を限定します。<br><br>
+        <b>1.</b> 閾値・分類・スコア・メッセージを domain/ に一元化<br>
+        <b>2.</b> 変更が 1 ファイルで完結（Single Source of Truth）<br>
+        <b>3.</b> unittest で全ビジネスルールを自動テスト<br>
+        <b>4.</b> Phase 2 は domain/ 上にモジュール追加するだけ
+      </p>
+    </div>
+  </div>
+
+  <h2>期待効果</h2>
+  <div class="metric-row">
+    <div class="metric">
+      <div class="label">ドメインロジック変更時の修正箇所</div>
+      <div class="value"><span class="before">2-3 ファイル</span>　→　<span class="after">1 ファイル</span></div>
+    </div>
+    <div class="metric">
+      <div class="label">ドメインロジックのテスト</div>
+      <div class="value"><span class="before">手動のみ</span>　→　<span class="after">unittest で自動検証</span></div>
+    </div>
+    <div class="metric">
+      <div class="label">Phase 2 Nurture System の追加コスト</div>
+      <div class="value"><span class="before">高い（構造決めから）</span>　→　<span class="after">domain/ に追加するだけ</span></div>
+    </div>
+  </div>
+
+  <h2 class="mt">決定済み事項</h2>
+  <div class="decisions">
+    <div class="decision">Q-01 Collector 修正: OK（動作同等を保証）</div>
+    <div class="decision">Q-02 テスト: unittest（標準ライブラリ）</div>
+    <div class="decision">Q-03 app.js: ドメインロジック全除去</div>
+    <div class="decision">Q-04 rebecca.py: スタブのみ（Phase 2 で実装）</div>
+  </div>
+
+  <div class="box box-gray mt-s" style="text-align:center;">
+    <span class="text-small" style="color:#78909C;">スコープ：UI/UX の変更なし（内部リファクタリング）　|　外部依存の追加なし　|　既存機能の回帰テスト実施</span>
+  </div>
+
+  <div class="page-num">1 / 5</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 2: 現状の課題（As-Is）                                    -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="title-bar">
+    <h1>現状アーキテクチャの課題</h1>
+    <div class="sub">Phase 1 完了時点の 3 層構造と、そこに潜む 4 つの問題</div>
+  </div>
+
+  <div class="row">
+    <!-- Left: Architecture Layers -->
+    <div class="col-3">
+      <h2>現在の 3 層構造</h2>
+
+      <div class="layer layer-collection">
+        <div class="layer-title">Collection 層（collectors/*.py — cron 実行）</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
+          <div class="ok-marker">✓ システム計測<br><span style="font-size:7.5pt;">top, vm_stat, pgrep</span></div>
+          <div class="problem-marker">⚠ ドメイン分類<br><span style="font-size:7.5pt;">classify_cpu() → "クリア"</span></div>
+          <div class="problem-marker">⚠ ドメイン集約<br><span style="font-size:7.5pt;">overall_score, alert_level</span></div>
+        </div>
+        <div class="text-small" style="color:#E53935;margin-top:4px;font-style:italic;">← 状態分類・スコア計算は Collection 層の責務ではない</div>
+      </div>
+
+      <div class="layer-arrow">↓　JSON ファイル書き込み</div>
+
+      <div class="layer layer-persistence">
+        <div class="layer-title">Persistence 層（src/data/*.json — gitignored）</div>
+        <div class="text-small">health.json / status.json / nurture.json — スキーマ定義なし、バージョニングなし</div>
+      </div>
+
+      <div class="layer-arrow">↓　HTTP fetch（5分ポーリング）</div>
+
+      <div class="layer layer-presentation">
+        <div class="layer-title">Presentation 層（app.js + style.css + index.html）</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
+          <div class="ok-marker">✓ fetch + DOM操作</div>
+          <div class="problem-marker">⚠ アラートメッセージ<br><span style="font-size:7.5pt;">ハードコード配列</span></div>
+          <div class="problem-marker">⚠ staleness 判定<br><span style="font-size:7.5pt;">閾値ロジック</span></div>
+          <div class="problem-marker">⚠ %変換ロジック</div>
+        </div>
+        <div class="text-small" style="color:#E53935;margin-top:4px;font-style:italic;">← メッセージ生成・データ鮮度判定は Presentation 層の責務ではない</div>
+      </div>
+
+      <div style="border:3px dashed #C2185B;border-radius:8px;padding:5px;text-align:center;margin-top:5px;">
+        <b style="color:#C2185B;font-size:9.5pt;">❌ Domain 層が存在しない</b>
+      </div>
+    </div>
+
+    <!-- Right: Problem Details -->
+    <div class="col-2">
+      <h2>4 つの問題</h2>
+
+      <div class="box box-red">
+        <h3>問題 1：二重管理</h3>
+        <p class="text-small">
+          アラートメッセージが <b>collect_health.py</b>（Python）と <b>app.js</b>（JavaScript）の両方にハードコードされています。
+          閾値を変更するとき、2つの言語・最大3ファイルの同時修正が必要です。修正漏れによる不整合リスクがあります。
+        </p>
+      </div>
+
+      <div class="box box-red">
+        <h3>問題 2：テスト不能</h3>
+        <p class="text-small">
+          ドメインロジック（状態分類・スコア計算・アラート判定）が Collector のシステム計測コードと混在しているため、
+          <b>ビジネスルールだけを単体テストできません</b>。テストするには実際にシステムコマンドを実行する必要があります。
+        </p>
+      </div>
+
+      <div class="box box-red">
+        <h3>問題 3：Phase 2 の受け皿なし</h3>
+        <p class="text-small">
+          Phase 2（Nurture System）では mood, trust, EXP, level, skills など<b>さらに複雑なドメインロジック</b>が加わります。
+          現状の構造のまま進むと、mood が Collector に、trust が app.js に、EXP がどこか不明…という状態になります。
+        </p>
+      </div>
+
+      <div class="box box-amber">
+        <h3>問題 4：設定値の散在</h3>
+        <p class="text-small">
+          CPU 閾値は collect_health.py、ポーリング間隔は app.js、Cron 間隔は crontab（Git管理外）にそれぞれハードコードされています。
+          <b>Single Source of Truth がありません。</b>
+        </p>
+      </div>
+
+      <div class="narrative mt-s">
+        これらは Phase 1 の「動くもの優先」という方針の結果として自然に生じた技術的負債です。
+        Phase 1 単体では問題になりませんが、<b>Phase 2 でドメインの複雑さが増すと維持不能になります</b>。
+      </div>
+    </div>
+  </div>
+
+  <div class="page-num">2 / 5</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 3: 目標アーキテクチャ（To-Be）                             -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="title-bar">
+    <h1>Phase 1.5 後のアーキテクチャ</h1>
+    <div class="sub">Domain 層の新設による 4 層構造</div>
+  </div>
+
+  <div class="row">
+    <!-- Left: 4-Layer Architecture -->
+    <div class="col-3">
+      <h2>新しい 4 層構造</h2>
+
+      <div class="layer layer-collection">
+        <div class="layer-title">Collection 層（collectors/*.py）</div>
+        <div class="text-small">責務：<b>純粋なシステム計測のみ</b><br>get_cpu_usage() → float　/　get_memory() → dict　/　check_gateway() → bool</div>
+      </div>
+
+      <div class="layer-arrow">↓　raw metrics（生の計測値）</div>
+
+      <div class="layer layer-domain">
+        <div class="layer-title">Domain 層（domain/*.py）<span class="tag tag-new" style="margin-left:8px;">NEW</span></div>
+        <div class="modules">
+          <div class="module"><b>constants.py</b>全閾値・メッセージ<br>一元管理</div>
+          <div class="module"><b>health.py</b>状態分類・スコア<br>アラート判定</div>
+          <div class="module"><b>presence.py</b>在室判定<br>時間帯コンテキスト</div>
+          <div class="module"><b>schema.py</b>JSON スキーマ<br>バリデーション</div>
+          <div class="module module-stub"><b>rebecca.py</b>統合状態<br>(Phase 2 受け皿)</div>
+        </div>
+        <div class="text-small mt-s" style="color:#880E4F;">
+          責務：<b>全ドメインロジックの集約</b> — 状態分類、スコア計算、アラート判定、メッセージ生成<br>
+          テスト：unittest で全ビジネスルールを自動検証。I/O なしの純粋関数で構成。
+        </div>
+      </div>
+
+      <div class="layer-arrow">↓　typed result（ドメインオブジェクト）</div>
+
+      <div class="layer layer-persistence">
+        <div class="layer-title">Persistence 層（src/data/*.json）</div>
+        <div class="text-small"><b>schema_version</b> 付き　|　Domain 層が生成した完全なデータ（メッセージ・staleness 含む）</div>
+      </div>
+
+      <div class="layer-arrow">↓　HTTP fetch</div>
+
+      <div class="layer layer-presentation">
+        <div class="layer-title">Presentation 層（app.js + style.css）</div>
+        <div class="text-small">責務：<b>純粋なレンダリングのみ</b>（data → DOM マッピング）。ビジネスロジック ゼロ。</div>
+      </div>
+
+      <div class="box box-purple mt-s" style="padding:6px 14px;">
+        <p class="text-small"><b>設計原則：domain/ が他のどの層にも依存しない</b>（逆方向依存なし）。
+        Collector が domain を使い、app.js は domain の出力（JSON）を表示する。domain は Collector も app.js も知らない。</p>
+      </div>
+    </div>
+
+    <!-- Right: Benefits + Directory -->
+    <div class="col-2">
+      <h2>この構造で得られるもの</h2>
+
+      <div class="box box-green">
+        <h3>✓ 変更の局所化</h3>
+        <p class="text-small">
+          閾値変更 → <b>constants.py のみ</b>。分類ロジック変更 → health.py or presence.py のみ。
+          Collector・Frontend に影響なし。修正箇所の特定が即座に可能。
+        </p>
+      </div>
+
+      <div class="box box-green">
+        <h3>✓ テスト可能</h3>
+        <p class="text-small">
+          domain/ は I/O のない純粋な Python モジュール。
+          classify(), alert_level(), score() の<b>境界値テスト</b>を unittest で自動実行。
+          デグレの早期検出が可能に。
+        </p>
+      </div>
+
+      <div class="box box-green">
+        <h3>✓ Phase 2 の受け皿</h3>
+        <p class="text-small">
+          Nurture System の mood, trust, EXP, level は
+          <b>domain/nurture.py</b> として追加するだけ。
+          既存の health.py, presence.py を入力に利用でき、構造の再設計が不要。
+        </p>
+      </div>
+
+      <div class="box box-green">
+        <h3>✓ 依存方向の統一</h3>
+        <p class="text-small">
+          Collection → Domain → Persistence → Presentation の<b>一方向フロー</b>。
+          変更の波及方向が常に予測可能。逆方向依存がないため、各層の独立開発が可能。
+        </p>
+      </div>
+
+      <h2 class="mt">ディレクトリ構造</h2>
+      <div class="box box-gray" style="font-family:monospace;font-size:8.5pt;line-height:1.7;">
+        rebecca-diary/<br>
+        ├── <b style="color:#C2185B;">domain/</b> <span class="tag tag-new">NEW</span><br>
+        │&emsp;&emsp;├── __init__.py<br>
+        │&emsp;&emsp;├── constants.py<br>
+        │&emsp;&emsp;├── health.py<br>
+        │&emsp;&emsp;├── presence.py<br>
+        │&emsp;&emsp;├── rebecca.py <span style="color:#9E9E9E;">(stub)</span><br>
+        │&emsp;&emsp;└── schema.py<br>
+        ├── <b style="color:#C2185B;">tests/</b> <span class="tag tag-new">NEW</span><br>
+        │&emsp;&emsp;├── test_health.py<br>
+        │&emsp;&emsp;├── test_presence.py<br>
+        │&emsp;&emsp;└── test_constants.py<br>
+        ├── collectors/ <span style="color:#F57F17;">修正</span><br>
+        └── src/app.js <span style="color:#F57F17;">修正</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-num">3 / 5</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 4: 実施計画                                               -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="title-bar">
+    <h1>実施計画 — 4 フェーズ・8 ワークグループ</h1>
+    <div class="sub">合計 30 ワークパッケージ。Phase A・B は並行実行可能</div>
+  </div>
+
+  <div class="wbs-phases">
+    <!-- Phase A -->
+    <div class="wbs-phase">
+      <div class="wbs-phase-header" style="background:#E3F2FD;color:#1565C0;">Phase A<br><span style="font-weight:400;font-size:7.5pt;">Domain 構築（並行可能）</span></div>
+
+      <div class="wbs-wg box-blue" style="border:1px solid #90CAF9;background:#E3F2FD;border-radius:6px;padding:5px 8px;margin-bottom:4px;">
+        <h4 style="color:#0D47A1;">WG-1: Foundation</h4>
+        <ul>
+          <li>domain/ ディレクトリ作成</li>
+          <li>constants.py（全閾値集約）</li>
+          <li>tests/ ディレクトリ作成</li>
+        </ul>
+        <div class="text-muted" style="text-align:right;">3 WP</div>
+      </div>
+
+      <div class="wbs-wg" style="border:1px solid #F48FB1;background:#FCE4EC;border-radius:6px;padding:5px 8px;margin-bottom:4px;">
+        <h4 style="color:#C2185B;">WG-2: Domain Health</h4>
+        <ul>
+          <li>health.py — classify() 実装</li>
+          <li>overall_score 計算移設</li>
+          <li>alert_level 判定移設</li>
+          <li>alert_message 生成</li>
+          <li>evaluate() 統合関数</li>
+        </ul>
+        <div class="text-muted" style="text-align:right;">5 WP</div>
+      </div>
+
+      <div class="wbs-wg" style="border:1px solid #F48FB1;background:#FCE4EC;border-radius:6px;padding:5px 8px;margin-bottom:4px;">
+        <h4 style="color:#C2185B;">WG-3: Domain Presence</h4>
+        <ul>
+          <li>presence.py — status 判定</li>
+          <li>time_context 移設</li>
+          <li>evaluate() 統合関数</li>
+        </ul>
+        <div class="text-muted" style="text-align:right;">3 WP</div>
+      </div>
+
+      <div class="wbs-wg" style="border:1px solid #FFE082;background:#FFF8E1;border-radius:6px;padding:5px 8px;margin-bottom:4px;">
+        <h4 style="color:#F57F17;">WG-7: Schema</h4>
+        <ul>
+          <li>schema.py 作成</li>
+          <li>schema_version 導入</li>
+          <li>staleness/alert_message 追加</li>
+        </ul>
+        <div class="text-muted" style="text-align:right;">4 WP</div>
+      </div>
+    </div>
+
+    <!-- Phase B -->
+    <div class="wbs-phase">
+      <div class="wbs-phase-header" style="background:#E8F5E9;color:#2E7D32;">Phase B<br><span style="font-weight:400;font-size:7.5pt;">Collector + テスト（並行可能）</span></div>
+
+      <div class="wbs-wg" style="border:1px solid #A5D6A7;background:#E8F5E9;border-radius:6px;padding:5px 8px;margin-bottom:4px;">
+        <h4 style="color:#2E7D32;">WG-4: Collector Refactoring</h4>
+        <ul>
+          <li>collect_health.py 浄化</li>
+          <li>collect_status.py 浄化</li>
+          <li>collect_nurture.py 浄化</li>
+          <li>JSON diff で動作同等検証</li>
+        </ul>
+        <div class="text-muted" style="text-align:right;">4 WP</div>
+      </div>
+
+      <div class="wbs-wg" style="border:1px solid #A5D6A7;background:#E8F5E9;border-radius:6px;padding:5px 8px;margin-bottom:4px;">
+        <h4 style="color:#2E7D32;">WG-6: Testing</h4>
+        <ul>
+          <li>test_health.py（classify, score, alert）</li>
+          <li>test_presence.py（status, context）</li>
+          <li>test_constants.py（閾値整合性）</li>
+          <li>python3 -m unittest 全実行</li>
+        </ul>
+        <div class="text-muted" style="text-align:right;">4 WP</div>
+      </div>
+    </div>
+
+    <!-- Phase C -->
+    <div class="wbs-phase">
+      <div class="wbs-phase-header" style="background:#FFF8E1;color:#F57F17;">Phase C<br><span style="font-weight:400;font-size:7.5pt;">Frontend 浄化</span></div>
+
+      <div class="wbs-wg" style="border:1px solid #FFE082;background:#FFF8E1;border-radius:6px;padding:5px 8px;margin-bottom:4px;">
+        <h4 style="color:#F57F17;">WG-5: Frontend Purification</h4>
+        <ul>
+          <li>alert メッセージ配列を削除</li>
+          <li>checkStaleness() を削除</li>
+          <li>メトリクス%変換ロジック削除</li>
+          <li>回帰テスト（UI 同一性確認）</li>
+        </ul>
+        <div class="text-muted" style="text-align:right;">4 WP</div>
+      </div>
+
+      <div class="narrative mt-s">
+        <b>回帰テストの方法：</b><br>
+        Phase 1 完了時のスクリーンショットを保存し、Phase 1.5 完了後の画面と目視比較。
+        UI/UX は完全に同一であることを確認。
+      </div>
+    </div>
+
+    <!-- Phase D -->
+    <div class="wbs-phase">
+      <div class="wbs-phase-header" style="background:#F3E5F5;color:#7B1FA2;">Phase D<br><span style="font-weight:400;font-size:7.5pt;">ドキュメント</span></div>
+
+      <div class="wbs-wg" style="border:1px solid #CE93D8;background:#F3E5F5;border-radius:6px;padding:5px 8px;margin-bottom:4px;">
+        <h4 style="color:#7B1FA2;">WG-8: Documentation</h4>
+        <ul>
+          <li>ADR-015: ドメインレイヤー導入</li>
+          <li>CLAUDE.md 更新</li>
+          <li>docs/README.md 更新</li>
+        </ul>
+        <div class="text-muted" style="text-align:right;">3 WP</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="mt">スコープサマリー</h2>
+  <table class="scope-table">
+    <tr>
+      <td><span class="tag tag-scope-new">新規作成</span></td>
+      <td><b>domain/</b>（constants.py, health.py, presence.py, rebecca.py, schema.py）+ <b>tests/</b>（test_health.py, test_presence.py, test_constants.py）</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-scope-mod">修正</span></td>
+      <td><b>collectors/</b>（collect_health.py, collect_status.py, collect_nurture.py — 計測のみに限定）+ <b>src/app.js</b>（ドメインロジック除去）+ <b>src/data/*.json</b>（schema_version 追加）</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-scope-no">変更なし</span></td>
+      <td>update_diary.py / watch_diary.py（Protected）/ src/style.css / src/index.html — <b>UI/UX は Phase 1 と完全に同一</b></td>
+    </tr>
+  </table>
+
+  <div class="narrative mt-s">
+    <b>依存関係：</b>Phase A 完了後に Phase B が開始可能。Phase B 完了後に Phase C。Phase C 完了後に Phase D。
+    Phase A 内の WG-2, WG-3, WG-7 は並行実行可能。Phase B 内の WG-4, WG-6 も並行実行可能。
+  </div>
+
+  <div class="page-num">4 / 5</div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE 5: 期待効果と Phase 2 接続                                 -->
+<!-- ============================================================ -->
+<div class="page">
+  <div class="title-bar">
+    <h1>期待効果と Phase 2 への接続</h1>
+    <div class="sub">Phase 1.5 は「機能追加」ではなく「構造の確立」。Phase 2 以降の開発速度と品質に直結します。</div>
+  </div>
+
+  <div class="row">
+    <!-- Left: Before/After -->
+    <div class="col">
+      <h2>Before / After 比較</h2>
+
+      <div class="comparison">
+        <div class="comp-col comp-before">
+          <div style="background:#FFEBEE;border-radius:6px;padding:4px;text-align:center;font-weight:700;color:#C62828;font-size:9pt;margin-bottom:6px;">Before（Phase 1 時点）</div>
+          <div class="comp-item"><b>ドメインロジック変更</b><br>2-3 ファイル修正（Python + JS）</div>
+          <div class="comp-item"><b>閾値変更</b><br>複数ファイルを横断的に修正</div>
+          <div class="comp-item"><b>テスト</b><br>手動確認のみ（自動テストなし）</div>
+          <div class="comp-item"><b>Phase 2 追加コスト</b><br>高い（構造決めから必要）</div>
+          <div class="comp-item"><b>不整合リスク</b><br>Python と JS の定義が食い違う</div>
+        </div>
+        <div class="comp-arrow">→</div>
+        <div class="comp-col comp-after">
+          <div style="background:#E8F5E9;border-radius:6px;padding:4px;text-align:center;font-weight:700;color:#2E7D32;font-size:9pt;margin-bottom:6px;">After（Phase 1.5 完了後）</div>
+          <div class="comp-item"><b>ドメインロジック変更</b><br><span style="color:#2E7D32;font-weight:700;">1 ファイルのみ（domain/*.py）</span></div>
+          <div class="comp-item"><b>閾値変更</b><br><span style="color:#2E7D32;font-weight:700;">constants.py のみ</span></div>
+          <div class="comp-item"><b>テスト</b><br><span style="color:#2E7D32;font-weight:700;">unittest で全ルール自動検証</span></div>
+          <div class="comp-item"><b>Phase 2 追加コスト</b><br><span style="color:#2E7D32;font-weight:700;">domain/ にモジュール追加するだけ</span></div>
+          <div class="comp-item"><b>不整合リスク</b><br><span style="color:#2E7D32;font-weight:700;">Single Source of Truth で排除</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Phase 2 Connection -->
+    <div class="col">
+      <h2>Phase 2（Nurture System）への接続</h2>
+
+      <div class="box box-pink" style="margin-bottom:6px;">
+        <h3 style="font-size:10pt;">Phase 1.5 で構築する domain/</h3>
+        <div class="modules">
+          <div class="module"><b>constants.py</b></div>
+          <div class="module"><b>health.py</b></div>
+          <div class="module"><b>presence.py</b></div>
+          <div class="module"><b>schema.py</b></div>
+          <div class="module module-stub"><b>rebecca.py</b><span style="font-size:7.5pt;"> (stub)</span></div>
+        </div>
+        <div class="text-small mt-s" style="color:#880E4F;font-style:italic;">← Phase 1.5 完了時点（受け皿完成）</div>
+      </div>
+
+      <div style="text-align:center;font-size:11pt;color:#7B1FA2;font-weight:700;padding:3px 0;">↓ Phase 2 で拡張 ↓</div>
+
+      <div class="box box-purple" style="border-style:dashed;">
+        <h3 style="font-size:10pt;">Phase 2 で追加されるモジュール</h3>
+        <div class="modules">
+          <div class="module module-phase2"><b>rebecca.py</b>統合状態<br>mood, energy</div>
+          <div class="module module-phase2"><b>nurture.py</b>EXP, Level<br>成長ロジック</div>
+          <div class="module module-phase2"><b>relationships.py</b>trust, intimacy<br>関係性深度</div>
+          <div class="module module-phase2"><b>skills.py</b>プラグイン<br>→ スキル</div>
+        </div>
+        <div class="text-small mt-s" style="color:#4A148C;font-style:italic;">health.py と presence.py を入力として利用 → 既存コードの再利用</div>
+      </div>
+
+      <div class="box box-indigo mt-s">
+        <h3>Phase 1.5 がなければ</h3>
+        <p class="text-small">
+          Nurture System は collect_nurture.py に詰め込まれ、mood が Collector に、trust が app.js に、EXP の場所が不明…
+          <b>テスト不能・変更コスト指数増大</b>の未来が確定します。
+        </p>
+      </div>
+
+      <div class="box box-indigo">
+        <h3>Phase 1.5 があれば</h3>
+        <p class="text-small">
+          Nurture System は domain/nurture.py + domain/relationships.py として追加。
+          既存 health.py, presence.py を入力に使い、テスト可能で変更が局所的。
+          <b>Phase 2 の開発速度と品質が構造的に保証されます。</b>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="box box-dark mt">
+    <p style="text-align:center;font-size:9.5pt;">
+      Phase 1.5 は<b>「機能追加」ではなく「構造の確立」</b>です。ユーザーから見える変化はありませんが、Phase 2 以降の開発速度と品質に直結します。<br>
+      <b style="font-size:11pt;color:#fff;">PO 承認後、Phase A（domain/ 新設 + テスト基盤構築）から着手します。</b>
+    </p>
+  </div>
+
+  <div style="text-align:center;margin-top:10px;">
+    <span class="text-small" style="color:#78909C;">
+      詳細仕様：docs/PHASE1_5_KICKOFF.md　|　プロジェクト：Rebecca's Room　|　提出日：2026-02-13
+    </span>
+  </div>
+
+  <div class="page-num">5 / 5</div>
+</div>
+
+</body>
+</html>

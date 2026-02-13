@@ -1,81 +1,274 @@
-# Rebecca's Diary — Design Rules
+# Rebecca's Room — Design Rules
 
 ## Design Philosophy
 
-- **Quiet Dark + Neon Accent** — 落ち着いたダークトーンがベース。ネオン・グローは味付けとして控えめに使用OK
-- **Typography-driven** — 装飾ではなくフォント・余白・階層で情報を伝える
-- **Vanilla JS OK** — ライブラリ不要のプレーンなJavaScriptは使用可。ナビゲーション、フィルタ、アニメーション制御等
-- **No external dependencies** — フレームワーク・CDN・Webフォント一切なし
+- **Cyberpunk Dark + Neon Accent** — 深いダークベースにネオンカラー（ピンク・シアン・イエロー・グリーン・レッド）で情報を伝える
+- **HUD-style UI** — コーナーブラケット、スキャンライン、グリッチテキスト等のサイバーパンク的UIパターン
+- **SVG Icon System** — 絵文字一切不使用。全アイコンはSVGスプライトシートから取得
+- **Typography-driven** — Google Fonts（Orbitron, Rajdhani, Share Tech Mono, Noto Sans JP）による階層表現
+- **Vanilla JS OK** — ライブラリ不要のプレーンなJavaScriptは使用可
 
 ---
 
 ## Color Palette
 
+### Neon Colors（5色 + バリエーション）
+
 ```
-Background
-  --bg:              #151519    ← ページ背景（ほぼ黒）
-  --surface:         #1c1c22    ← カード/セクション背景
-  --surface-hover:   #222229    ← ホバー時の背景
+Pink（メインアクセント）
+  --rb-neon-pink:        #ff2a6d    ← リンク、カードボーダー、ハイライト
+  --rb-neon-pink-dim:    #cc2258    ← ボーダー、下線
+  --rb-neon-pink-glow:   rgba(255, 42, 109, 0.4)    ← グロー効果
+  --rb-neon-pink-subtle: rgba(255, 42, 109, 0.1)     ← 背景（Obsidianセクション）
 
-Accent
-  --accent:          #c87088    ← ピンク（リンク、code、アクセント）
-  --accent-dim:      #8a4f5e    ← ピンク薄め（下線など）
-  --accent-subtle:   rgba(200, 112, 136, 0.08)  ← 背景用の極薄ピンク
+Cyan（サブアクセント）
+  --rb-neon-cyan:        #05d9e8    ← アイコン、コード、コーナーブラケット
+  --rb-neon-cyan-dim:    #04adb9    ← ボーダー
+  --rb-neon-cyan-glow:   rgba(5, 217, 232, 0.4)     ← グロー効果
+  --rb-neon-cyan-subtle: rgba(5, 217, 232, 0.08)    ← 背景（Memoryセクション）
 
-Text
-  --text:            #bfc3ca    ← 本文テキスト
-  --text-secondary:  #73767e    ← セクションラベル、補助テキスト
-  --text-muted:      #4a4c54    ← 日付、マーカー、フッター
+Yellow（警告）
+  --rb-neon-yellow:      #f0e130    ← アラートLv.1、away状態
+  --rb-neon-yellow-dim:  #c4b828
+  --rb-neon-yellow-glow: rgba(240, 225, 48, 0.35)
 
-Border
-  --border:          #28282f    ← ボーダー、区切り線
+Green（正常）
+  --rb-neon-green:       #39ff14    ← オンライン状態、ヘルス良好
+  --rb-neon-green-dim:   #2ecc10
+  --rb-neon-green-glow:  rgba(57, 255, 20, 0.35)
+
+Red（危険）
+  --rb-neon-red:         #ff073a    ← アラートLv.3、クリティカル
+  --rb-neon-red-dim:     #cc0630
+  --rb-neon-red-glow:    rgba(255, 7, 58, 0.35)
+```
+
+### Dark Base（7段階）
+
+```
+  --rb-bg-deepest:  #0a0a0f    ← body背景、スクロールバートラック
+  --rb-bg-deep:     #0d0d14
+  --rb-bg-base:     #111119    ← ページ背景
+  --rb-bg-elevated: #16161f    ← ステータスバー、ダッシュボード
+  --rb-bg-surface:  #1c1c28    ← カード、パネル（グラデーション終端）
+  --rb-bg-hover:    #222233    ← ホバー背景
+  --rb-bg-active:   #2a2a3d    ← アクティブ状態
+```
+
+### Text
+
+```
+  --rb-text-primary:   #e8e6f0    ← 本文、見出し
+  --rb-text-secondary: #8a8899    ← セクションラベル、メトリック名
+  --rb-text-muted:     #55536a    ← 日付、フッター、HUDプレフィックス
+  --rb-text-accent:    var(--rb-neon-cyan)      ← アクセントテキスト
+  --rb-text-highlight: var(--rb-neon-pink)      ← ハイライトテキスト
+```
+
+### Borders
+
+```
+  --rb-border-subtle:  rgba(255, 255, 255, 0.06)    ← 通常ボーダー
+  --rb-border-default: rgba(255, 255, 255, 0.1)     ← ホバー時
+  --rb-border-active:  var(--rb-neon-cyan)           ← アクティブ
+  --rb-border-accent:  var(--rb-neon-pink)           ← アクセント
 ```
 
 ### 使い分けルール
 
 | 用途 | 変数 |
 |------|------|
-| 本文・見出し・`<strong>` | `--text` |
-| セクションラベル（`🧠 Internal Memory` 等） | `--text-secondary` |
-| 日付・リストマーカー・フッター | `--text-muted` |
-| リンク・`<code>`・戻るリンクのhover | `--accent` |
-| リンク下線（通常時） | `--accent-dim` |
+| 本文・見出し・`<strong>` | `--rb-text-primary` |
+| セクションラベル（`Internal Memory` 等） | `--rb-text-secondary` |
+| 日付・リストマーカー・フッター・HUD `//` | `--rb-text-muted` |
+| リンク・カードアクセント | `--rb-neon-pink` |
+| `<code>`・インラインアイコン・コーナーブラケット | `--rb-neon-cyan` |
+| オンライン状態・ヘルス良好 | `--rb-neon-green` |
+| 警告・away状態 | `--rb-neon-yellow` |
+| 危険・クリティカル | `--rb-neon-red` |
+
+### Legacy Compatibility
+
+旧変数名は新システムへのエイリアスとして維持:
+
+```css
+--accent  → --rb-neon-pink
+--mint    → --rb-neon-cyan
+--bg      → --rb-bg-base
+--surface → --rb-bg-surface
+--text    → --rb-text-primary
+--border  → --rb-border-subtle
+```
 
 ---
 
 ## Typography
 
-### Font Stack
+### Font Stack（Google Fonts）
 
-| 用途 | フォント |
-|------|----------|
-| **本文**（body, p, li） | `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif` |
-| **見出し**（h1, h3 in entry） | `Georgia, "Times New Roman", serif` |
-| **モノスペース**（日付, ラベル, code, subtitle, back-link） | `"SF Mono", Monaco, Consolas, monospace` |
+```html
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+```
 
-### Font Size Scale
+| 用途 | 変数 | フォント |
+|------|------|----------|
+| **ディスプレイ**（h1, ダッシュボードタイトル） | `--rb-font-display` | `'Orbitron', 'Share Tech Mono', monospace` |
+| **本文**（body, p, li） | `--rb-font-body` | `'Rajdhani', 'Share Tech', sans-serif` |
+| **モノスペース**（日付, ラベル, code） | `--rb-font-mono` | `'Share Tech Mono', 'Fira Code', monospace` |
+| **日本語** | `--rb-font-jp` | `'Noto Sans JP', 'M PLUS 1 Code', sans-serif` |
 
-| 要素 | サイズ | 備考 |
-|------|--------|------|
-| `h1`（モバイル） | `1.75rem` | serif, bold 700 |
-| `h1`（デスクトップ） | `2rem` | — |
-| `h3`（エントリ内） | `1.15rem` | serif, bold 700 |
-| `h4` | `0.95rem` | sans, semibold 600 |
-| 本文（p, li） | `0.95rem` | line-height: 1.8 |
-| `code` | `0.88em` | mono |
-| 日付・ラベル | `0.75rem` | mono, uppercase, letter-spacing |
-| subtitle | `0.85rem` | mono |
+### Font Size Scale（Fluid）
+
+| 変数 | 範囲 | 用途 |
+|------|------|------|
+| `--rb-text-xs` | 0.65rem → 0.75rem | 日付、ラベル、メトリック名 |
+| `--rb-text-sm` | 0.75rem → 0.875rem | ステータス、サブテキスト |
+| `--rb-text-base` | 0.875rem → 1rem | 本文 |
+| `--rb-text-lg` | 1rem → 1.25rem | エントリ内h3 |
+| `--rb-text-xl` | 1.25rem → 1.75rem | — |
+| `--rb-text-2xl` | 1.5rem → 2.5rem | ヒーローh1 |
+| `--rb-text-3xl` | 2rem → 3.5rem | デスクトップh1 |
 
 ### ラベル系のスタイルパターン
 
-日付・セクションヘッダー等は共通パターン:
+日付・HUDラベル等は共通パターン:
 ```css
-font-family: "SF Mono", Monaco, Consolas, monospace;
-font-size: 0.75rem;
+font-family: var(--rb-font-mono);
+font-size: var(--rb-text-xs);
 font-weight: 500;
-letter-spacing: 0.08em;
+letter-spacing: 0.1em;
 text-transform: uppercase;
-color: var(--text-muted);  /* or --text-secondary */
+color: var(--rb-text-muted);
+```
+
+HUDスタイルタイトル（ダッシュボード等）:
+```css
+font-family: var(--rb-font-display);
+font-size: var(--rb-text-xs);
+font-weight: 700;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(--rb-neon-cyan);
+text-shadow: var(--rb-glow-text-cyan);
+/* 自動プレフィックス: `// ` */
+```
+
+---
+
+## SVG Icon System
+
+### 概要
+
+- **絵文字は一切使用禁止** — 全てSVGスプライトアイコンに統一
+- スプライトシート: `src/assets/icons.svg`（22シンボル）
+- 使用方法: `<svg class="icon"><use href="assets/icons.svg#icon-NAME"/></svg>`
+
+### 利用可能アイコン一覧
+
+| ID | 用途 |
+|----|------|
+| `icon-dashboard` | ダッシュボード、メモリメトリック |
+| `icon-diary` | 日記、ノート |
+| `icon-tasks` | タスク |
+| `icon-chat` | チャット、会話 |
+| `icon-settings` | 設定、CPUメトリック |
+| `icon-status-online` | オンライン状態 |
+| `icon-status-offline` | オフライン/スリープ状態 |
+| `icon-alert` | 警告、温度メトリック |
+| `icon-search` | 検索 |
+| `icon-clock` | 時間、日付、稼働時間メトリック |
+| `icon-add` | 追加 |
+| `icon-delete` | 削除 |
+| `icon-edit` | 編集 |
+| `icon-filter` | フィルター |
+| `icon-expand` | 全画面 |
+| `icon-close` | 閉じる |
+| `icon-menu` | メニュー |
+| `icon-user` | ユーザー |
+| `icon-sync` | 同期、読み込み中 |
+| `icon-chevron-right` | 右矢印 |
+| `icon-chevron-down` | 下矢印 |
+| `icon-pin` | ピン、ブックマーク |
+| `icon-download` | ダウンロード、ディスクメトリック |
+| `icon-rebecca` | Rebeccaアイコン（ボット） |
+
+### CSS `.icon` クラス
+
+```css
+.icon {
+    display: inline-block;
+    width: 1em;     /* フォントサイズに追従 */
+    height: 1em;
+    vertical-align: -0.15em;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+```
+
+コンテキスト別サイズ:
+
+| コンテキスト | サイズ |
+|-------------|--------|
+| コンテンツ内（`.entry-content .icon`） | `1em`（フォントサイズ追従） + `color: --rb-neon-cyan` |
+| メトリックアイコン（`.metric-icon .icon`） | `16px × 16px` |
+| 全体スコア（`.overall-emoji .icon`） | `22px × 22px` |
+
+### ヘルスダッシュボード アイコンマッピング
+
+| メトリック | アイコン |
+|-----------|---------|
+| CPU | `icon-settings` |
+| Memory | `icon-dashboard` |
+| Disk | `icon-download` |
+| Temperature | `icon-alert` |
+| Uptime | `icon-clock` |
+
+### JS動的アイコン生成
+
+`app.js` の `svgIcon()` ヘルパー:
+```javascript
+function svgIcon(name, size) {
+    var s = size || 16;
+    return '<svg class="icon" width="' + s + '" height="' + s +
+        '"><use href="assets/icons.svg#icon-' + name + '"/></svg>';
+}
+```
+
+ステータスバー → アイコン対応:
+
+| ステータス | アイコン |
+|-----------|---------|
+| `online` | `icon-status-online` |
+| `away` | `icon-clock` |
+| `sleeping` | `icon-status-offline` |
+| `offline` | `icon-status-offline` |
+| `loading` | `icon-sync` |
+
+全体ヘルス → アイコン対応:
+
+| 状態 | アイコン |
+|------|---------|
+| `excellent` / `good` | `icon-status-online` |
+| `normal` | `icon-rebecca` |
+| `poor` / `bad` / `critical` | `icon-alert` |
+
+---
+
+## Shadows & Glows
+
+```
+--rb-shadow-sm:   0 1px 3px rgba(0,0,0,0.5)     ← カード
+--rb-shadow-md:   0 4px 12px rgba(0,0,0,0.6)     ← パネル
+--rb-shadow-lg:   0 8px 32px rgba(0,0,0,0.7)     ← トースト
+
+--rb-glow-pink:   0 0 15px pink-glow, 0 0 40px faint-pink   ← ホバー（奇数カード）
+--rb-glow-cyan:   0 0 15px cyan-glow, 0 0 40px faint-cyan   ← ホバー（偶数カード）
+
+--rb-glow-text-pink:  0 0 8px pink-glow    ← テキストグロー（h1 .accent）
+--rb-glow-text-cyan:  0 0 8px cyan-glow    ← テキストグロー（subtitle, HUDタイトル）
 ```
 
 ---
@@ -85,19 +278,26 @@ color: var(--text-muted);  /* or --text-secondary */
 ### Page Structure
 
 ```
-┌─ header#top ─────────────────────────┐
-│  mascot + title + subtitle           │
-├──────────────────────────────────────┤
-│  main.timeline-container             │
-│  ┌─ .diary-grid ──────────────────┐  │  ← TOP: カード一覧
-│  │  .diary-card  .diary-card  ... │  │
-│  └────────────────────────────────┘  │
-│                                      │
-│  article.diary-entry#diary-YYYY-...  │  ← DETAIL: display:none → :target で表示
-│  article.diary-entry#diary-YYYY-...  │
-├──────────────────────────────────────┤
-│  footer                              │
-└──────────────────────────────────────┘
+┌─ header.hero.rb-scanlines ─────────────────┐
+│  hero-bg.svg (abs, 35% opacity)            │
+│  hero-bg-img (abs, 768px+: 右端6-7%)       │
+│  scanlines overlay (z:1)                    │
+│  hero-content (z:2)                         │
+│    avatar + glitch title + mono subtitle    │
+├─ .room-status[data-status] ────────────────┤
+│  SVGアイコン + ラベル + 時間 + コンテキスト  │
+├─ .room-alert[data-level] ─────────────────┤
+│  アラートメッセージ（非表示/Lv.1/2/3）     │
+├─ .health-dashboard ───────────────────────┤
+│  コーナーブラケット + HUDタイトル           │
+│  CPU / Mem / Disk / Temp / Up メトリック   │
+│  Overall Score                              │
+├─ main.main-content ───────────────────────┤
+│  .diary-grid (カード一覧)                   │
+│  .diary-entry:target (エントリ詳細)         │
+├─ footer.site-footer ─────────────────────┤
+│  neon gradient divider + mono text          │
+└─────────────────────────────────────────────┘
 ```
 
 ### Navigation（CSS :target）
@@ -108,7 +308,7 @@ TOPページ（デフォルト）:
   .diary-entry       → display: none
 
 エントリ選択時（#diary-YYYY-MM-DD）:
-  .diary-entry:target              → display: block
+  .diary-entry:target              → display: block (fadeIn animation)
   main:has(.diary-entry:target) .diary-grid → display: none
 
 「← Back to list」クリック（#top）:
@@ -119,31 +319,80 @@ TOPページ（デフォルト）:
 
 | 要素 | max-width |
 |------|-----------|
-| `.container`（ヘッダー内） | `680px` |
-| `.timeline-container`（メイン） | `960px` |
+| `.main-content` | `960px` |
+| `.diary-entry` | `680px` |
+| `.health-dashboard` | `420px` → `540px` (768px+) → `600px` (1024px+) |
 
 ### Responsive Breakpoints
 
-| 幅 | カードグリッド | ヘッダー | マスコット |
-|----|--------------|----------|-----------|
-| `< 768px` | 1列 | 縦並び | 100px |
-| `768px+` | 2列 | 横並び (gap: 2rem) | 120px |
+| 幅 | カードグリッド | ヒーロー | アバター |
+|----|--------------|----------|---------|
+| `< 768px` | 1列 | compact | 88px |
+| `768px+` | 2列 | spacious, bg-img表示 | 100px |
 | `1024px+` | 3列 | — | — |
+
+---
+
+## Utility Classes（Cyberpunk Asset Kit由来）
+
+### テキスト効果
+
+| クラス | 効果 |
+|--------|------|
+| `.rb-text-neon-pink` | ピンクテキスト + text-shadow glow |
+| `.rb-text-neon-cyan` | シアンテキスト + text-shadow glow |
+| `.rb-glitch-text` | グリッチテキストアニメーション（2s infinite）— h1で使用 |
+| `.rb-data-label` | HUDラベルスタイル（mono, xs, uppercase, muted） |
+
+### 装飾
+
+| クラス | 効果 |
+|--------|------|
+| `.rb-scanlines` | `::after` でスキャンラインオーバーレイ — ヒーローで使用 |
+| `.rb-panel` | パネル（gradient bg, subtle border, shadow, overflow hidden） |
+| `.rb-frame` | コーナーブラケット（`::before` 左上, `::after` 右下） |
+| `.rb-divider` | ネオングラデーションライン（cyan→pink, 40%不透明度） |
+| `.rb-border-glow-pink` | ピンクボーダー + glow shadow |
+| `.rb-border-glow-cyan` | シアンボーダー + glow shadow |
+
+### ステータス
+
+| クラス | 効果 |
+|--------|------|
+| `.rb-status-dot--online` | 緑ドット + glow |
+| `.rb-status-dot--offline` | mutedグレードット |
+| `.rb-status-dot--error` | 赤ドット + glow + pulse |
+
+### アニメーション
+
+| クラス | 効果 |
+|--------|------|
+| `.rb-glitch` | 位置グリッチ（0.3s） |
+| `.rb-pulse` | フェードイン/アウト（2s infinite） |
+| `.rb-flicker` | ネオンサインフリッカー（3s infinite） |
 
 ---
 
 ## Card Grid（.diary-grid）
 
-- `gap: 1px` + `background: var(--border)` でセル間にボーダーラインを生成
-- カード背景は `var(--bg)` でグリッド背景色との1pxの隙間がラインに見える
+- `gap: 0.75rem`
+- カードは `--rb-gradient-panel` 背景（elevated → surface グラデーション）
+- `border-top: 2px solid --rb-neon-pink`（奇数カード: pink / 偶数カード: cyan）
+- コーナーブラケット（`::before` / `::after`）、ホバーで不透明度UP
 
 ### Card Structure
 
 ```html
 <a href="#diary-YYYY-MM-DD" class="diary-card">
-    <div class="card-date">📅 YYYY-MM-DD</div>
+    <div class="card-date">
+        <svg class="icon" width="16" height="16"><use href="assets/icons.svg#icon-clock"/></svg>
+        YYYY-MM-DD
+    </div>
     <div class="card-preview">最初の意味のある行...</div>
-    <div class="card-sources">🧠 📝</div>
+    <div class="card-sources">
+        <svg class="icon" width="16" height="16"><use href="assets/icons.svg#icon-rebecca"/></svg>
+        <svg class="icon" width="16" height="16"><use href="assets/icons.svg#icon-diary"/></svg>
+    </div>
 </a>
 ```
 
@@ -160,16 +409,47 @@ TOPページ（デフォルト）:
     <a href="#top" class="back-link">&larr; Back to list</a>
     <div class="entry-date">YYYY-MM-DD</div>
     <div class="entry-content">
-        <div class="section-memory">...</div>
-        <div class="section-obsidian">...</div>
+        <div class="section-memory">...</div>   ← border-left: cyan
+        <div class="section-obsidian">...</div>  ← border-left: pink
     </div>
 </article>
 ```
 
-### Section Separator
+### Section Styling
 
-- セクション間は `border-top: 1px solid var(--border)` + `padding-top: 1.5rem` + `margin-top: 2rem`
-- 左ボーダー等の装飾は使わない
+| セクション | ボーダー色 | 背景色 | タイトル色 |
+|-----------|-----------|--------|-----------|
+| `.section-memory` | `--rb-neon-cyan` | `--rb-neon-cyan-subtle` | cyan + glow |
+| `.section-obsidian` | `--rb-neon-pink` | `--rb-neon-pink-subtle` | pink + glow |
+
+---
+
+## Health Dashboard
+
+### 構造
+
+- `--rb-gradient-panel` 背景 + コーナーブラケット
+- タイトル: Orbitron, `// ` プレフィックス付きHUDスタイル
+- 各メトリック: `grid(icon / name / bar / label)`
+
+### メトリックバーの状態色
+
+| 状態群 | 色 |
+|--------|-----|
+| `idle`, `spacious`, `cool`, `fresh` | `--rb-neon-green` + glow |
+| `clear`, `comfortable`, `normal` | `--rb-neon-cyan` + glow |
+| `busy`, `tight`, `warm`, `tired` | `--rb-neon-yellow` + glow |
+| `heavy`, `hot`, `exhausted` | `--rb-neon-pink` + glow |
+| `critical` | `--rb-neon-red` + glow + barPulse animation |
+
+### Overall Healthの状態色
+
+| 状態 | 色 |
+|------|-----|
+| `excellent` / `good` | `--rb-neon-green` |
+| `normal` | `--rb-neon-cyan` |
+| `poor` | `--rb-neon-yellow` |
+| `bad` / `critical` | `--rb-neon-red` |
 
 ---
 
@@ -177,22 +457,60 @@ TOPページ（デフォルト）:
 
 | 要素 | 効果 |
 |------|------|
-| `.diary-card` hover | `background: var(--surface)` (0.2s) |
-| `.mascot-img` hover | `grayscale(0.15) → grayscale(0)` (0.4s) |
-| `.back-link` hover | `color: var(--accent)` (0.2s) |
-| `.entry-content a` hover | `text-decoration-color: var(--accent)` (0.2s) |
-| scrollbar thumb hover | `var(--border) → var(--text-muted)` |
+| `.diary-card` hover | border glow (pink/cyan), translateY(-2px), corner bracket opacity UP |
+| `.diary-card` active | `scale(0.98)` (0.05s) |
+| `.hero-avatar` hover | `scale(1.08)`, enhanced glow |
+| `.hero-avatar` active | `scale(0.92)` |
+| `.hero-avatar` idle | `avatarGlow` animation (3s alternate) |
+| `.back-link` hover | `color: --rb-neon-pink` + glow |
+| `.entry-content a` hover | `text-decoration-color: pink` + glow |
+| `.health-metric` hover | label → detail 切替 (opacity) |
+| `.overall-emoji` idle | `breathe` animation (4s, poor/bad: 6s) |
+| scrollbar thumb hover | `--rb-bg-active → --rb-text-muted` |
 
-### ネオン・グロー（味付けとしてOK）
+---
 
-控えめなアクセントとして使用可。ベースのQuiet Darkトーンを壊さない範囲で:
+## Animations
 
-- `box-shadow` のグロー — カードhoverやアクセント要素に薄く
-- `text-shadow` — 見出しやアクセントカラーに控えめに
-- `@keyframes` アニメーション — マスコットやページ遷移など、ワンポイントで
-- `transform` — hover時のスケール等、微細な範囲で
+| 名前 | 用途 | 仕様 |
+|------|------|------|
+| `fadeIn` | エントリ表示 | opacity + translateY(8px), 0.35s |
+| `avatarGlow` | アバター常時 | box-shadow 強弱, 3s alternate |
+| `slightBounce` | マスコットクリック | scale + rotate, 0.3s |
+| `slideUp` | トースト表示 | opacity + translateY(16px), 0.4s |
+| `breathe` | Overall emoji | scale(1↔1.08), 4s |
+| `barPulse` | クリティカルバー | opacity(1↔0.6), 1.5s |
+| `alertPulse` | Lv.3アラート | opacity(1↔0.7), 2s |
+| `rb-glitch` | グリッチ効果 | translate 微振動, 0.3s |
+| `rb-glitch-text` | タイトル | text-shadow 位置変化 (cyan+pink), 2s infinite |
+| `rb-pulse` | 汎用パルス | opacity(1↔0.5), 2s infinite |
+| `rb-flicker` | ネオンサイン | 不規則なopacity変化, 3s infinite |
 
-**NG:** 全面ネオン、常時アニメーション、読みづらくなるほどの発光
+---
+
+## Spacing & Radius
+
+```
+--rb-space-xs:  0.25rem     --rb-radius-sm:    2px
+--rb-space-sm:  0.5rem      --rb-radius-md:    4px
+--rb-space-md:  1rem        --rb-radius-lg:    8px
+--rb-space-lg:  1.5rem      --rb-radius-panel: 6px
+--rb-space-xl:  2rem
+--rb-space-2xl: 3rem
+```
+
+---
+
+## Z-Index Scale
+
+```
+--rb-z-base:     0      ← デフォルト
+--rb-z-elevated: 10     ← hero-content
+--rb-z-overlay:  100    ← オーバーレイ
+--rb-z-modal:    200    ← モーダル
+--rb-z-toast:    300    ← トースト
+--rb-z-tooltip:  400    ← ツールチップ
+```
 
 ---
 
@@ -200,9 +518,9 @@ TOPページ（デフォルト）:
 
 ```css
 width: 6px
-track: var(--bg)
-thumb: var(--border), border-radius: 3px
-thumb:hover: var(--text-muted)
+track: var(--rb-bg-deepest)
+thumb: var(--rb-bg-active), border-radius: 3px
+thumb:hover: var(--rb-text-muted)
 ```
 
 ---
@@ -211,9 +529,9 @@ thumb:hover: var(--text-muted)
 
 | ソース | アイコン |
 |--------|---------|
-| OpenClaw Memory | 🧠 |
-| Obsidian Daily Note | 📝 |
-| カード日付の先頭 | 📅 |
+| OpenClaw Memory | `icon-rebecca` |
+| Obsidian Daily Note | `icon-diary` |
+| カード日付の先頭 | `icon-clock` |
 
 ---
 
@@ -225,108 +543,60 @@ thumb:hover: var(--text-muted)
 
 | 特性 | デザインへの反映 |
 |------|------------------|
-| **Trigger-happy（トリガーハッピー）** | ホバー/クリック時の即座のフィードバック。待たせない。 |
-| **Extreme & Unpredictable（極端で予測不能）** | 時々の小さなサプライズ要素。ランダムな微細アニメ。 |
-| **Sharp-tongued（毒舌）** | コピーは短く、切れ味鋭く。冗長な説明不要。 |
-| **Loyal to the Crew（仲間への忠誠）** | ユーザーを「仲間」として扱う温かさを細部に。 |
-| **Maniacal Laughter（狂気の笑い）** | 楽しさ・カオスを恐れない。時にぶっ飛んだ表現OK。 |
-| **Perceptive（察する力）** | 見た目はクレイジーでも、UXは丁寧に設計。 |
+| **Trigger-happy** | ホバー/クリック時の即座のフィードバック（0.1s transition, scale active） |
+| **Extreme & Unpredictable** | グリッチアニメーション、ネオンフリッカー、ランダムな微細効果 |
+| **Sharp-tongued** | コピーは短く、切れ味鋭く。HUDスタイルの `//` プレフィックス |
+| **Loyal to the Crew** | ユーザーを「仲間」として扱う温かさを細部に |
+| **Maniacal Laughter** | スキャンライン、グリッチテキスト、ネオングロー — カオスを恐れない |
+| **Perceptive** | 見た目はサイバーパンクでも、UXは丁寧に設計 |
 
-### Signature Elements
-
-#### Ram Skull（ラムスカル）🐏💀
-
-Rebecca のシグネチャーモチーフ。使用箇所:
-
-- **ファビコン** — 16x16, 32x32 のラムスカルアイコン
-- **ヘッダーロゴ** — タイトル横またはマスコット近くに配置
-- **セクション区切り** — 装飾として控えめに使用可
-- **404/エラーページ** — ラムスカル + 煽りテキスト
-
-**NG:** 過剰な繰り返し、背景パターンとしての乱用
-
-#### Rebecca's Color Signature
-
-公式リファレンスからの追加アクセントカラー:
-
-```
---rebecca-mint:      #98e0c8    ← 髪の色（ミントグリーン）
---rebecca-pink:      #e85a87    ← ホットピンク（ボディスーツ、ラムスカル）
---rebecca-eye-red:   #ff6b4a    ← 目のグラデーション（赤側）
---rebecca-eye-gold:  #f0a030    ← 目のグラデーション（金側）
---rebecca-navy:      #2a3548    ← ボディスーツのネイビー
-```
-
-**使い方:**
-- 通常は既存の `--accent` ピンクを使用
-- 特別な強調・祝い・ハイライト時に `--rebecca-pink` や `--rebecca-mint` を投入
-- グラデーションは見出しやスペシャルコンテンツに
-
-### Voice & Tone（テキストの口調）
+### Voice & Tone
 
 | シーン | トーン | 例 |
 |--------|--------|-----|
 | 通常の日記 | 素直、時々毒 | 「今日はまあまあ。タスク消化。」 |
-| 成功・達成 | 煽り気味に得意げ | 「ッハ！片付けたぜ 💥」 |
+| 成功・達成 | 煽り気味に得意げ | 「片付けたぜ」 |
 | エラー・失敗 | 開き直り＆前向き | 「爆散した。次は当てる。」 |
 | 空のページ | 挑発的 | 「何も書いてねぇのかよ？」 |
 
-### Micro-interactions（マイクロインタラクション）
+### Easter Eggs
 
-Rebecca らしい「動き」のヒント:
+- **マスコット連続クリック** → 表情サイクル + bounce animation
+- **深夜アクセス（02:00-05:00）** → トースト「まだ起きてんのか？」（pink glow border）
 
-```css
-/* トリガーハッピー: 即座の反応 */
-.diary-card {
-    transition: transform 0.1s ease-out; /* 速い！待たない！ */
-}
-.diary-card:active {
-    transform: scale(0.98); /* クリックの衝撃感 */
-}
+### Don'ts
 
-/* 時々のサプライズ（控えめに） */
-.mascot-img:hover {
-    animation: slight-bounce 0.3s ease;
-}
-
-@keyframes slight-bounce {
-    50% { transform: translateY(-4px) rotate(2deg); }
-}
-
-/* マニアカルな笑い — 特別な時だけ */
-.celebration {
-    animation: shake 0.5s ease-in-out;
-}
-```
-
-### Easter Eggs（イースターエッグ）
-
-ユーザーを楽しませる隠し要素を仕込んでOK:
-
-- **Konami Code** → 特別なアニメーション発動
-- **特定の日付**（9/13 = Edgerunners 公開日）→ 特別なスタイル
-- **マスコット連続クリック** → 表情変化や台詞表示
-- **深夜アクセス（02:00-05:00）** → 「まだ起きてんのか？」的なメッセージ
-
-### Don'ts（やらないこと）
-
-- ❌ 可愛いだけのデザイン — Rebecca は cute じゃなくて **fierce**
-- ❌ 丸みを帯びすぎたUI — シャープさを保つ
-- ❌ パステル調 — ネオンとダークのコントラストを維持
-- ❌ 長文での説明 — 短く、鋭く
-- ❌ ユーザーを見下す — 挑発はしても、バカにはしない（仲間だから）
+- 可愛いだけのデザイン — Rebecca は cute じゃなくて **fierce**
+- 丸みを帯びすぎたUI — シャープさを保つ（`border-radius` は最大8px）
+- パステル調 — ネオンとダークのコントラストを維持
+- 長文での説明 — 短く、鋭く
+- **絵文字の使用** — 全てSVGアイコンに統一済み
 
 ---
 
 ## Assets
 
-### 公式リファレンスから切り出し済み
+### SVGアセット
 
-| ファイル | サイズ | 用途 |
-|---------|--------|------|
-| `fullbody.png` | 370×726 | メインビジュアル |
-| `face_closeup.png` | 366×380 | アバター・プロフィール |
-| `ramskull_logo.png` | 260×190 | ロゴ・ファビコン素材 |
-| `rebecca_text.png` | 240×106 | タイトルロゴ |
+| ファイル | 用途 |
+|---------|------|
+| `src/assets/icons.svg` | SVGスプライトシート（22アイコン） |
+| `src/assets/hero-bg.svg` | ヒーロー背景（サイバーパンク都市スカイライン） |
+| `src/assets/sidebar-bg.svg` | サイドバー背景（将来使用） |
 
-**保存先:** `src/assets/rebecca/`
+### キャラクターアセット
+
+保存先: `src/assets/rebecca/`
+
+| ファイル | 用途 |
+|---------|------|
+| `レベッカ_顔絵ニュートラル.png` | デフォルトアバター |
+| `レベッカ_ウィンク.png` | 表情サイクル |
+| `レベッカ_微笑.png` | 表情サイクル |
+| `レベッカ_見下し.png` | 表情サイクル |
+| `レベッカ_すね顔.png` | 表情サイクル |
+| `レベッカ_ガッツポーズ.png` | 表情サイクル |
+| `レベッカ_coffee.png` | 深夜トースト + 表情サイクル |
+| `レベッカ_呆れ顔.png` | 表情サイクル |
+| `レベッカ_コミカル中指.png` | 表情サイクル |
+| `レベッカ_躍動胸像.png` | ヒーロー背景画像（デスクトップ） |

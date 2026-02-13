@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 1080">
+  <defs>
+    <linearGradient id="sidebar-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c0c15"/>
+      <stop offset="100%" stop-color="#0f0f1c"/>
+    </linearGradient>
+    <linearGradient id="edge-glow" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#ff2a6d" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#ff2a6d" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="micro-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <line x1="20" y1="0" x2="20" y2="20" stroke="#1a1a30" stroke-width="0.3"/>
+      <line x1="0" y1="20" x2="20" y2="20" stroke="#1a1a30" stroke-width="0.3"/>
+    </pattern>
+  </defs>
+
+  <rect width="280" height="1080" fill="url(#sidebar-bg)"/>
+  <rect width="280" height="1080" fill="url(#micro-grid)" opacity="0.5"/>
+
+  <!-- Right edge neon line -->
+  <line x1="279" y1="0" x2="279" y2="1080" stroke="#ff2a6d" stroke-width="1" opacity="0.4"/>
+  <rect x="260" y="0" width="20" height="1080" fill="url(#edge-glow)"/>
+
+  <!-- Decorative circuit lines -->
+  <g stroke="#05d9e8" stroke-width="0.5" opacity="0.1" fill="none">
+    <polyline points="20,100 60,100 60,130 90,130"/>
+    <polyline points="20,400 50,400 50,420 80,420 80,450"/>
+    <polyline points="30,700 70,700 70,720 100,720"/>
+    <circle cx="90" cy="130" r="2"/>
+    <circle cx="80" cy="450" r="2"/>
+    <circle cx="100" cy="720" r="2"/>
+  </g>
+</svg>

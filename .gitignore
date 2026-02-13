@@ -1,8 +1,8 @@
 # macOS
 .DS_Store
 
-# Phase 1+ collected data
-data/
+# Phase 1+ collected data (inside src/ for dev server access)
+src/data/
 
 # IDE
 .claude/

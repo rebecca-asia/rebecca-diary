@@ -19,12 +19,13 @@ Phase 0（静的日記サイト）を拡張し、以下を追加する:
 
 ```
 ┌──────────────────┐     ┌───────────────┐     ┌──────────────┐
-│  Collectors       │     │  Data Store   │     │  Renderer    │
-│  (Python, cron)   │ ──→ │  data/*.json  │ ──→ │  build.py    │ ──→ index.html
-└──────────────────┘     └───────────────┘     └──────────────┘
+│  Collectors       │     │  Data Store   │     │  Frontend    │
+│  (Python, cron)   │ ──→ │  src/data/    │ ──→ │  app.js      │ ──→ DOM 更新
+└──────────────────┘     │  *.json       │     │  (fetch API) │
+                          └───────────────┘     └──────────────┘
                                                        ↑
                                               memory/*.md + Obsidian
-                                              (既存 update_diary.py)
+                                              (既存 update_diary.py → index.html)
 ```
 
 ### 新規ディレクトリ
@@ -34,15 +35,18 @@ rebecca-diary/
 ├── collectors/             # NEW: データ収集スクリプト
 │   ├── collect_health.py   # Mac システム状態収集
 │   └── collect_status.py   # Rebecca 在室状況判定
-├── data/                   # NEW: 収集データ（gitignore推奨）
-│   ├── health.json         # システムヘルス
-│   └── status.json         # 在室状況
 ├── src/
+│   ├── data/               # NEW: 収集データ（gitignore）
+│   │   ├── health.json     # システムヘルス
+│   │   └── status.json     # 在室状況
 │   ├── index.html          # Room Status セクション追加
 │   ├── style.css           # ヘルスバー・ステータス表示のスタイル
 │   └── app.js              # 既存 + Room 動的表示
 └── ...
 ```
+
+**data/ の配置理由:** dev server は `cd src && python3 -m http.server 8080` で起動するため、
+`fetch('/data/health.json')` が同一オリジンでアクセスできるよう `src/data/` に配置する。
 
 ---
 
@@ -68,9 +72,9 @@ rebecca-diary/
     "message": "余裕あり"
   },
   "disk": {
-    "used_gb": 124,
-    "total_gb": 500,
-    "usage_percent": 24.8,
+    "used_gb": 56,
+    "total_gb": 228,
+    "usage_percent": 24.6,
     "state": "spacious",
     "label": "広々",
     "message": null
@@ -112,25 +116,28 @@ rebecca-diary/
 #### Overall Score Calculation
 
 ```
-score = 100 - weighted_penalty
+score = 100 - sum_of_penalties
 
 penalties:
-  cpu_penalty     = cpu_usage * 1.5    (max 150 → capped at 100)
-  memory_penalty  = max(0, memory_usage - 50) * 2.0
+  cpu_penalty     = max(0, cpu_usage - 20) * 1.0     ← 20%以下はペナルティなし
+  memory_penalty  = max(0, memory_usage - 60) * 1.5   ← 60%以下はペナルティなし
   disk_penalty    = max(0, disk_usage - 70) * 1.0
-  temp_penalty    = max(0, temp - 50) * 1.2
-  uptime_penalty  = min(uptime_days * 3, 30)
+  temp_penalty    = max(0, temp - 50) * 1.0            ← temp=None の場合は 0
+  uptime_penalty  = min(uptime_days * 2, 20)
 
-overall_score = max(0, 100 - sum_of_penalties)
+overall_score = max(0, min(100, 100 - sum_of_penalties))
 ```
 
-| Score | State | Emoji | Label |
-|-------|-------|-------|-------|
-| 80+ | `great` | 🟢 | 元気 |
-| 60-79 | `good` | 🟡 | 普通 |
-| 40-59 | `poor` | 🟠 | 調子悪い |
-| 20-39 | `bad` | 🔴 | かなり悪い |
-| 0-19 | `critical` | 💀 | 限界 |
+**設計意図:** アイドル状態の Mac（CPU ~15%, Memory ~60%）で score 80+ (元気) になるよう調整。
+旧式（cpu * 1.5）ではアイドルでも score 40（調子悪い）になる問題があった。
+
+| Score | State | Emoji | Label | Message |
+|-------|-------|-------|-------|---------|
+| 80+ | `great` | 🟢 | 元気！ | 「調子いい！今日はイケる」 |
+| 60-79 | `good` | 🟡 | まぁまぁ | 「まぁまぁかな」 |
+| 40-59 | `poor` | 🟠 | ちょっとダルい | 「ちょっとダルい......」 |
+| 20-39 | `bad` | 🔴 | かなりキツい | 「......しんどい」 |
+| 0-19 | `critical` | 💀 | 限界 | 「.........」 |
 
 #### Alert Level
 
@@ -165,7 +172,7 @@ overall_score = max(0, 100 - sum_of_penalties)
 |--------|-------|-----------|
 | `online` | 🟢 | Gateway 稼働 & 最終活動 < 30min |
 | `away` | 🟡 | Gateway 稼働 & 最終活動 30min-2h |
-| `sleeping` | 🔴 | 深夜(02:00-06:00) & 最終活動 > 1h |
+| `sleeping` | 💤 | 深夜(02:00-06:00) & 最終活動 > 1h |
 | `offline` | ⚫ | Gateway 未稼働 or 最終活動 > 2h |
 
 #### Time Context
@@ -186,68 +193,83 @@ overall_score = max(0, 100 - sum_of_penalties)
 
 ### 4.1 collect_health.py
 
-**実行頻度:** 5分ごと（cron）
-**出力:** `data/health.json`
-**依存:** Python 3 標準ライブラリのみ
+**実行頻度:** 5分ごと（cron / launchd）
+**出力:** `src/data/health.json`
+**依存:** Python 3.9+ 標準ライブラリのみ
 
 ```python
 # Core logic outline
-import subprocess, json, time
+import subprocess, json, os, shutil
+from datetime import datetime, timezone
 
 def get_cpu_usage():
-    # ps aux | awk '{sum += $3} END {print sum}'
-    # or: top -l 1 -n 0 | grep "CPU usage"
+    # top -l 1 -n 0 → "CPU usage: XX.X% user, YY.Y% sys, ZZ.Z% idle"
+    # user + sys = total usage
+    # 注: top -l 1 は実行に ~5秒かかる
     ...
 
 def get_memory():
-    # vm_stat | parse page sizes
-    # or: sysctl hw.memsize
+    # vm_stat → ページ統計（page size は出力ヘッダーから動的に取得、Apple Silicon は 16384）
+    # sysctl hw.memsize → 総メモリ（bytes）
+    # used = (active + wired + compressor) pages * page_size
+    # ⚠️ inactive pages はファイルキャッシュのため "used" に含めない
     ...
 
 def get_disk():
-    # os.statvfs('/') or df -h /
+    # shutil.disk_usage('/') → (total, used, free) in bytes
+    # APFS コンテナ全体の容量を返す（このマシンでは ~228GB）
     ...
 
 def get_temperature():
-    # osx-cpu-temp (if available)
-    # or: powermetrics --samplers smc -n 1 (requires sudo)
-    # fallback: None
+    # shutil.which('osx-cpu-temp') で存在チェック
+    # 存在すれば実行、なければ None
+    # powermetrics は sudo 必須のため使用不可
     ...
 
 def get_uptime():
-    # sysctl kern.boottime | parse
+    # sysctl -n kern.boottime → { sec = EPOCH, usec = ... }
+    # regex で sec を抽出 → now() との差分
     ...
 ```
 
-**温度取得の注意:**
-- `osx-cpu-temp` はインストールが必要（`brew install osx-cpu-temp`）
-- 取得できない場合は `temperature: null` として扱う
-- Phase 1 では温度をオプショナルとする
+**実装上の注意:**
+- **温度:** `osx-cpu-temp` はオプショナル（`brew install osx-cpu-temp`）。未インストール時は `temperature: null`
+- **メモリ:** `vm_stat` の page size は Apple Silicon で 16384 bytes（Intel は 4096）。ヘッダー行から動的にパースすること
+- **ディスク:** `os.statvfs` の代わりに `shutil.disk_usage('/')` 推奨（シンプル）
+- **CPU:** `top -l 1 -n 0` は ~5秒かかる。5分間隔の cron では問題なし
+- **アトミック書き込み:** `.tmp` ファイルに書き込み後 `os.rename()` で上書き（fetch 中の破損防止）
+- **ディレクトリ確認:** 出力先 `src/data/` が存在しない場合は `os.makedirs()` で作成
+- **cron PATH:** subprocess 呼び出しではフルパス推奨（`/usr/bin/top`, `/usr/bin/vm_stat`, `/usr/sbin/sysctl`）
 
 ### 4.2 collect_status.py
 
-**実行頻度:** 1分ごと（cron）
-**出力:** `data/status.json`
+**実行頻度:** 1分ごと（cron / launchd）
+**出力:** `src/data/status.json`
 
 ```python
 # Core logic outline
 def check_gateway():
-    # pgrep -f openclaw-gateway
-    # or: check for heartbeat file
+    # pgrep -x openclaw-gateway（-x で完全一致、-f だと Chrome helper も誤検出）
+    # fallback: HEARTBEAT.md の mtime チェック
     ...
 
 def get_last_activity():
-    # stat ~/.openclaw/workspace/memory/ の最終更新
-    # or: activity log の最終行
+    # ~/.openclaw/workspace/memory/*.md の最新ファイルの mtime
+    # secondary: ~/.openclaw/workspace/HEARTBEAT.md の mtime
     ...
 ```
+
+**実装上の注意:**
+- **Gateway 検出:** `pgrep -x`（完全一致）を使用。`-f`（コマンドライン全体）だと Chrome helper プロセスが誤検出される
+- **アトミック書き込み / ディレクトリ確認:** collect_health.py と同じ
+- **時間帯メッセージ:** 各時間帯に複数バリエーションを用意し、ランダム選択で機械的な繰り返しを避ける
 
 ### 4.3 Cron Setup
 
 ```crontab
 # Rebecca's Room collectors
-*/5 * * * * cd /path/to/rebecca-diary && python3 collectors/collect_health.py
-*/1 * * * * cd /path/to/rebecca-diary && python3 collectors/collect_status.py
+*/5 * * * * cd /Users/rebeccacyber/.openclaw/workspace/rebecca-diary && /usr/bin/python3 collectors/collect_health.py 2>> /tmp/rebecca-health.log
+*/1 * * * * cd /Users/rebeccacyber/.openclaw/workspace/rebecca-diary && /usr/bin/python3 collectors/collect_status.py 2>> /tmp/rebecca-status.log
 ```
 
 ---
@@ -328,38 +350,45 @@ def get_last_activity():
 update_diary.py: memory/*.md + Obsidian → index.html (diary entries)
 ```
 
-### Phase 1 追加
+### Phase 1: app.js で動的に表示
 
-```
-build_room.py:
-  1. Read data/health.json → Generate health dashboard HTML
-  2. Read data/status.json → Generate status bar HTML
-  3. Inject into index.html (new markers)
-
-  Or: app.js が data/*.json を fetch して動的に表示
-```
-
-**推奨:** Phase 1 では **app.js で data/*.json を fetch** する方式を採用。
+**決定:** Phase 1 では **app.js で src/data/*.json を fetch** する方式を採用。
+（SSG 方式の `build_room.py` は採用しない）
 
 理由:
 - SSG で毎回 HTML 再生成するよりシンプル
 - ページリロードなしで最新状態を表示可能（setInterval）
-- data/*.json は同一オリジン（localhost:8080）から fetch 可能
+- src/data/*.json は同一オリジン（localhost:8080）から fetch 可能
 
 ```javascript
 // app.js (Phase 1 addition)
-async function updateRoomStatus() {
-    const health = await fetch('/data/health.json').then(r => r.json());
-    const status = await fetch('/data/status.json').then(r => r.json());
+async function updateRoom() {
+    var health = await fetchJSON('/data/health.json');
+    var status = await fetchJSON('/data/status.json');
 
-    renderHealthDashboard(health);
     renderStatusBar(status);
+    renderHealthDashboard(health);
+    renderAlert(health);
 }
 
-// 5分ごとに更新
-setInterval(updateRoomStatus, 5 * 60 * 1000);
-updateRoomStatus();
+async function fetchJSON(url) {
+    try {
+        var response = await fetch(url + '?t=' + Date.now()); // cache-busting
+        if (!response.ok) return null;
+        return await response.json();
+    } catch (e) {
+        console.error('Fetch failed:', url, e);
+        return null;
+    }
+}
+
+// 初回実行 + 5分間隔
+updateRoom();
+setInterval(updateRoom, 5 * 60 * 1000);
 ```
+
+**データ鮮度チェック:** fetch した JSON の `timestamp` が現在時刻から15分以上古い場合、
+「最終更新: XX分前」を表示し、データが古い可能性をユーザーに伝える。
 
 ---
 
@@ -391,12 +420,14 @@ updateRoomStatus();
 
 ---
 
-## 9. Open Questions
+## 9. Open Questions（解決済み）
 
-1. **温度取得:** `osx-cpu-temp` のインストールを前提にするか、オプショナルにするか
-2. **Gateway 検出:** `openclaw-gateway` のプロセス名は正確か、heartbeat ファイルの方がよいか
-3. **data/ のデプロイ:** GitHub Pages 等で公開する場合、data/*.json はどうやって更新するか
-4. **更新間隔:** fetch の間隔は 5 分で十分か、もっと頻繁にすべきか
+| # | 質問 | 解決 | 根拠 |
+|---|------|------|------|
+| 1 | 温度取得: mandatory or optional? | **オプショナル** | WP-2.4。osx-cpu-temp 未インストール時は null。powermetrics は sudo 必須で不可 |
+| 2 | Gateway 検出: pgrep or heartbeat? | **pgrep -x（完全一致）+ heartbeat fallback** | 実環境検証で `-f` だと Chrome helper が誤検出されることを確認。PID 542 が正しい gateway |
+| 3 | data/ のデプロイ | **Phase 1 は local only** | GitHub Pages 問題は Phase 2+ で CI/CD と合わせて検討 |
+| 4 | fetch 間隔 | **5分で十分** | status collector は1分間隔だが、フロントエンド更新は5分で体感上問題なし |
 
 ---
 
