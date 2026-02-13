@@ -186,7 +186,153 @@ STALENESS_FRESH_MAX_MIN = 10
 STALENESS_STALE_MAX_MIN = 30
 
 # ============================================================================
-# Nurture — EXP table (Phase 2 prep, constants only)
+# Nurture — first day (project start)
+# ============================================================================
+
+from datetime import datetime, timezone, timedelta
+
+_JST = timezone(timedelta(hours=9))
+
+NURTURE_FIRST_DAY = datetime(2026, 1, 1, 0, 0, 0, tzinfo=_JST)
+
+# ============================================================================
+# Nurture — Energy thresholds and labels
+# ============================================================================
+
+ENERGY_THRESHOLDS = [
+    (70, "energetic"),
+    (40, "normal"),
+    (20, "tired"),
+    (None, "exhausted"),
+]
+
+ENERGY_LABELS = {
+    "energetic": {"label": "元気", "message": "エネルギー十分！"},
+    "normal":    {"label": "ふつう", "message": None},
+    "tired":     {"label": "疲れ気味", "message": "ちょっと疲れた..."},
+    "exhausted": {"label": "ヘトヘト", "message": "......充電したい"},
+}
+
+# ============================================================================
+# Nurture — Mood thresholds and labels
+# ============================================================================
+
+MOOD_THRESHOLDS = [
+    (80, "great"),
+    (60, "good"),
+    (40, "normal"),
+    (20, "down"),
+    (None, "bad"),
+]
+
+MOOD_LABELS = {
+    "great":  {"label": "絶好調", "message": "今日は調子いい！"},
+    "good":   {"label": "いい感じ", "message": "まぁまぁかな"},
+    "normal": {"label": "ふつう", "message": "ふつう"},
+    "down":   {"label": "だるい", "message": "ちょっとだるい......"},
+    "bad":    {"label": "最悪", "message": "......"},
+}
+
+# ============================================================================
+# Nurture — Mood calculation weights
+# ============================================================================
+
+MOOD_WEIGHTS = {
+    "health": 0.4,
+    "energy": 0.2,
+    "visits": 0.2,
+    "time": 0.2,
+}
+
+# ============================================================================
+# Nurture — Energy time-of-day modifiers
+# ============================================================================
+
+ENERGY_TIME_WEIGHTS = {
+    "deep_night": -20,
+    "late_night": -10,
+    "morning": -5,
+    "active": 0,
+    "afternoon": 0,
+    "evening": -5,
+    "night": -10,
+}
+
+# ============================================================================
+# Nurture — Energy uptime penalty parameters
+# ============================================================================
+
+ENERGY_BASE = 80
+ENERGY_UPTIME_THRESHOLD_HOURS = 8
+ENERGY_UPTIME_PENALTY_PER_HOUR = 3
+ENERGY_UPTIME_PENALTY_MAX = 40
+
+# ============================================================================
+# Nurture — Mood visit factors
+# ============================================================================
+
+MOOD_VISIT_NEUTRAL = 10
+MOOD_VISIT_TODAY = 16
+MOOD_VISIT_STREAK_LONG = 20    # streak >= 7
+MOOD_VISIT_STREAK_MID = 14     # streak >= 3
+
+# ============================================================================
+# Nurture — Mood time factors
+# ============================================================================
+
+MOOD_TIME_FACTORS = {
+    "deep_night": 4,
+    "late_night": 6,
+    "morning": 8,
+    "active": 16,
+    "afternoon": 14,
+    "evening": 12,
+    "night": 10,
+}
+
+# ============================================================================
+# Nurture — Trust calculation parameters
+# ============================================================================
+
+TRUST_BASE = 10
+TRUST_LOG_COEFFICIENT = 25
+TRUST_MAX_FROM_VISITS = 70
+TRUST_STREAK_BONUS_PER_DAY = 2
+TRUST_STREAK_BONUS_MAX = 15
+
+# ============================================================================
+# Nurture — Intimacy calculation parameters
+# ============================================================================
+
+INTIMACY_BASE = 5
+INTIMACY_LOG_COEFFICIENT = 23
+INTIMACY_MAX_FROM_HOURS = 75
+INTIMACY_TODAY_DIVISOR = 6      # today_minutes / 6 = bonus
+INTIMACY_TODAY_BONUS_MAX = 10
+
+# ============================================================================
+# Nurture — EXP sources
+# ============================================================================
+
+EXP_SOURCES = {
+    "visit": 10,
+    "time_per_5min": 2,
+    "streak_bonus": 5,
+    "health_bonus": 2,
+    "skill_bonus": 50,
+}
+
+HEALTH_EXP_THRESHOLD = 50      # health above this earns bonus EXP
+STREAK_EXP_CAP = 10            # max streak multiplier
+
+# ============================================================================
+# Nurture — EXP extrapolation for levels beyond table
+# ============================================================================
+
+EXP_EXTRAPOLATION_STEP = 2500
+
+# ============================================================================
+# Nurture — EXP table
 # ============================================================================
 
 EXP_TABLE = [
@@ -227,4 +373,41 @@ SKILL_LEVEL_LABELS = {
     8:  "得意分野",
     9:  "エキスパート",
     10: "マスター",
+}
+
+# ============================================================================
+# Rebecca — Voice messages by mood state (Phase 2A personality layer)
+# ============================================================================
+
+REBECCA_VOICE_MESSAGES = {
+    "great": [
+        "今日は調子いい！なんでもできそう",
+        "よし、やるか！",
+        "いい感じ。この調子でいこう",
+        "今日のあたし、けっこうイケてる",
+    ],
+    "good": [
+        "まぁまぁかな",
+        "悪くないよ",
+        "ふつうにいい感じ",
+        "今日も来てくれたんだ",
+    ],
+    "normal": [
+        "ふつう",
+        "......別に",
+        "まぁ、やることやるか",
+        "特に変わりなし",
+    ],
+    "down": [
+        "ちょっとだるい......",
+        "......今日はあんまり",
+        "なんか調子出ない",
+        "......ひま",
+    ],
+    "bad": [
+        "......",
+        "......もう無理",
+        "放っといて",
+        ".........",
+    ],
 }

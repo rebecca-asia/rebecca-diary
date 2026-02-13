@@ -6,6 +6,9 @@ Scans ~/.claude/plugins/marketplaces/claude-plugins-official/ to discover
 installed plugins, skills, LSP languages, and external integrations.
 Outputs structured data to src/data/skills.json.
 
+Calculation logic delegated to domain/skills.py (Phase 2A).
+This collector handles I/O only.
+
 Usage:
     python3 collectors/collect_skills.py        # normal run
     python3 collectors/collect_skills.py -v     # verbose/debug output
@@ -15,7 +18,6 @@ Frequency: every 1 hour (cron)
 """
 
 import json
-import os
 import re
 import sys
 from datetime import datetime, timezone, timedelta
@@ -26,7 +28,8 @@ _PROJECT_ROOT = str(Path(__file__).resolve().parent.parent)
 if _PROJECT_ROOT not in sys.path:
     sys.path.insert(0, _PROJECT_ROOT)
 
-from domain.constants import SKILL_LEVEL_LABELS as _DOMAIN_SKILL_LEVEL_LABELS
+from domain import skills as domain_skills
+from domain.schema import write_json_atomic, inject_version, inject_staleness
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -81,9 +84,6 @@ LSP_NAMES = {
     "php-lsp": "PHP",
     "clangd-lsp": "C/C++",
 }
-
-# Skill level labels (from domain.constants)
-LEVEL_LABELS = _DOMAIN_SKILL_LEVEL_LABELS
 
 
 def log(msg):
@@ -173,46 +173,6 @@ def scan_components(plugin_dir):
     return counts
 
 
-def calculate_level(sub_skill_count, has_commands, has_agents, has_hooks):
-    """
-    Calculate skill level. Phase 1: based on installed components.
-    Future: usage frequency scoring.
-    """
-    # Base level: installed = 1
-    level = 1
-
-    # Sub-skills contribute heavily
-    if sub_skill_count >= 5:
-        level += 4
-    elif sub_skill_count >= 3:
-        level += 3
-    elif sub_skill_count >= 1:
-        level += 2
-
-    # Commands add capability
-    if has_commands:
-        level += 1
-
-    # Agents add sophistication
-    if has_agents:
-        level += 1
-
-    # Hooks add automation depth
-    if has_hooks:
-        level += 1
-
-    return min(level, 10)
-
-
-def get_level_label(level):
-    """Get Rebecca's label for a skill level."""
-    if level in LEVEL_LABELS:
-        return LEVEL_LABELS[level]
-    if level > 10:
-        return "マスター"
-    return "覚えたて"
-
-
 def scan_plugins():
     """Scan all plugins and return categorized results."""
     skills = []
@@ -261,7 +221,8 @@ def scan_plugins():
             if display_name == plugin_id:
                 display_name = plugin_id.replace("-", " ").title()
 
-            level = calculate_level(
+            # Delegate level calculation to domain layer
+            level = domain_skills.calculate_level(
                 len(sub_skills),
                 "commands" in components,
                 "agents" in components,
@@ -275,7 +236,7 @@ def scan_plugins():
                 "level": level,
                 "sub_skills": sub_skills,
                 "sub_skill_count": len(sub_skills),
-                "label": get_level_label(level),
+                "label": domain_skills.get_level_label(level),
             }
             skills.append(skill_entry)
             log(f"Plugin: {display_name} (Lv.{level}, {len(sub_skills)} skills, cat={category})")
@@ -321,7 +282,7 @@ def build_output(skills, languages, integrations):
     total_plugins = len(skills) + len(languages) + len(integrations)
     with_skills = sum(1 for s in skills if s["sub_skill_count"] > 0)
 
-    return {
+    data = {
         "timestamp": now.isoformat(timespec="seconds"),
         "summary": {
             "total_plugins": total_plugins,
@@ -334,24 +295,11 @@ def build_output(skills, languages, integrations):
         "integrations": integrations,
     }
 
+    # Inject schema version and staleness
+    inject_version(data)
+    inject_staleness(data, now)
 
-def write_json_atomic(data, output_path):
-    """Atomic write: .tmp -> rename."""
-    os.makedirs(output_path.parent, exist_ok=True)
-    tmp_path = output_path.with_suffix(".tmp")
-    try:
-        with open(tmp_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-            f.write("\n")
-        os.rename(tmp_path, output_path)
-        log(f"Wrote {output_path}")
-    except OSError as e:
-        log(f"Failed to write {output_path}: {e}")
-        try:
-            tmp_path.unlink(missing_ok=True)
-        except OSError:
-            pass
-        raise
+    return data
 
 
 # ---------------------------------------------------------------------------
@@ -363,7 +311,7 @@ def main():
 
     skills, languages, integrations = scan_plugins()
     data = build_output(skills, languages, integrations)
-    write_json_atomic(data, OUTPUT_FILE)
+    write_json_atomic(data, str(OUTPUT_FILE))
 
     if VERBOSE:
         print(json.dumps(data, ensure_ascii=False, indent=2))

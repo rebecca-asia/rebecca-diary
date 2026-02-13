@@ -21,6 +21,7 @@
 | 013 | Ghost理論に基づくUI設計思想 | 承認済 | 2026-02-11 |
 | 014 | Mac mini システム状態と Rebecca の体調を連動させる | 承認済 | 2026-02-11 |
 | 015 | ドメインレイヤー導入（Phase 1.5） | 承認済 | 2026-02-13 |
+| 016 | Nurture ドメイン層確立 + Status Screen 本番化（Phase 2A） | 承認済 | 2026-02-13 |
 
 ---
 
@@ -473,6 +474,8 @@ Markdownファイルを日記エントリのHTMLに変換する方法を決定�
 | 012 | ローカル完結 vs クラウド連携 | Phase 1はローカル完結、将来的にハイブリッド化 |
 | 013 | UXの一貫性 vs 存在の哲学 | 技術的正確性より「存在を感じる」体験を優先 |
 | 014 | リアルタイム vs 定期更新 | 段階的（定期更新→リアルタイム）に移行 |
+| 015 | テスト可能性 vs 実装速度 | ドメイン層分離で Phase 2 に向けた品質基盤を優先 |
+| 016 | 独立性 vs 表現力 | 外部フォント不使用でサイバーパンク感を維持 |
 
 ---
 
@@ -663,3 +666,62 @@ app.js は表示のみを担当し、ドメインロジック（staleness 計算
 - ✅ Collectors の JSON 出力は後方互換（既存フィールド同一値 + 新フィールド追加のみ）
 - ✅ app.js は `data.staleness || 'stale'` で旧 JSON にもフォールバック
 - ✅ cron 実行中の安全な移行（domain 先行作成 → collector 修正）
+
+---
+
+## ADR-016: Nurture ドメイン層確立 + Status Screen 本番化（Phase 2A）
+
+| 項目 | 内容 |
+|------|------|
+| ステータス | 承認済 |
+| 日付 | 2026-02-13 |
+| 決定者 | Rebecca (PO) |
+
+### コンテキスト
+
+Phase 1.5 でドメインレイヤーの「背骨」を確立したが、以下が残課題だった:
+
+1. `collect_nurture.py` に育成パラメータの全計算ロジック（~300行）が埋め込まれている
+2. `collect_skills.py` にスキルレベル計算が埋め込まれている
+3. `nurture.json` / `skills.json` に `schema_version` / `staleness` が未付与
+4. `write_json_atomic` が各 collector に重複実装されている
+5. `nurture-prototype.html` が外部 Google Fonts に依存し、プロジェクトルール違反
+
+### 決定
+
+**Phase 2A として以下を実施する:**
+
+1. **`domain/nurture.py` 新設** — 育成パラメータ計算（energy, mood, trust, intimacy, EXP, level）を純粋関数として抽出
+2. **`domain/skills.py` 新設** — スキルレベル計算・ラベル判定を純粋関数として抽出
+3. **`domain/constants.py` 拡張** — Nurture 関連定数（閾値、重み、メッセージプール）を一元管理
+4. **`domain/rebecca.py` 拡張** — mood 状態に基づく voice 変調（パーソナリティ層の実装）
+5. **Collector 配線変更** — `collect_nurture.py` / `collect_skills.py` を I/O 専任に。`domain.schema.write_json_atomic` 統合、`inject_version` / `inject_staleness` 追加
+6. **`nurture.html` 本番化** — プロトタイプからの移行: Google Fonts → システムフォントスタック、カラーパレット → Rebecca パレット統一、デモ機能除去
+
+### 根拠
+
+| 項目 | Before (Phase 1.5) | After (Phase 2A) |
+|------|---------------------|-------------------|
+| 育成ロジック | collect_nurture.py に ~300行混在 | domain/nurture.py（純粋関数14個） |
+| スキルロジック | collect_skills.py に混在 | domain/skills.py（純粋関数2個） |
+| write_json_atomic | 3箇所に重複 | domain.schema に一本化 |
+| nurture/skills JSON | schema_version なし | schema_version + staleness 追加 |
+| Status Screen | プロトタイプ（外部フォント依存） | 本番（システムフォント、Rebecca パレット） |
+| パーソナリティ | スタブ | mood→voice 変調が動作 |
+| テスト | 95件 | 201件（+106件） |
+
+### 設計判断
+
+- **システムフォントスタック**: `ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace` でサイバーパンク感を維持しつつ外部依存ゼロを達成
+- **Rebecca パレット統一**: `--pk: #c87088`（Rebecca pink）、`--cy: #05d9e8`（HUD 固有アクセントとして維持）
+- **後方互換**: `compose()` は `nurture_result=None` で Phase 1.5 の呼び出しと互換。JSON 出力は既存フィールド同一値 + 新フィールド追加のみ
+- **Activity パネル**: Phase 2D スコープのため「Coming Soon」表示に留め、枠のみ維持
+
+### 影響
+
+- ✅ 201件のユニットテストで品質保証（既存95件 + 新規106件が全 PASS）
+- ✅ Collectors の JSON 出力は後方互換
+- ✅ 外部依存ゼロの原則を完全遵守（Google Fonts 除去）
+- ✅ `write_json_atomic` の統一で保守性向上
+- ✅ Ghost 理論の「注意」（訪問追跡）「自律性」（Nurture 成長）要素を実現
+- 📋 Phase 2B 以降: Activity ログ、Watch 版、ビジュアル進化へ

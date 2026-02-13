@@ -26,7 +26,7 @@ DEFAULT_CONFIG = {
     "memory_dir": Path("/Users/rebeccacyber/.openclaw/workspace/memory"),
     "obsidian_dir": Path("/Users/rebeccacyber/Documents/Obsidian Vault"),
     "template_html": BASE_DIR / "src" / "template.html",
-    "index_html": BASE_DIR / "src" / "index.html",
+    "index_html": BASE_DIR / "src" / "diary.html",
 }
 
 CARDS_PLACEHOLDER = "<!-- DIARY_CARDS_PLACEHOLDER -->"

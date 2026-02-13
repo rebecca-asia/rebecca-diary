@@ -22,7 +22,13 @@ Phase 1.5: Domain Layer (2026-02-13) ✅ 完了
     domain/ に集約。Collectors は I/O 専任、app.js は表示専任に。
     unittest による品質保証。Phase 2 (Nurture) の受け皿。
 
-Phase 2-5: Tasks, Activity, Visual, Interactivity (Future)
+Phase 2A: Nurture Domain + Status Screen (2026-02-13) ✅ 完了
+    育成パラメータ（energy, mood, trust, intimacy, EXP, level）と
+    スキルレベル計算をドメイン層に確立。collect_nurture/skills を
+    I/O 専任に。nurture-prototype.html を本番化（HUD トーン維持、
+    Rebecca パレット統一、外部依存除去）。201件のテスト。
+
+Phase 2B-5: Tasks, Activity, Visual, Interactivity (Future)
 ```
 
 ---
@@ -49,6 +55,8 @@ Rebecca's Room の「なぜ」を定義する資料群。
 | [PLANNING.md](PLANNING.md) | **企画書:** 6つの Core Sections（Room Status, Diary, Tasks, Mac Health, Activity, Conversations）。Phase 0-5 ロードマップ。技術アーキテクチャ。 |
 | [PHASE1_GOAL.md](PHASE1_GOAL.md) | **Phase 1 ゴール定義:** ビジョン、Ghost理論との対応、成功基準（必須/品質/感性）、スコープ定義、設計原則、技術アーキテクチャ概要、リスクと対策。 |
 | [PHASE1_WBS.md](PHASE1_WBS.md) | **Phase 1 WBS:** 9カテゴリ・54ワークパッケージの階層的作業分解。各WPにID・成果物・依存関係・受入基準。実装推奨順序と依存関係マトリクス。 |
+| [PHASE2A_GOAL.md](PHASE2A_GOAL.md) | **Phase 2A ゴール定義:** Nurture ドメイン層確立 + Status Screen 本番化。Ghost理論の「注意」「自律性」要素の実現。 |
+| [PHASE2A_WBS.md](PHASE2A_WBS.md) | **Phase 2A WBS:** 9ワークパッケージの階層的作業分解。ドメイン層（WP-1〜4）、Collector配線（WP-5）、テスト（WP-6）、フロントエンド（WP-7）。 |
 | [IDEAS.md](IDEAS.md) | **アイデアバックログ:** ローカルLLMフェイルセーフ、音声会話、マシンアップグレード等。Active/Pending/Approved/Integrated の分類。 |
 
 ### Analysis — 分析資料
@@ -69,7 +77,7 @@ Rebecca's Room の「なぜ」を定義する資料群。
 |----------|---------|
 | [DESIGN_RULES.md](DESIGN_RULES.md) | **デザインシステム:** カラーパレット、タイポグラフィ、レイアウト、カードグリッド、エントリ詳細、インタラクション、Rebecca のキャラクター表現。**これが CSS 実装の正（authoritative source）。** |
 | [DESIGN_DECISIONS.md](DESIGN_DECISIONS.md) | **4つの設計決定:** (1)インシデント履歴の表示方針 (2)段階的アラートシステム (3)ヘルス可視化レベル (4)「死」の3段階表現。 |
-| [ADR.md](ADR.md) | **アーキテクチャ決定記録:** ADR-001〜014。Phase 0 の10決定 + Room 進化に伴う4決定。ADR-001(JS許可)とADR-008(Grid移行)は改訂済み。 |
+| [ADR.md](ADR.md) | **アーキテクチャ決定記録:** ADR-001〜016。Phase 0 の10決定 + Room 進化に伴う6決定。ADR-001(JS許可)とADR-008(Grid移行)は改訂済み。 |
 
 ### Spec — 技術仕様
 
@@ -99,7 +107,7 @@ Phase 0（静的日記サイト）策定時の詳細仕様書。Phase 0 は完�
 
 ---
 
-## Directory Structure (Current + Phase 1 Planned)
+## Directory Structure
 
 ```
 rebecca-diary/
@@ -119,30 +127,41 @@ rebecca-diary/
 │   ├── PHASE1_GOAL.md
 │   ├── PHASE1_WBS.md
 │   ├── PHASE1_SPEC.md
+│   ├── PHASE2A_GOAL.md
+│   ├── PHASE2A_WBS.md
 │   ├── ENTITY_LIST.md
 │   ├── USE_CASE_LIST.md
 │   ├── FEATURE_LIST.md
 │   └── archive/phase0/     # Phase 0 完了済み仕様書
-├── domain/                  # Phase 1.5: ドメインレイヤー（純粋ロジック）
+├── domain/                  # ドメインレイヤー（純粋ロジック）
 │   ├── constants.py         # 全閾値・ラベル・メッセージ
 │   ├── health.py            # ヘルス分類・スコア・アラート
+│   ├── nurture.py           # 育成パラメータ計算
 │   ├── presence.py          # 在室状況・時間帯判定
-│   ├── rebecca.py           # パーソナリティ層（Phase 2 スタブ）
-│   └── schema.py            # スキーマ管理・原子書込み
-├── tests/                   # Phase 1.5: ユニットテスト
+│   ├── rebecca.py           # パーソナリティ層（mood→voice 変調）
+│   ├── schema.py            # スキーマ管理・原子書込み
+│   └── skills.py            # スキルレベル計算
+├── tests/                   # ユニットテスト（201件）
 │   ├── test_health.py
 │   ├── test_presence.py
-│   └── test_constants.py
-├── collectors/              # Phase 1: データ収集スクリプト（I/O層）
+│   ├── test_constants.py
+│   ├── test_nurture.py
+│   └── test_skills.py
+├── collectors/              # データ収集スクリプト（I/O層）
 │   ├── collect_health.py
-│   └── collect_status.py
+│   ├── collect_status.py
+│   ├── collect_nurture.py
+│   └── collect_skills.py
 ├── src/
 │   ├── index.html           # メインページ
+│   ├── nurture.html         # Status Screen（HUD/育成ダッシュボード）
 │   ├── style.css            # 全スタイル
 │   ├── app.js               # JS ロジック
 │   ├── template.html        # SSG テンプレート
-│   ├── data/                # Phase 1: 収集データ (gitignore)
+│   ├── data/                # 収集データ (gitignore)
 │   │   ├── health.json
+│   │   ├── nurture.json
+│   │   ├── skills.json
 │   │   └── status.json
 │   └── assets/rebecca/      # キャラクター画像
 ├── update_diary.py          # 日記生成スクリプト (Protected)
@@ -154,7 +173,11 @@ rebecca-diary/
 
 ## Quick Links
 
-**Phase 1 を始めるなら:**
+**Phase 2A の詳細を見るなら:**
+1. [PHASE2A_GOAL.md](PHASE2A_GOAL.md) → ゴール定義・成功基準
+2. [PHASE2A_WBS.md](PHASE2A_WBS.md) → 作業分解・実装順序
+
+**Phase 1 の詳細を見るなら:**
 1. [PHASE1_GOAL.md](PHASE1_GOAL.md) → ゴール定義・成功基準
 2. [PHASE1_WBS.md](PHASE1_WBS.md) → 作業分解・実装順序
 3. [PHASE1_SPEC.md](PHASE1_SPEC.md) → 技術仕様

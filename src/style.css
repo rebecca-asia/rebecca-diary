@@ -338,8 +338,8 @@ body {
 .hero {
     position: relative;
     overflow: hidden;
-    padding: 4rem 1.25rem 3rem;
-    text-align: center;
+    padding: 1rem 1.25rem;
+    text-align: left;
     border-bottom: 1px solid var(--rb-border-subtle);
     background: var(--rb-bg-deepest);
 }
@@ -375,21 +375,26 @@ body {
 .hero-content {
     position: relative;
     z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .hero-avatar {
-    width: 88px;
-    height: 88px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     object-fit: cover;
     object-position: center 20%;
     border: 2px solid var(--rb-neon-pink);
     box-shadow:
-        0 0 20px var(--rb-neon-pink-glow),
-        0 0 40px rgba(255, 42, 109, 0.12);
+        0 0 12px var(--rb-neon-pink-glow),
+        0 0 24px rgba(255, 42, 109, 0.1);
     cursor: pointer;
     transition: transform var(--rb-duration-fast), box-shadow var(--rb-duration-slow);
-    animation: avatarGlow 3s ease-in-out infinite alternate;
+    flex-shrink: 0;
 }
 
 .hero-avatar:hover {
@@ -405,12 +410,13 @@ body {
 
 .hero h1 {
     font-family: var(--rb-font-display);
-    font-size: var(--rb-text-2xl);
-    font-weight: 900;
+    font-size: var(--rb-text-base);
+    font-weight: 700;
     color: var(--rb-text-primary);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    margin-top: 1rem;
+    margin: 0;
+    line-height: 1.2;
 }
 
 .hero h1 .accent {
@@ -420,21 +426,22 @@ body {
 
 .hero-sub {
     font-family: var(--rb-font-mono);
-    font-size: var(--rb-text-sm);
+    font-size: var(--rb-text-xs);
     color: var(--rb-neon-cyan);
     text-shadow: var(--rb-glow-text-cyan);
-    letter-spacing: 0.12em;
-    margin-top: 0.5rem;
+    letter-spacing: 0.08em;
+    margin: 0;
 }
 
 /* ─── Mini Nurture Widget ────────────────────────────────────────── */
 
 .nurture-mini {
-    margin-top: 1rem;
+    margin-left: auto;
     display: flex;
-    justify-content: center;
+    align-items: center;
     gap: 0.5rem;
     flex-wrap: wrap;
+    flex-shrink: 0;
 }
 
 .nurture-mini-link {
@@ -1309,27 +1316,20 @@ main:has(.diary-entry:target) .diary-grid {
 
 @media (min-width: 768px) {
     .hero {
-        padding: 5rem 2rem 4rem;
+        padding: 1rem 2rem;
     }
 
     .hero h1 {
-        font-size: var(--rb-text-3xl);
+        font-size: var(--rb-text-lg);
     }
 
     .hero-avatar {
-        width: 100px;
-        height: 100px;
+        width: 48px;
+        height: 48px;
     }
 
     .hero-bg-img {
-        display: block;
-        position: absolute;
-        right: 5%;
-        top: 50%;
-        transform: translateY(-50%);
-        height: 300px;
-        width: auto;
-        opacity: 0.06;
+        display: none;
     }
 
     .diary-grid {
@@ -1358,9 +1358,7 @@ main:has(.diary-entry:target) .diary-grid {
     }
 
     .hero-bg-img {
-        right: 8%;
-        height: 340px;
-        opacity: 0.07;
+        display: none;
     }
 
     .health-dashboard {
