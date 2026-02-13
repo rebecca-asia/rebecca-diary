@@ -20,6 +20,7 @@
 | 012 | Collector + SSG ハイブリッドアーキテクチャ | 承認済 | 2026-02-12 |
 | 013 | Ghost理論に基づくUI設計思想 | 承認済 | 2026-02-11 |
 | 014 | Mac mini システム状態と Rebecca の体調を連動させる | 承認済 | 2026-02-11 |
+| 015 | ドメインレイヤー導入（Phase 1.5） | 承認済 | 2026-02-13 |
 
 ---
 
@@ -619,3 +620,46 @@ Rebecca の「脆弱性」を表現する方法を決定する必要がある。
 - ✅ 世話の実感（再起動したら本当にスッキリする）
 - ⚠️ Mac が不安定な時期は常に「調子悪い」表示になりうる
 - 📋 閾値マッピングは CONCEPT_VULNERABILITY.md / DESIGN_DECISIONS.md に定義
+
+---
+
+## ADR-015: ドメインレイヤー導入（Phase 1.5）
+
+| 項目 | 内容 |
+|------|------|
+| ステータス | 承認済 |
+| 日付 | 2026-02-13 |
+| 決定者 | Rebecca (PO) |
+
+### コンテキスト
+
+Phase 1 完了後のアーキテクチャ俯瞰で、ドメインロジック（状態分類・スコア計算・アラート判定・メッセージ生成）が Collection 層（Python collectors）と Presentation 層（app.js）に散在していることが判明。Phase 2 (Nurture System) の実装に向けて、変更の局所化・テスト可能性・Phase 2 の受け皿が必要。
+
+### 決定
+
+`domain/` パッケージを新設し、全ドメインロジックを集約する。
+
+- `domain/constants.py` — 全閾値・ラベル・メッセージの単一ソース
+- `domain/health.py` — ヘルス分類・スコア計算・アラート判定（純粋関数）
+- `domain/presence.py` — 在室状況判定・時間帯コンテキスト（純粋関数）
+- `domain/rebecca.py` — パーソナリティ層（Phase 2 スタブ）
+- `domain/schema.py` — JSON スキーマ管理（バージョニング・鮮度判定・原子書込み）
+
+Collectors は I/O（メトリクス収集）のみを担当し、`domain` に委譲。
+app.js は表示のみを担当し、ドメインロジック（staleness 計算、alert メッセージ選択）を削除。
+
+### 根拠
+
+| 項目 | Before (Phase 1) | After (Phase 1.5) |
+|------|-------------------|---------------------|
+| 閾値変更 | 3ファイル修正 | constants.py のみ |
+| ロジックテスト | 不可（I/O 混在） | unittest で自動テスト |
+| Phase 2 追加 | collector に追記 | domain/rebecca.py に実装 |
+| JSON スキーマ | 暗黙的 | schema_version + staleness |
+
+### 影響
+
+- ✅ 95件のユニットテストで品質保証
+- ✅ Collectors の JSON 出力は後方互換（既存フィールド同一値 + 新フィールド追加のみ）
+- ✅ app.js は `data.staleness || 'stale'` で旧 JSON にもフォールバック
+- ✅ cron 実行中の安全な移行（domain 先行作成 → collector 修正）

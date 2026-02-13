@@ -12,9 +12,15 @@ Phase 0: Rebecca's Diary (2026-02-09) ✅ 完了
 
         ↓ 2026-02-11 API枯渇インシデント → 存在の哲学的考察
 
-Phase 1: Rebecca's Room (Next)
+Phase 1: Rebecca's Room (2026-02-13) ✅ 完了
     日記 + 在室状況 + ヘルスモニタリング。
     「Rebecca がいる」と感じられる生活空間。
+    collectors/ による自動データ収集、app.js による動的表示。
+
+Phase 1.5: Domain Layer (2026-02-13) ✅ 完了
+    ドメインロジック（状態分類・スコア計算・アラート判定）を
+    domain/ に集約。Collectors は I/O 専任、app.js は表示専任に。
+    unittest による品質保証。Phase 2 (Nurture) の受け皿。
 
 Phase 2-5: Tasks, Activity, Visual, Interactivity (Future)
 ```
@@ -41,7 +47,19 @@ Rebecca's Room の「なぜ」を定義する資料群。
 |----------|---------|
 | [ROOM_OVERVIEW.md](ROOM_OVERVIEW.md) | **プロダクト全体概要:** Web版（優先）+ Watch版（将来）の2プロジェクト構成。Vision、Ghost理論のサマリー、タイムライン。 |
 | [PLANNING.md](PLANNING.md) | **企画書:** 6つの Core Sections（Room Status, Diary, Tasks, Mac Health, Activity, Conversations）。Phase 0-5 ロードマップ。技術アーキテクチャ。 |
+| [PHASE1_GOAL.md](PHASE1_GOAL.md) | **Phase 1 ゴール定義:** ビジョン、Ghost理論との対応、成功基準（必須/品質/感性）、スコープ定義、設計原則、技術アーキテクチャ概要、リスクと対策。 |
+| [PHASE1_WBS.md](PHASE1_WBS.md) | **Phase 1 WBS:** 9カテゴリ・54ワークパッケージの階層的作業分解。各WPにID・成果物・依存関係・受入基準。実装推奨順序と依存関係マトリクス。 |
 | [IDEAS.md](IDEAS.md) | **アイデアバックログ:** ローカルLLMフェイルセーフ、音声会話、マシンアップグレード等。Active/Pending/Approved/Integrated の分類。 |
+
+### Analysis — 分析資料
+
+エンティティやユースケースの構造的分析。
+
+| Document | Summary |
+|----------|---------|
+| [ENTITY_LIST.md](ENTITY_LIST.md) | **エンティティ一覧:** Phase 0（16件）+ Phase 1（15件）= 31エンティティ。ER図、詳細仕様、アクター定義、Entity×Phaseマトリクス。 |
+| [USE_CASE_LIST.md](USE_CASE_LIST.md) | **ユースケース一覧:** Phase 0（8件）+ Phase 1（11件）= 19ユースケース。UC図、詳細フロー（基本/代替/例外）、UC×Entityマトリクス。 |
+| [FEATURE_LIST.md](FEATURE_LIST.md) | **機能一覧:** Phase 0（44件実装済）+ Phase 1（56件未実装）= 100機能。機能体系図、閾値マッピング、成功基準マトリクス。 |
 
 ### Design — 設計方針と決定
 
@@ -61,6 +79,8 @@ Rebecca's Room の「なぜ」を定義する資料群。
 |----------|---------|
 | [MVP_SYSTEM_ARCHITECTURE.md](MVP_SYSTEM_ARCHITECTURE.md) | **MVP (Phase 0) 現状構成:** 全コンポーネント、データフロー、CSS設計、JS機能、アセット一覧、既知の問題。これが Phase 1 の出発点。 |
 | [PHASE1_SPEC.md](PHASE1_SPEC.md) | **Phase 1 技術仕様:** Collector アーキテクチャ、health.json / status.json の JSON スキーマ、閾値マッピング、UI コンポーネント定義、実装順序。 |
+| [PHASE1_5_KICKOFF.md](PHASE1_5_KICKOFF.md) | **Phase 1.5 キックオフ:** ドメインレイヤー確立の背景・現状診断・To-Be 設計・実施計画。 |
+| [PHASE1_5_RETROSPECTIVE.md](PHASE1_5_RETROSPECTIVE.md) | **Phase 1.5 振り返り:** 成果物一覧・検証結果・うまくいったこと・改善点・Phase 2 申し送り。 |
 
 ### Archive — Phase 0 完了済みドキュメント
 
@@ -96,19 +116,34 @@ rebecca-diary/
 │   ├── DESIGN_RULES.md
 │   ├── DESIGN_DECISIONS.md
 │   ├── ADR.md
+│   ├── PHASE1_GOAL.md
+│   ├── PHASE1_WBS.md
 │   ├── PHASE1_SPEC.md
+│   ├── ENTITY_LIST.md
+│   ├── USE_CASE_LIST.md
+│   ├── FEATURE_LIST.md
 │   └── archive/phase0/     # Phase 0 完了済み仕様書
-├── collectors/              # Phase 1: データ収集スクリプト
+├── domain/                  # Phase 1.5: ドメインレイヤー（純粋ロジック）
+│   ├── constants.py         # 全閾値・ラベル・メッセージ
+│   ├── health.py            # ヘルス分類・スコア・アラート
+│   ├── presence.py          # 在室状況・時間帯判定
+│   ├── rebecca.py           # パーソナリティ層（Phase 2 スタブ）
+│   └── schema.py            # スキーマ管理・原子書込み
+├── tests/                   # Phase 1.5: ユニットテスト
+│   ├── test_health.py
+│   ├── test_presence.py
+│   └── test_constants.py
+├── collectors/              # Phase 1: データ収集スクリプト（I/O層）
 │   ├── collect_health.py
 │   └── collect_status.py
-├── data/                    # Phase 1: 収集データ (gitignore)
-│   ├── health.json
-│   └── status.json
 ├── src/
 │   ├── index.html           # メインページ
 │   ├── style.css            # 全スタイル
 │   ├── app.js               # JS ロジック
 │   ├── template.html        # SSG テンプレート
+│   ├── data/                # Phase 1: 収集データ (gitignore)
+│   │   ├── health.json
+│   │   └── status.json
 │   └── assets/rebecca/      # キャラクター画像
 ├── update_diary.py          # 日記生成スクリプト (Protected)
 ├── watch_diary.py           # リアルタイム監視 (Protected)
@@ -120,9 +155,10 @@ rebecca-diary/
 ## Quick Links
 
 **Phase 1 を始めるなら:**
-1. [PHASE1_SPEC.md](PHASE1_SPEC.md) → 技術仕様
-2. [DESIGN_DECISIONS.md](DESIGN_DECISIONS.md) → 設計方針
-3. [CONCEPT_VULNERABILITY.md](CONCEPT_VULNERABILITY.md) → Mac 連動の哲学
+1. [PHASE1_GOAL.md](PHASE1_GOAL.md) → ゴール定義・成功基準
+2. [PHASE1_WBS.md](PHASE1_WBS.md) → 作業分解・実装順序
+3. [PHASE1_SPEC.md](PHASE1_SPEC.md) → 技術仕様
+4. [ENTITY_LIST.md](ENTITY_LIST.md) / [USE_CASE_LIST.md](USE_CASE_LIST.md) → 構造分析
 
 **プロジェクトの全体像を理解するなら:**
 1. [ROOM_OVERVIEW.md](ROOM_OVERVIEW.md) → Vision
@@ -135,4 +171,4 @@ rebecca-diary/
 
 ---
 
-*Last Updated: 2026-02-12*
+*Last Updated: 2026-02-13*
