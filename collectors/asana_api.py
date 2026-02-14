@@ -52,7 +52,7 @@ def get_tasks(headers, workspace_gid, user_gid):
     params = {
         "workspace": workspace_gid,
         "assignee": user_gid,
-        "completed_since": "now",
+        "completed_since": "2026-02-01T00:00:00.000Z",
         "opt_fields": "name,due_on,due_at,completed,notes,projects.name,tags.name,created_at,modified_at"
     }
     
