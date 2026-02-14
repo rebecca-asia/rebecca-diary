@@ -1366,6 +1366,68 @@ main:has(.diary-entry:target) .diary-grid {
     }
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   LANGUAGE TOGGLE
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Default: EN content hidden (high specificity to override .card-preview etc.) */
+.lang-content[data-lang="en"] { display: none !important; }
+
+/* EN active: swap visibility */
+html[data-active-lang="en"] .lang-content[data-lang="ja"] { display: none !important; }
+html[data-active-lang="en"] .lang-content[data-lang="en"] { display: block !important; }
+
+/* Restore -webkit-box for card-preview line-clamp when visible */
+html[data-active-lang="en"] .diary-card .card-preview.lang-content[data-lang="en"] {
+    display: -webkit-box !important;
+}
+
+/* Toggle button */
+.lang-toggle {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.3rem 0.7rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--rb-border-subtle);
+    border-radius: var(--rb-radius-sm);
+    font-family: var(--rb-font-mono);
+    font-size: var(--rb-text-xs);
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: border-color var(--rb-duration-normal), box-shadow var(--rb-duration-normal);
+    flex-shrink: 0;
+    color: var(--rb-text-secondary);
+    line-height: 1;
+}
+
+.lang-toggle:hover {
+    border-color: var(--rb-neon-cyan-dim);
+    box-shadow: 0 0 12px rgba(5, 217, 232, 0.1);
+}
+
+.lang-label-ja,
+.lang-label-en {
+    transition: color var(--rb-duration-fast), text-shadow var(--rb-duration-fast);
+}
+
+.lang-sep {
+    color: var(--rb-text-muted);
+    font-size: 0.65rem;
+}
+
+/* Active label: JA active by default */
+.lang-label-ja.lang-active {
+    color: var(--rb-neon-pink);
+    text-shadow: var(--rb-glow-text-pink);
+}
+
+.lang-label-en.lang-active {
+    color: var(--rb-neon-cyan);
+    text-shadow: var(--rb-glow-text-cyan);
+}
+
 /* ─── Scrollbar (Webkit) ─────────────────────────────────────────── */
 
 ::-webkit-scrollbar {

@@ -61,8 +61,6 @@
     // Phase 1: Room Status + Health Dashboard
     // ═══════════════════════════════════════════════════════════════════
 
-    var isFirstLoad = true;
-
     // ─── Data Fetch (WP-6.1) ──────────────────────────────────────────
 
     function fetchJSON(url) {
@@ -176,167 +174,6 @@
         }
     }
 
-    // ─── Health Dashboard Rendering (WP-6.3, WP-6.3a) ────────────────
-
-    function renderHealthDashboard(data) {
-        var dashboard = document.getElementById('healthDashboard');
-        if (!dashboard) return;
-
-        if (!data) {
-            renderMetric('cpu', 0, 'loading', '—', '');
-            renderMetric('memory', 0, 'loading', '—', '');
-            renderMetric('disk', 0, 'loading', '—', '');
-            renderMetric('temperature', 0, 'loading', '—', '');
-            renderMetric('uptime', 0, 'loading', '—', '');
-            renderOverall(null);
-            return;
-        }
-
-        var freshness = data.staleness || 'stale';
-        var dimmed = freshness === 'stale' || freshness === 'dead';
-
-        // Temperature: hide row if null
-        var tempRow = document.getElementById('tempRow');
-        if (tempRow) {
-            tempRow.style.display = data.temperature ? '' : 'none';
-        }
-
-        // CPU
-        if (data.cpu) {
-            renderMetric('cpu', data.cpu.usage_percent,
-                data.cpu.state, data.cpu.label,
-                data.cpu.usage_percent.toFixed(1) + '%');
-        }
-
-        // Memory
-        if (data.memory) {
-            renderMetric('memory', data.memory.usage_percent,
-                data.memory.state, data.memory.label,
-                data.memory.used_gb.toFixed(1) + ' / ' + data.memory.total_gb.toFixed(1) + ' GB');
-        }
-
-        // Disk
-        if (data.disk) {
-            renderMetric('disk', data.disk.usage_percent,
-                data.disk.state, data.disk.label,
-                data.disk.used_gb + ' / ' + data.disk.total_gb + ' GB');
-        }
-
-        // Temperature
-        if (data.temperature) {
-            renderMetric('temperature', Math.min(data.temperature.celsius, 100),
-                data.temperature.state, data.temperature.label,
-                data.temperature.celsius.toFixed(1) + '°C');
-        }
-
-        // Uptime — map to bar percentage (7 days = 100%)
-        if (data.uptime) {
-            var uptimePct = Math.min((data.uptime.seconds / (7 * 86400)) * 100, 100);
-            renderMetric('uptime', uptimePct,
-                data.uptime.state, data.uptime.label,
-                data.uptime.display);
-        }
-
-        // Overall
-        renderOverall(data.overall);
-
-        // Staleness indicator
-        if (dimmed) {
-            dashboard.style.opacity = '0.5';
-        } else {
-            dashboard.style.opacity = '';
-        }
-
-        isFirstLoad = false;
-    }
-
-    function renderMetric(name, percent, state, label, detail) {
-        var fill = document.getElementById(name === 'temperature' ? 'tempFill' :
-            name === 'memory' ? 'memFill' :
-            name + 'Fill');
-        var labelEl = document.getElementById(name === 'temperature' ? 'tempLabel' :
-            name === 'memory' ? 'memLabel' :
-            name + 'Label');
-        var detailEl = document.getElementById(name === 'temperature' ? 'tempDetail' :
-            name === 'memory' ? 'memDetail' :
-            name + 'Detail');
-        var row = fill ? fill.closest('.health-metric') : null;
-
-        if (row) row.setAttribute('data-state', state || 'loading');
-
-        if (fill) {
-            if (isFirstLoad) {
-                // Staggered animation on first load
-                var metrics = ['cpu', 'memory', 'disk', 'temperature', 'uptime'];
-                var idx = metrics.indexOf(name);
-                var delay = idx * 80;
-                fill.style.transition = 'none';
-                fill.style.width = '0%';
-                setTimeout(function () {
-                    fill.style.transition = 'width 0.8s ease-out, background-color 0.5s ease';
-                    fill.style.width = Math.min(percent, 100) + '%';
-                }, 50 + delay);
-            } else {
-                fill.style.width = Math.min(percent, 100) + '%';
-            }
-        }
-
-        if (labelEl) labelEl.textContent = label || '—';
-        if (detailEl) detailEl.textContent = detail || '';
-    }
-
-    // Map overall health state to icon + color class
-    var overallIconMap = {
-        'excellent': 'status-online',
-        'good': 'status-online',
-        'normal': 'rebecca',
-        'poor': 'alert',
-        'bad': 'alert',
-        'critical': 'alert'
-    };
-
-    function renderOverall(overall) {
-        var iconEl = document.getElementById('overallEmoji');
-        var label = document.getElementById('overallLabel');
-        var message = document.getElementById('healthMessage');
-        var container = document.getElementById('healthOverall');
-
-        if (!overall) {
-            if (container) container.setAttribute('data-state', 'loading');
-            if (iconEl) iconEl.innerHTML = svgIcon('rebecca', 22);
-            if (label) label.textContent = '';
-            if (message) message.textContent = '';
-            return;
-        }
-
-        var state = overall.state || 'loading';
-        if (container) container.setAttribute('data-state', state);
-        if (iconEl) iconEl.innerHTML = svgIcon(overallIconMap[state] || 'rebecca', 22);
-        if (label) label.textContent = overall.label || '';
-        if (message) message.textContent = overall.message ? '「' + overall.message + '」' : '';
-    }
-
-    // ─── Alert Rendering (WP-6.4) ─────────────────────────────────────
-
-    function renderAlert(health) {
-        var alert = document.getElementById('roomAlert');
-        var msg = document.getElementById('alertMessage');
-        if (!alert) return;
-
-        if (!health || !health.alert_level || health.alert_level === 0) {
-            alert.hidden = true;
-            alert.setAttribute('data-level', '0');
-            return;
-        }
-
-        var level = health.alert_level;
-        var text = health.alert_message || '';
-
-        alert.hidden = false;
-        alert.setAttribute('data-level', String(level));
-        if (msg) msg.textContent = text ? '「' + text + '」' : '';
-    }
-
     // ─── Mini Nurture Widget (WP-7.1) ────────────────────────────────
 
     function renderNurtureMini(data) {
@@ -361,17 +198,13 @@
 
     function updateRoom() {
         Promise.all([
-            fetchJSON('data/health.json'),
             fetchJSON('data/status.json'),
             fetchJSON('data/nurture.json')
         ]).then(function (results) {
-            var health = results[0];
-            var status = results[1];
-            var nurture = results[2];
+            var status = results[0];
+            var nurture = results[1];
 
             renderStatusBar(status);
-            renderHealthDashboard(health);
-            renderAlert(health);
             renderNurtureMini(nurture);
         });
     }
@@ -379,5 +212,35 @@
     // Initial load + 5 minute interval
     updateRoom();
     setInterval(updateRoom, 5 * 60 * 1000);
+
+    // ═══════════════════════════════════════════════════════════════════
+    // Language Toggle (JA / EN)
+    // ═══════════════════════════════════════════════════════════════════
+
+    var LANG_KEY = 'rebecca-diary-lang';
+    var langToggle = document.getElementById('langToggle');
+
+    function setLang(lang) {
+        document.documentElement.setAttribute('data-active-lang', lang);
+        if (langToggle) {
+            var ja = langToggle.querySelector('.lang-label-ja');
+            var en = langToggle.querySelector('.lang-label-en');
+            if (ja) ja.classList.toggle('lang-active', lang === 'ja');
+            if (en) en.classList.toggle('lang-active', lang === 'en');
+        }
+        try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+    }
+
+    // Restore saved preference (default: ja)
+    var savedLang = 'ja';
+    try { savedLang = localStorage.getItem(LANG_KEY) || 'ja'; } catch (e) {}
+    setLang(savedLang);
+
+    if (langToggle) {
+        langToggle.addEventListener('click', function () {
+            var current = document.documentElement.getAttribute('data-active-lang') || 'ja';
+            setLang(current === 'ja' ? 'en' : 'ja');
+        });
+    }
 
 })();

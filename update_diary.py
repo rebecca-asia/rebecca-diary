@@ -9,9 +9,13 @@ generates a full timeline HTML, and updates the website.
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import logging
 import re
 import sys
+import urllib.error
+import urllib.request
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -31,6 +35,19 @@ DEFAULT_CONFIG = {
 
 CARDS_PLACEHOLDER = "<!-- DIARY_CARDS_PLACEHOLDER -->"
 ENTRIES_PLACEHOLDER = "<!-- DIARY_ENTRIES_PLACEHOLDER -->"
+
+TRANSLATION_CACHE_DIR = BASE_DIR / ".translation-cache"
+OPENCLAW_CONFIG = Path.home() / ".openclaw" / "openclaw.json"
+TRANSLATION_MODEL = "anthropic/claude-sonnet-4-5"
+
+
+def _gateway_url_and_token() -> tuple[str, str]:
+    """Read Gateway URL and auth token from OpenClaw config."""
+    config = json.loads(OPENCLAW_CONFIG.read_text(encoding="utf-8"))
+    gw = config.get("gateway", {})
+    port = gw.get("port", 18789)
+    token = gw.get("auth", {}).get("token", "")
+    return f"http://127.0.0.1:{port}/v1/chat/completions", token
 
 # ─── Logging ─────────────────────────────────────────────────────────────────
 
@@ -56,7 +73,7 @@ ENTRY_TEMPLATE = Template("""\
         <article class="diary-entry" id="diary-$date">
             <a href="#top" class="back-link">&larr; Back to list</a>
             <div class="entry-header">
-                <img src="assets/rebecca/レベッカ_顔絵ニュートラル.png" alt="" class="entry-avatar">
+                <img src="assets/rebecca/transparent/レベッカ_顔絵ニュートラル.png" alt="" class="entry-avatar">
                 <div class="entry-date">$date</div>
             </div>
             <div class="entry-content">
@@ -67,14 +84,20 @@ $sections
 CARD_TEMPLATE = Template("""\
             <a href="#diary-$date" class="diary-card">
                 <div class="card-date">$emoji $date</div>
-                <div class="card-preview">$preview</div>
+                <div class="card-preview lang-content" data-lang="ja">$preview_ja</div>
+                <div class="card-preview lang-content" data-lang="en">$preview_en</div>
                 <div class="card-sources">$sources</div>
             </a>""")
 
 SECTION_TEMPLATE = Template("""\
         <div class="section-$css_class">
             <h3>$icon $title</h3>
-$body
+            <div class="lang-content" data-lang="ja">
+$body_ja
+            </div>
+            <div class="lang-content" data-lang="en">
+$body_en
+            </div>
         </div>""")
 
 
@@ -87,6 +110,8 @@ class DiarySection:
     css_class: str
     body_html: str
     raw_md: str = ""  # Original markdown for preview extraction
+    body_html_ja: str = ""  # Japanese translation HTML
+    raw_md_ja: str = ""  # Japanese translation markdown
 
 
 @dataclass
@@ -106,7 +131,8 @@ class DiaryEntry:
                     css_class=section.css_class,
                     icon=section.icon,
                     title=section.title,
-                    body=section.body_html,
+                    body_ja=section.body_html_ja or "<p><em>翻訳はまだないよ</em></p>",
+                    body_en=section.body_html,
                 )
             )
         return ENTRY_TEMPLATE.substitute(
@@ -115,12 +141,17 @@ class DiaryEntry:
         )
 
     def to_card_html(self) -> str:
-        # Build preview from first meaningful markdown lines
-        preview = ""
+        # Build preview: EN = original, JA = translated
+        preview_en = ""
+        preview_ja = ""
         for section in self.sections:
-            preview = extract_preview(section.raw_md)
-            if preview:
-                break
+            if not preview_en:
+                preview_en = extract_preview(section.raw_md)
+            if not preview_ja and section.raw_md_ja:
+                preview_ja = extract_preview(section.raw_md_ja)
+
+        if not preview_ja:
+            preview_ja = preview_en
 
         # Build source icons
         source_icons = []
@@ -134,7 +165,8 @@ class DiaryEntry:
         return CARD_TEMPLATE.substitute(
             date=self.date,
             emoji="\U0001f4c5",
-            preview=preview,
+            preview_ja=preview_ja,
+            preview_en=preview_en,
             sources=sources,
         )
 
@@ -325,6 +357,94 @@ class MarkdownConverter:
         return text
 
 
+# ─── Translation ─────────────────────────────────────────────────────────────
+
+def _cache_path(date_str: str, source: str) -> Path:
+    """Return the cache file path for a given date and source."""
+    return TRANSLATION_CACHE_DIR / f"{date_str}_{source}.json"
+
+
+def _load_cached_translation(date_str: str, source: str, md_hash: str) -> Optional[str]:
+    """Load a cached translation if the source hash matches."""
+    path = _cache_path(date_str, source)
+    if not path.is_file():
+        return None
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+        if data.get("hash") == md_hash:
+            log.debug("Cache hit for %s_%s", date_str, source)
+            return data.get("translation")
+    except (json.JSONDecodeError, KeyError):
+        pass
+    return None
+
+
+def _save_cached_translation(date_str: str, source: str, md_hash: str, translation: str) -> None:
+    """Save a translation to the cache."""
+    TRANSLATION_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    path = _cache_path(date_str, source)
+    data = {"hash": md_hash, "translation": translation}
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    log.debug("Cached translation for %s_%s", date_str, source)
+
+
+def translate_markdown(md_text: str) -> Optional[str]:
+    """Translate markdown text to Japanese via OpenClaw Gateway."""
+    payload = json.dumps({
+        "model": TRANSLATION_MODEL,
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    "You are a strict literal translator. Translate the following Markdown document into Japanese. "
+                    "CRITICAL RULES:\n"
+                    "1. Preserve ALL Markdown formatting EXACTLY (headings, lists, tables, checkboxes, bold, italic, code, links)\n"
+                    "2. Do NOT interpret, summarize, or add commentary\n"
+                    "3. Do NOT change the structure or reorganize content\n"
+                    "4. Do NOT add conversational responses or reactions\n"
+                    "5. Keep proper nouns, technical terms, code snippets, URLs, and file paths as-is\n"
+                    "6. Translate ONLY the text content, preserving the exact same document structure\n"
+                    "Output ONLY the translated Markdown with identical structure to the input."
+                ),
+            },
+            {"role": "user", "content": md_text},
+        ],
+        "temperature": 0.3,
+    }).encode("utf-8")
+
+    url, token = _gateway_url_and_token()
+    headers = {"Content-Type": "application/json"}
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+
+    req = urllib.request.Request(url, data=payload, headers=headers, method="POST")
+
+    try:
+        with urllib.request.urlopen(req, timeout=180) as resp:
+            result = json.loads(resp.read().decode("utf-8"))
+            return result["choices"][0]["message"]["content"]
+    except (urllib.error.URLError, urllib.error.HTTPError, KeyError, json.JSONDecodeError, OSError) as e:
+        log.warning("Translation failed: %s", e)
+        return None
+
+
+def get_translation(date_str: str, source: str, md_text: str) -> Optional[str]:
+    """Get Japanese translation of markdown, using cache when possible."""
+    md_hash = hashlib.sha256(md_text.encode("utf-8")).hexdigest()
+
+    # Check cache
+    cached = _load_cached_translation(date_str, source, md_hash)
+    if cached is not None:
+        return cached
+
+    # Translate
+    log.info("Translating %s_%s ...", date_str, source)
+    translated = translate_markdown(md_text)
+    if translated:
+        _save_cached_translation(date_str, source, md_hash, translated)
+    return translated
+
+
 # ─── Core Logic ──────────────────────────────────────────────────────────────
 
 def scan_dates(memory_dir: Path, obsidian_dir: Path) -> list[str]:
@@ -351,7 +471,13 @@ def read_source(path: Path) -> Optional[str]:
     return path.read_text(encoding="utf-8")
 
 
-def build_entry(date_str: str, memory_dir: Path, obsidian_dir: Path) -> Optional[DiaryEntry]:
+def build_entry(
+    date_str: str,
+    memory_dir: Path,
+    obsidian_dir: Path,
+    *,
+    skip_translation: bool = False,
+) -> Optional[DiaryEntry]:
     """Build a DiaryEntry for a specific date from both sources."""
     converter = MarkdownConverter()
     entry = DiaryEntry(date=date_str)
@@ -367,17 +493,36 @@ def build_entry(date_str: str, memory_dir: Path, obsidian_dir: Path) -> Optional
         if raw is None:
             continue
         html = converter.convert(raw)
-        if html.strip():
-            entry.sections.append(
-                DiarySection(title=title, icon=icon, css_class=css_class, body_html=html, raw_md=raw)
+        if not html.strip():
+            continue
+
+        # Translation (EN→JA)
+        body_html_ja = ""
+        raw_md_ja = ""
+        if not skip_translation:
+            translated_md = get_translation(date_str, css_class, raw)
+            if translated_md:
+                raw_md_ja = translated_md
+                body_html_ja = converter.convert(translated_md)
+
+        entry.sections.append(
+            DiarySection(
+                title=title,
+                icon=icon,
+                css_class=css_class,
+                body_html=html,
+                raw_md=raw,
+                body_html_ja=body_html_ja,
+                raw_md_ja=raw_md_ja,
             )
-            has_content = True
-            log.debug("Loaded section '%s' from %s", title, path.name)
+        )
+        has_content = True
+        log.debug("Loaded section '%s' from %s", title, path.name)
 
     return entry if has_content else None
 
 
-def generate_site(config: dict, dry_run: bool = False) -> bool:
+def generate_site(config: dict, dry_run: bool = False, skip_translation: bool = False) -> bool:
     """Generate the full website by scanning all dates."""
     memory_dir = config["memory_dir"]
     obsidian_dir = config["obsidian_dir"]
@@ -394,7 +539,7 @@ def generate_site(config: dict, dry_run: bool = False) -> bool:
     entries_html = []
     cards_html = []
     for date in dates:
-        entry = build_entry(date, memory_dir, obsidian_dir)
+        entry = build_entry(date, memory_dir, obsidian_dir, skip_translation=skip_translation)
         if entry:
             entries_html.append(entry.to_html())
             cards_html.append(entry.to_card_html())
@@ -459,6 +604,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Print generated HTML to stdout instead of writing file.",
     )
     parser.add_argument(
+        "--skip-translation",
+        action="store_true",
+        help="Skip AI translation (dev/test mode).",
+    )
+    parser.add_argument(
         "-v", "--verbose",
         action="store_true",
         help="Enable debug logging.",
@@ -477,7 +627,7 @@ def main(argv: list[str] | None = None) -> int:
         "index_html": args.output,
     }
 
-    success = generate_site(config, dry_run=args.dry_run)
+    success = generate_site(config, dry_run=args.dry_run, skip_translation=args.skip_translation)
     return 0 if success else 1
 
 

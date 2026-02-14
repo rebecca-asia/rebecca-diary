@@ -11,3 +11,6 @@ src/data/
 # Python
 __pycache__/
 *.pyc
+
+# Translation cache
+.translation-cache/

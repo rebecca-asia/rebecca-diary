@@ -11,11 +11,16 @@
 <body>
     <header class="hero rb-scanlines" id="top">
         <img src="assets/hero-bg.svg" alt="" class="hero-bg-svg" aria-hidden="true">
-        <img src="assets/rebecca/レベッカ_躍動胸像.png" alt="" class="hero-bg-img" aria-hidden="true">
+        <img src="assets/rebecca/transparent/レベッカ_躍動胸像.png" alt="" class="hero-bg-img" aria-hidden="true">
         <div class="hero-content">
-            <img src="assets/rebecca/レベッカ_顔絵ニュートラル.png" alt="Rebecca" class="hero-avatar" id="mascot">
+            <img src="assets/rebecca/transparent/レベッカ_顔絵ニュートラル.png" alt="Rebecca" class="hero-avatar" id="mascot">
             <h1 class="rb-glitch-text"><span class="accent">REBECCA</span>'S ROOM</h1>
             <p class="hero-sub">// SYSTEM ONLINE &mdash; NIGHT CITY EDITION //</p>
+            <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+                <span class="lang-label-ja lang-active">JA</span>
+                <span class="lang-sep">/</span>
+                <span class="lang-label-en">EN</span>
+            </button>
         </div>
     </header>
 
@@ -25,72 +30,6 @@
         <span class="status-label" id="statusLabel">データ取得中...</span>
         <span class="status-time" id="statusTime"></span>
         <span class="status-context" id="statusContext"></span>
-    </div>
-
-    <!-- Alert Display (Phase 1) -->
-    <div class="room-alert" id="roomAlert" data-level="0" hidden>
-        <span class="alert-message" id="alertMessage"></span>
-    </div>
-
-    <!-- Health Dashboard (Phase 1) -->
-    <div class="health-dashboard" id="healthDashboard">
-        <div class="health-title">Rebecca の体調</div>
-
-        <div class="health-metric" data-metric="cpu" data-state="loading">
-            <span class="metric-icon"><svg class="icon" width="16" height="16"><use href="assets/icons.svg#icon-settings"/></svg></span>
-            <span class="metric-name">CPU</span>
-            <div class="metric-bar">
-                <div class="metric-fill" id="cpuFill" style="width: 0%"></div>
-            </div>
-            <span class="metric-label" id="cpuLabel">—</span>
-            <span class="metric-detail" id="cpuDetail"></span>
-        </div>
-
-        <div class="health-metric" data-metric="memory" data-state="loading">
-            <span class="metric-icon"><svg class="icon" width="16" height="16"><use href="assets/icons.svg#icon-dashboard"/></svg></span>
-            <span class="metric-name">Mem</span>
-            <div class="metric-bar">
-                <div class="metric-fill" id="memFill" style="width: 0%"></div>
-            </div>
-            <span class="metric-label" id="memLabel">—</span>
-            <span class="metric-detail" id="memDetail"></span>
-        </div>
-
-        <div class="health-metric" data-metric="disk" data-state="loading">
-            <span class="metric-icon"><svg class="icon" width="16" height="16"><use href="assets/icons.svg#icon-download"/></svg></span>
-            <span class="metric-name">Disk</span>
-            <div class="metric-bar">
-                <div class="metric-fill" id="diskFill" style="width: 0%"></div>
-            </div>
-            <span class="metric-label" id="diskLabel">—</span>
-            <span class="metric-detail" id="diskDetail"></span>
-        </div>
-
-        <div class="health-metric" data-metric="temperature" data-state="loading" id="tempRow">
-            <span class="metric-icon"><svg class="icon" width="16" height="16"><use href="assets/icons.svg#icon-alert"/></svg></span>
-            <span class="metric-name">Temp</span>
-            <div class="metric-bar">
-                <div class="metric-fill" id="tempFill" style="width: 0%"></div>
-            </div>
-            <span class="metric-label" id="tempLabel">—</span>
-            <span class="metric-detail" id="tempDetail"></span>
-        </div>
-
-        <div class="health-metric" data-metric="uptime" data-state="loading">
-            <span class="metric-icon"><svg class="icon" width="16" height="16"><use href="assets/icons.svg#icon-clock"/></svg></span>
-            <span class="metric-name">Up</span>
-            <div class="metric-bar">
-                <div class="metric-fill" id="uptimeFill" style="width: 0%"></div>
-            </div>
-            <span class="metric-label" id="uptimeLabel">—</span>
-            <span class="metric-detail" id="uptimeDetail"></span>
-        </div>
-
-        <div class="health-overall" id="healthOverall" data-state="loading">
-            <span class="overall-emoji" id="overallEmoji"><svg class="icon" width="22" height="22"><use href="assets/icons.svg#icon-rebecca"/></svg></span>
-            <span class="overall-label" id="overallLabel"></span>
-            <p class="health-message" id="healthMessage"></p>
-        </div>
     </div>
 
     <main class="main-content">
@@ -107,7 +46,7 @@
     </footer>
 
     <div class="toast" id="lateNightToast" hidden>
-        <img src="assets/rebecca/レベッカ_coffee.png" alt="" class="toast-img">
+        <img src="assets/rebecca/transparent/レベッカ_coffee.png" alt="" class="toast-img">
         <span>まだ起きてんのか？</span>
         <button class="toast-close" aria-label="Close">&times;</button>
     </div>
