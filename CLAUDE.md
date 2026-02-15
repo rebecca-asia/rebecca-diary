@@ -3,12 +3,13 @@
 ## Project Overview
 
 AIアシスタント「Rebecca」の生活空間。日記に加え、在室状況・体調・活動ログを表示する。
-Phase 0（静的日記）完了 → Phase 1（Room Status + Health）完了 → Phase 1.5（ドメインレイヤー確立）完了 → Phase 2A（Nurture ドメイン層 + Status Screen 本番化）完了。
+Phase 0（静的日記）完了 → Phase 1（Room Status + Health）完了 → Phase 1.5（ドメインレイヤー確立）完了 → Phase 2A（Nurture ドメイン層 + Status Screen 本番化）完了 → Phase 3（Diary Database）完了。
 
 ## Tech Stack
 
 - **HTML5** + **CSS3** + **Vanilla JS** (no frameworks)
 - **Python 3** — `scripts/update_diary.py` for diary, `collectors/*.py` for Room data
+- **SQLite** — `diary.db` for diary entry persistence (Phase 3)
 - **Dev server:** `cd src && python3 -m http.server 8080`
 
 ## Directory Structure
@@ -22,9 +23,11 @@ rebecca-diary/
 ├── scripts/
 │   ├── update_diary.py     # SSG: scans Markdown, generates full site (Protected)
 │   └── watch_diary.py      # Real-time file watcher (Protected)
+├── diary.db            # SQLite diary database (gitignored, Phase 3)
 ├── domain/             # ドメインレイヤー（純粋ロジック）
 │   ├── __init__.py     # Package + schema version
 │   ├── constants.py    # 全閾値・ラベル・メッセージの一元管理
+│   ├── diary.py        # 日記DBリポジトリ（SQLite CRUD・キャッシュ・移行）
 │   ├── health.py       # ヘルス分類・スコア計算・アラート判定
 │   ├── nurture.py      # 育成パラメータ計算（energy, mood, trust, exp, level）
 │   ├── presence.py     # 在室状況判定・時間帯コンテキスト
@@ -32,6 +35,7 @@ rebecca-diary/
 │   ├── schema.py       # JSON スキーマ管理（バージョン・鮮度・バリデーション）
 │   └── skills.py       # スキルレベル計算・ラベル判定
 ├── tests/              # ユニットテスト
+│   ├── test_diary.py   # diary.py のテスト（DB初期化・CRUD・キャッシュ・移行）
 │   ├── test_health.py  # health.py のテスト（境界値・全状態網羅）
 │   ├── test_presence.py # presence.py のテスト（全24時間・状態遷移）
 │   ├── test_constants.py # constants.py の構造整合性テスト
@@ -67,10 +71,10 @@ rebecca-diary/
 │   ├── IDEAS.md        # Idea backlog
 │   ├── concept/        # Philosophical foundation (Ghost, Presence, Vulnerability)
 │   ├── design/         # Design system + decisions
-│   ├── phases/         # Phase specs (phase1/, phase1.5/, phase2a/)
+│   ├── phases/         # Phase specs (phase1/, phase1.5/, phase2a/, phase3/)
 │   ├── specs/          # Technical specs (Entity, UseCase, Feature, Architecture, Nurture)
 │   └── archive/phase0/ # Completed Phase 0 specs
-└── (hidden: .git, .translation-cache, .recap-cache)
+└── (hidden: .git, .translation-cache, .recap-cache, diary.db)
 ```
 
 ## Key Architecture Decisions
@@ -80,6 +84,7 @@ rebecca-diary/
 - **Single-page SPA-like** — card grid → entry detail via CSS `:target` + `:has()`
 - **Dark theme + Neon Accent** — Rebecca's palette (pink, mint), subtle glows
 - **Domain Layer** — 全ドメインロジックは `domain/` に集約。Collectors は I/O のみ、app.js は表示のみ
+- **Diary Database** — SQLite (`diary.db`) で日記データを永続保存。差分更新（当日分のみ処理）対応
 
 ## CSS Custom Properties (src/style.css)
 
@@ -99,33 +104,44 @@ See `docs/design/RULES.md` for full design system (**authoritative source**). Ke
 
 ## scripts/update_diary.py
 
-CLI tool that reads Markdown from two sources and inserts HTML entries into `diary.html`:
+CLI tool that reads Markdown from two sources, stores in SQLite, and generates `diary.html`:
 
 - **OpenClaw memory:** `~/.openclaw/workspace/memory/{YYYY-MM-DD}.md`
 - **Obsidian vault:** `~/Documents/Obsidian Vault/{YYYY-MM-DD}.md`
+- **Database:** `diary.db` (SQLite, auto-created)
 
 ### Usage
 
 ```bash
-# Today's entry
+# Today's entry (default: process today only → save to DB → generate HTML)
 python3 scripts/update_diary.py
 
-# Specific date
-python3 scripts/update_diary.py 2026-02-09
+# Rebuild all entries from source files into DB
+python3 scripts/update_diary.py --rebuild
+
+# Migrate file-based caches to DB
+python3 scripts/update_diary.py --migrate-cache
+
+# Rebuild + migrate in one command
+python3 scripts/update_diary.py --rebuild --migrate-cache -v
 
 # Preview without modifying diary.html
 python3 scripts/update_diary.py --dry-run
+
+# Legacy mode (no DB, like pre-Phase 3)
+python3 scripts/update_diary.py --no-db
 
 # Verbose logging
 python3 scripts/update_diary.py -v
 ```
 
-### How it works
+### How it works (Phase 3)
 
-1. Reads Markdown files for the given date from both sources
-2. Converts Markdown to HTML (headings, lists, tables, inline formatting)
-3. Inserts the entry after the `<!-- 日記エントリはここに追加される -->` marker in `diary.html`
-4. Skips if an entry for that date already exists
+1. Initializes SQLite database (`diary.db`) with WAL mode
+2. Reads Markdown files for target date(s) from both sources
+3. Converts Markdown to HTML, translates EN→JA (cached in DB)
+4. Saves entry data (markdown, HTML, translations, recaps) to DB
+5. Reads ALL entries from DB and generates full `diary.html` from template
 
 ## Conventions
 
@@ -157,7 +173,9 @@ python3 scripts/update_diary.py -v
 
 ## Common Tasks
 
-- **Add a diary entry:** `python3 scripts/update_diary.py [YYYY-MM-DD]`
+- **Add today's diary entry:** `python3 scripts/update_diary.py`
+- **Rebuild all diary entries:** `python3 scripts/update_diary.py --rebuild`
+- **Migrate caches to DB:** `python3 scripts/update_diary.py --migrate-cache`
 - **Run dev server:** `cd src && python3 -m http.server 8080`
 - **Run Health Collector:** `python3 collectors/collect_health.py [-v]`
 - **Run Status Collector:** `python3 collectors/collect_status.py [-v]`

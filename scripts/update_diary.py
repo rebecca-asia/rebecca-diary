@@ -4,6 +4,11 @@ update_diary.py — Rebecca's Diary SSG.
 
 Scans memory and Obsidian directories for daily notes,
 generates a full timeline HTML, and updates the website.
+
+Phase 3: SQLite-backed diary database for persistent storage.
+Default: process today only → save to DB → read all from DB → diary.html
+--rebuild: process all dates → save to DB → read all from DB → diary.html
+--migrate-cache: migrate file-based caches to DB
 """
 
 from __future__ import annotations
@@ -13,11 +18,12 @@ import hashlib
 import json
 import logging
 import re
+import sqlite3
 import sys
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
 from string import Template
 from typing import Optional
@@ -25,6 +31,10 @@ from typing import Optional
 # ─── Configuration ───────────────────────────────────────────────────────────
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Ensure project root is on sys.path so `domain` package can be imported
+if str(BASE_DIR) not in sys.path:
+    sys.path.insert(0, str(BASE_DIR))
 
 DEFAULT_CONFIG = {
     "memory_dir": Path("/Users/rebeccacyber/.openclaw/workspace/memory"),
@@ -38,6 +48,7 @@ ENTRIES_PLACEHOLDER = "<!-- DIARY_ENTRIES_PLACEHOLDER -->"
 
 TRANSLATION_CACHE_DIR = BASE_DIR / ".translation-cache"
 RECAP_CACHE_DIR = BASE_DIR / ".recap-cache"
+DB_PATH = BASE_DIR / "diary.db"
 OPENCLAW_CONFIG = Path.home() / ".openclaw" / "openclaw.json"
 TRANSLATION_MODEL = "anthropic/claude-sonnet-4-5"
 
@@ -55,17 +66,17 @@ def _gateway_url_and_token() -> tuple[str, str]:
 def merge_markdown_sources(memory_md: Optional[str], obsidian_md: Optional[str]) -> str:
     """Combine memory and obsidian markdown into a single integrated markdown."""
     parts = []
-    
+
     if memory_md:
         parts.append("## 🧠 Internal Memory (OpenClaw)")
         parts.append(memory_md.strip())
-        
+
     if obsidian_md:
         if parts:
             parts.append("\n---\n")
         parts.append("## 📝 Daily Report (Obsidian)")
         parts.append(obsidian_md.strip())
-        
+
     return "\n\n".join(parts)
 
 # ─── Logging ─────────────────────────────────────────────────────────────────
@@ -146,7 +157,7 @@ class DiaryEntry:
 
     def to_html(self) -> str:
         rendered = []
-        
+
         # Add Recap section if available
         if self.recap_ja or self.recap_en:
             rendered.append(f"""
@@ -398,28 +409,59 @@ def _cache_path(date_str: str, source: str) -> Path:
     return TRANSLATION_CACHE_DIR / f"{date_str}_{source}.json"
 
 
-def _load_cached_translation(date_str: str, source: str, md_hash: str) -> Optional[str]:
-    """Load a cached translation if the source hash matches."""
+def _load_cached_translation(
+    date_str: str, source: str, md_hash: str,
+    db_conn: Optional[sqlite3.Connection] = None,
+) -> Optional[str]:
+    """Load a cached translation if the source hash matches.
+
+    Checks DB first (if available), then falls back to file cache.
+    """
+    # DB cache (primary)
+    if db_conn is not None:
+        from domain.diary import get_translation_cache
+        cached = get_translation_cache(db_conn, date_str, source, md_hash)
+        if cached is not None:
+            log.debug("DB cache hit for %s_%s", date_str, source)
+            return cached
+
+    # File cache (fallback)
     path = _cache_path(date_str, source)
     if not path.is_file():
         return None
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
         if data.get("hash") == md_hash:
-            log.debug("Cache hit for %s_%s", date_str, source)
-            return data.get("translation")
+            log.debug("File cache hit for %s_%s", date_str, source)
+            translation = data.get("translation")
+            # Backfill to DB if available
+            if db_conn is not None and translation:
+                from domain.diary import set_translation_cache
+                set_translation_cache(db_conn, date_str, source, md_hash, translation)
+                log.debug("Backfilled DB cache for %s_%s", date_str, source)
+            return translation
     except (json.JSONDecodeError, KeyError):
         pass
     return None
 
 
-def _save_cached_translation(date_str: str, source: str, md_hash: str, translation: str) -> None:
-    """Save a translation to the cache."""
+def _save_cached_translation(
+    date_str: str, source: str, md_hash: str, translation: str,
+    db_conn: Optional[sqlite3.Connection] = None,
+) -> None:
+    """Save a translation to cache (DB and/or file)."""
+    # Save to DB (primary)
+    if db_conn is not None:
+        from domain.diary import set_translation_cache
+        set_translation_cache(db_conn, date_str, source, md_hash, translation)
+        log.debug("Saved translation to DB for %s_%s", date_str, source)
+
+    # Also save to file (for backward compat during transition)
     TRANSLATION_CACHE_DIR.mkdir(parents=True, exist_ok=True)
     path = _cache_path(date_str, source)
     data = {"hash": md_hash, "translation": translation}
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    log.debug("Cached translation for %s_%s", date_str, source)
+    log.debug("Saved translation to file for %s_%s", date_str, source)
 
 
 def translate_markdown(md_text: str) -> Optional[str]:
@@ -467,12 +509,15 @@ def translate_markdown(md_text: str) -> Optional[str]:
         return None
 
 
-def get_translation(date_str: str, source: str, md_text: str) -> Optional[str]:
+def get_translation(
+    date_str: str, source: str, md_text: str,
+    db_conn: Optional[sqlite3.Connection] = None,
+) -> Optional[str]:
     """Get Japanese translation of markdown, using cache when possible."""
     md_hash = hashlib.sha256(md_text.encode("utf-8")).hexdigest()
 
-    # Check cache
-    cached = _load_cached_translation(date_str, source, md_hash)
+    # Check cache (DB first, then file)
+    cached = _load_cached_translation(date_str, source, md_hash, db_conn=db_conn)
     if cached is not None:
         return cached
 
@@ -480,13 +525,26 @@ def get_translation(date_str: str, source: str, md_text: str) -> Optional[str]:
     log.info("Translating %s_%s ...", date_str, source)
     translated = translate_markdown(md_text)
     if translated:
-        _save_cached_translation(date_str, source, md_hash, translated)
+        _save_cached_translation(date_str, source, md_hash, translated, db_conn=db_conn)
     return translated
 
 
-def get_recap(date_str: str, content: str) -> tuple[str, str]:
+def get_recap(
+    date_str: str, content: str,
+    db_conn: Optional[sqlite3.Connection] = None,
+) -> tuple[str, str]:
     """Generate or load a cached recap for the day."""
     md_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()
+
+    # Check DB cache first
+    if db_conn is not None:
+        from domain.diary import get_recap_cache
+        cached = get_recap_cache(db_conn, date_str, md_hash)
+        if cached is not None:
+            log.debug("DB recap cache hit for %s", date_str)
+            return cached
+
+    # Check file cache (fallback)
     RECAP_CACHE_DIR.mkdir(parents=True, exist_ok=True)
     cache_path = RECAP_CACHE_DIR / f"{date_str}.json"
 
@@ -494,12 +552,17 @@ def get_recap(date_str: str, content: str) -> tuple[str, str]:
         try:
             data = json.loads(cache_path.read_text(encoding="utf-8"))
             if data.get("hash") == md_hash:
-                return data.get("ja", ""), data.get("en", "")
-        except:
+                ja, en = data.get("ja", ""), data.get("en", "")
+                # Backfill to DB
+                if db_conn is not None and ja and en:
+                    from domain.diary import set_recap_cache
+                    set_recap_cache(db_conn, date_str, md_hash, ja, en)
+                return ja, en
+        except Exception:
             pass
 
     log.info("Generating Rebecca Recap for %s ...", date_str)
-    
+
     payload = json.dumps({
         "model": TRANSLATION_MODEL,
         "messages": [
@@ -533,11 +596,16 @@ def get_recap(date_str: str, content: str) -> tuple[str, str]:
             res_json = json.loads(res_content)
             ja, en = res_json.get("ja", ""), res_json.get("en", "")
             if ja and en:
+                # Save to file (backward compat)
                 cache_path.write_text(json.dumps({"hash": md_hash, "ja": ja, "en": en}, ensure_ascii=False), encoding="utf-8")
+                # Save to DB
+                if db_conn is not None:
+                    from domain.diary import set_recap_cache
+                    set_recap_cache(db_conn, date_str, md_hash, ja, en)
                 return ja, en
     except Exception as e:
         log.warning("Recap generation failed: %s", e)
-    
+
     return "", ""
 
 
@@ -556,7 +624,7 @@ def scan_dates(memory_dir: Path, obsidian_dir: Path) -> list[str]:
             m = pattern.match(f.name)
             if m:
                 dates.add(m.group(1))
-    
+
     return sorted(list(dates), reverse=True)
 
 
@@ -573,6 +641,7 @@ def build_entry(
     obsidian_dir: Path,
     *,
     skip_translation: bool = False,
+    db_conn: Optional[sqlite3.Connection] = None,
 ) -> Optional[DiaryEntry]:
     """Build a DiaryEntry for a specific date by integrating memory and obsidian."""
     converter = MarkdownConverter()
@@ -596,7 +665,7 @@ def build_entry(
     raw_md_ja = ""
     if not skip_translation:
         # Use 'integrated' as the cache source key
-        translated_md = get_translation(date_str, "integrated", integrated_md)
+        translated_md = get_translation(date_str, "integrated", integrated_md, db_conn=db_conn)
         if translated_md:
             raw_md_ja = translated_md
             html_ja = converter.convert(translated_md)
@@ -614,29 +683,107 @@ def build_entry(
         )
     )
 
+    # Generate recap
+    if not skip_translation:
+        recap_ja, recap_en = get_recap(date_str, integrated_md, db_conn=db_conn)
+        entry.recap_ja = recap_ja
+        entry.recap_en = recap_en
+
     log.debug("Integrated entry for %s", date_str)
+
+    # Save to DB if connection available
+    if db_conn is not None:
+        _save_entry_to_db(
+            db_conn,
+            date_str=date_str,
+            memory_md=memory_md,
+            obsidian_md=obsidian_md,
+            integrated_md=integrated_md,
+            html_en=html_en,
+            html_ja=html_ja,
+            raw_md_ja=raw_md_ja,
+            recap_en=entry.recap_en,
+            recap_ja=entry.recap_ja,
+            preview_en=extract_preview(integrated_md),
+            preview_ja=extract_preview(raw_md_ja) if raw_md_ja else "",
+        )
+
     return entry
 
 
-def generate_site(config: dict, dry_run: bool = False, skip_translation: bool = False) -> bool:
-    """Generate the full website by scanning all dates."""
-    memory_dir = config["memory_dir"]
-    obsidian_dir = config["obsidian_dir"]
-    template_path = config["template_html"]
-    output_path = config["index_html"]
+def _save_entry_to_db(
+    db_conn: sqlite3.Connection,
+    *,
+    date_str: str,
+    memory_md: Optional[str],
+    obsidian_md: Optional[str],
+    integrated_md: str,
+    html_en: str,
+    html_ja: str,
+    raw_md_ja: str,
+    recap_en: str,
+    recap_ja: str,
+    preview_en: str,
+    preview_ja: str,
+) -> None:
+    """Save a built entry to the database."""
+    from domain.diary import upsert_entry
+    integrated_hash = hashlib.sha256(integrated_md.encode("utf-8")).hexdigest()
+    upsert_entry(
+        db_conn,
+        date=date_str,
+        memory_md=memory_md,
+        obsidian_md=obsidian_md,
+        integrated_md=integrated_md,
+        integrated_hash=integrated_hash,
+        html_en=html_en,
+        html_ja=html_ja or None,
+        raw_md_ja=raw_md_ja or None,
+        recap_en=recap_en,
+        recap_ja=recap_ja,
+        preview_en=preview_en,
+        preview_ja=preview_ja,
+    )
+    log.debug("Saved entry %s to DB", date_str)
 
+
+def _entry_from_db_row(row: dict) -> DiaryEntry:
+    """Reconstruct a DiaryEntry from a database row."""
+    entry = DiaryEntry(date=row["date"])
+    entry.recap_ja = row.get("recap_ja") or ""
+    entry.recap_en = row.get("recap_en") or ""
+    entry.sections.append(
+        DiarySection(
+            title="Rebecca's Integrated Log",
+            icon="\U0001f5d2",
+            css_class="integrated",
+            body_html=row["html_en"],
+            raw_md=row["integrated_md"],
+            body_html_ja=row.get("html_ja") or "",
+            raw_md_ja=row.get("raw_md_ja") or "",
+        )
+    )
+    return entry
+
+
+# ─── Site Generation ─────────────────────────────────────────────────────────
+
+
+def _render_html(
+    template_path: Path,
+    output_path: Path,
+    entries: list[DiaryEntry],
+    dry_run: bool = False,
+) -> bool:
+    """Render diary entries into the HTML template."""
     if not template_path.is_file():
         log.error("Template not found: %s", template_path)
         return False
 
-    dates = scan_dates(memory_dir, obsidian_dir)
-    log.info("Found %d unique dates to process.", len(dates))
-
     entries_html = []
     cards_html = []
-    for date in dates:
-        entry = build_entry(date, memory_dir, obsidian_dir, skip_translation=skip_translation)
-        if entry:
+    for entry in entries:
+        if entry.has_content:
             entries_html.append(entry.to_html())
             cards_html.append(entry.to_card_html())
 
@@ -654,21 +801,99 @@ def generate_site(config: dict, dry_run: bool = False, skip_translation: bool = 
 
     final_html = template_content.replace(CARDS_PLACEHOLDER, "\n\n".join(cards_html))
     final_html = final_html.replace(ENTRIES_PLACEHOLDER, "\n\n".join(entries_html))
-    
+
     if dry_run:
         print(final_html)
         return True
-        
+
     output_path.write_text(final_html, encoding="utf-8")
-    log.info("Successfully generated site at %s with %d entries.", output_path, len(entries_html))
+    log.info("Generated site at %s with %d entries.", output_path, len(entries_html))
     return True
+
+
+def generate_site(config: dict, dry_run: bool = False, skip_translation: bool = False) -> bool:
+    """Generate the full website by scanning all dates (legacy mode, no DB)."""
+    memory_dir = config["memory_dir"]
+    obsidian_dir = config["obsidian_dir"]
+    template_path = config["template_html"]
+    output_path = config["index_html"]
+
+    if not template_path.is_file():
+        log.error("Template not found: %s", template_path)
+        return False
+
+    dates = scan_dates(memory_dir, obsidian_dir)
+    log.info("Found %d unique dates to process.", len(dates))
+
+    entries = []
+    for d in dates:
+        entry = build_entry(d, memory_dir, obsidian_dir, skip_translation=skip_translation)
+        if entry:
+            entries.append(entry)
+
+    return _render_html(template_path, output_path, entries, dry_run=dry_run)
+
+
+def generate_site_with_db(
+    config: dict,
+    db_conn: sqlite3.Connection,
+    *,
+    rebuild: bool = False,
+    dry_run: bool = False,
+    skip_translation: bool = False,
+) -> bool:
+    """Generate the website using the diary database.
+
+    Default: process today only → save to DB → read all from DB → render HTML
+    --rebuild: process all dates → save to DB → read all from DB → render HTML
+    """
+    from domain.diary import get_all_entries, count_entries
+
+    memory_dir = config["memory_dir"]
+    obsidian_dir = config["obsidian_dir"]
+    template_path = config["template_html"]
+    output_path = config["index_html"]
+
+    if not template_path.is_file():
+        log.error("Template not found: %s", template_path)
+        return False
+
+    # Step 1: Determine which dates to process
+    if rebuild:
+        dates_to_process = scan_dates(memory_dir, obsidian_dir)
+        log.info("Rebuild mode: processing %d dates.", len(dates_to_process))
+    else:
+        today_str = date.today().isoformat()
+        dates_to_process = [today_str]
+        log.info("Default mode: processing today (%s) only.", today_str)
+
+    # Step 2: Build and save entries for target dates
+    processed = 0
+    for d in dates_to_process:
+        entry = build_entry(
+            d, memory_dir, obsidian_dir,
+            skip_translation=skip_translation,
+            db_conn=db_conn,
+        )
+        if entry:
+            processed += 1
+
+    log.info("Processed %d entries (saved to DB).", processed)
+
+    # Step 3: Read ALL entries from DB and generate HTML
+    db_rows = get_all_entries(db_conn, order="DESC")
+    log.info("Reading %d entries from DB for HTML generation.", len(db_rows))
+
+    entries = [_entry_from_db_row(row) for row in db_rows]
+
+    return _render_html(template_path, output_path, entries, dry_run=dry_run)
 
 
 # ─── CLI ─────────────────────────────────────────────────────────────────────
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Rebecca's Diary SSG - Scans and generates full static site.",
+        description="Rebecca's Diary SSG - SQLite-backed diary generator.",
     )
     parser.add_argument(
         "--memory-dir",
@@ -695,6 +920,22 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Path to output HTML file.",
     )
     parser.add_argument(
+        "--db",
+        type=Path,
+        default=DB_PATH,
+        help="Path to diary SQLite database.",
+    )
+    parser.add_argument(
+        "--rebuild",
+        action="store_true",
+        help="Rebuild: process all dates from source files into DB.",
+    )
+    parser.add_argument(
+        "--migrate-cache",
+        action="store_true",
+        help="Migrate file-based translation/recap caches to DB.",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Print generated HTML to stdout instead of writing file.",
@@ -703,6 +944,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--skip-translation",
         action="store_true",
         help="Skip AI translation (dev/test mode).",
+    )
+    parser.add_argument(
+        "--no-db",
+        action="store_true",
+        help="Legacy mode: skip DB, process all dates like pre-Phase 3.",
     )
     parser.add_argument(
         "-v", "--verbose",
@@ -715,7 +961,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
     setup_logging(verbose=args.verbose)
-    
+
     config = {
         "memory_dir": args.memory_dir,
         "obsidian_dir": args.obsidian_dir,
@@ -723,7 +969,39 @@ def main(argv: list[str] | None = None) -> int:
         "index_html": args.output,
     }
 
-    success = generate_site(config, dry_run=args.dry_run, skip_translation=args.skip_translation)
+    # Legacy mode (no DB)
+    if args.no_db:
+        log.info("Running in legacy mode (no DB).")
+        success = generate_site(config, dry_run=args.dry_run, skip_translation=args.skip_translation)
+        return 0 if success else 1
+
+    # Phase 3: DB mode
+    from domain.diary import init_db, migrate_file_caches
+
+    db_conn = init_db(args.db)
+    log.info("Database initialized at %s", args.db)
+
+    try:
+        # Migrate caches if requested
+        if args.migrate_cache:
+            log.info("Migrating file-based caches to DB...")
+            stats = migrate_file_caches(db_conn, TRANSLATION_CACHE_DIR, RECAP_CACHE_DIR)
+            log.info(
+                "Migration complete: %d translations, %d recaps, %d skipped.",
+                stats["translations"], stats["recaps"], stats["skipped"],
+            )
+
+        # Generate site
+        success = generate_site_with_db(
+            config,
+            db_conn,
+            rebuild=args.rebuild,
+            dry_run=args.dry_run,
+            skip_translation=args.skip_translation,
+        )
+    finally:
+        db_conn.close()
+
     return 0 if success else 1
 
 

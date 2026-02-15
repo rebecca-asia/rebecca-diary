@@ -33,6 +33,14 @@ Phase 2B-5: Tasks, Activity, Visual, Interactivity (Future)
 
 ---
 
+## Reference
+
+| Document | Summary |
+|----------|---------|
+| [FILE_MAP.md](FILE_MAP.md) | **全ファイル一覧:** カテゴリ・役割・依存関係・データフロー図。プロジェクト構造の完全リファレンス。 |
+
+---
+
 ## Document Map
 
 ### Concept — 哲学的基盤

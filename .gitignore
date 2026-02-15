@@ -17,3 +17,11 @@ __pycache__/
 
 # Translation cache
 .translation-cache/
+
+# Recap cache
+.recap-cache/
+
+# Diary database (Phase 3)
+diary.db
+diary.db-wal
+diary.db-shm
