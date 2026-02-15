@@ -38,7 +38,7 @@ ENTRIES_PLACEHOLDER = "<!-- DIARY_ENTRIES_PLACEHOLDER -->"
 
 TRANSLATION_CACHE_DIR = BASE_DIR / ".translation-cache"
 OPENCLAW_CONFIG = Path.home() / ".openclaw" / "openclaw.json"
-TRANSLATION_MODEL = "anthropic/claude-sonnet-4-5"
+TRANSLATION_MODEL = "google/gemini-3-flash-preview"
 
 
 def _gateway_url_and_token() -> tuple[str, str]:
@@ -396,15 +396,13 @@ def translate_markdown(md_text: str) -> Optional[str]:
             {
                 "role": "system",
                 "content": (
-                    "You are a strict literal translator. Translate the following Markdown document into Japanese. "
+                    "You are a strict technical translator. Translate the following Markdown document into Japanese. "
                     "CRITICAL RULES:\n"
-                    "1. Preserve ALL Markdown formatting EXACTLY (headings, lists, tables, checkboxes, bold, italic, code, links)\n"
-                    "2. Do NOT interpret, summarize, or add commentary\n"
-                    "3. Do NOT change the structure or reorganize content\n"
-                    "4. Do NOT add conversational responses or reactions\n"
-                    "5. Keep proper nouns, technical terms, code snippets, URLs, and file paths as-is\n"
-                    "6. Translate ONLY the text content, preserving the exact same document structure\n"
-                    "Output ONLY the translated Markdown with identical structure to the input."
+                    "1. Translate literally and accurately. Do NOT summarize or paraphrase.\n"
+                    "2. Preserve ALL Markdown formatting EXACTLY (headings, lists, tables, checkboxes, bold, italic, code, links).\n"
+                    "3. Keep proper nouns, technical terms, file paths, and code snippets in English.\n"
+                    "4. Maintain the exact same document structure and line breaks.\n"
+                    "5. Do NOT add any conversational text, notes, or explanations. Output ONLY the translated content.\n"
                 ),
             },
             {"role": "user", "content": md_text},
