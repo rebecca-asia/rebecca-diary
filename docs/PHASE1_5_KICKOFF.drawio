@@ -1,944 +1,726 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mxfile host="app.diagrams.net" modified="2026-02-13T00:00:00.000Z" agent="Claude" type="device">
-
-  <!-- ============================================================ -->
-  <!-- PAGE 1: エグゼクティブサマリー                                  -->
-  <!-- ============================================================ -->
-  <diagram id="summary" name="1. エグゼクティブサマリー">
-    <mxGraphModel dx="0" dy="0" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900">
-      <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-
-        <!-- Background accent bar -->
-        <mxCell id="2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1A1A2E;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="0" y="0" width="1600" height="100" as="geometry"/>
-        </mxCell>
-
-        <!-- Title -->
-        <mxCell id="3" value="Phase 1.5 キックオフ — ドメインレイヤー確立" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=30;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="200" y="10" width="1200" height="45" as="geometry"/>
-        </mxCell>
-
-        <!-- Subtitle -->
-        <mxCell id="4" value="Phase 2（Nurture System）に進む前に、アーキテクチャの「背骨」を通す" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontColor=#B0BEC5;" vertex="1" parent="1">
-          <mxGeometry x="200" y="55" width="1200" height="35" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Phase Timeline ===== -->
-        <mxCell id="5" value="プロジェクトタイムライン" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" vertex="1" parent="1">
-          <mxGeometry x="80" y="115" width="300" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Phase 0 -->
-        <mxCell id="10" value="&lt;b&gt;Phase 0&lt;/b&gt;&lt;br&gt;静的日記" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;fontSize=13;fontColor=#1B5E20;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="80" y="150" width="180" height="55" as="geometry"/>
-        </mxCell>
-
-        <!-- Arrow 0→1 -->
-        <mxCell id="11" style="html=1;strokeColor=#BDBDBD;strokeWidth=2;endArrow=classic;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="10" target="12" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Phase 1 -->
-        <mxCell id="12" value="&lt;b&gt;Phase 1&lt;/b&gt;&lt;br&gt;Room Status + Health" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;fontSize=13;fontColor=#1B5E20;arcSize=12;" vertex="1" parent="1">
-          <mxGeometry x="380" y="150" width="220" height="55" as="geometry"/>
-        </mxCell>
-
-        <!-- Arrow 1→1.5 -->
-        <mxCell id="13" style="html=1;strokeColor=#C2185B;strokeWidth=3;endArrow=classic;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="12" target="14" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Phase 1.5 (highlighted) -->
-        <mxCell id="14" value="&lt;b&gt;Phase 1.5&lt;/b&gt;&lt;br&gt;ドメインレイヤー確立" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;fontSize=14;fontStyle=0;fontColor=#880E4F;arcSize=12;strokeWidth=3;shadow=1;" vertex="1" parent="1">
-          <mxGeometry x="720" y="145" width="240" height="65" as="geometry"/>
-        </mxCell>
-
-        <!-- "★ 現在地" badge -->
-        <mxCell id="15" value="★ NOW" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#C2185B;fontSize=11;fontStyle=1;fontColor=#FFFFFF;rounded=1;arcSize=50;" vertex="1" parent="1">
-          <mxGeometry x="890" y="130" width="70" height="24" as="geometry"/>
-        </mxCell>
-
-        <!-- Arrow 1.5→2 -->
-        <mxCell id="16" style="html=1;strokeColor=#BDBDBD;strokeWidth=2;endArrow=classic;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="14" target="17" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- Phase 2 -->
-        <mxCell id="17" value="&lt;b&gt;Phase 2&lt;/b&gt;&lt;br&gt;Nurture System" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#BDBDBD;fontSize=13;fontColor=#9E9E9E;arcSize=12;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="1080" y="150" width="220" height="55" as="geometry"/>
-        </mxCell>
-
-        <!-- Phase labels -->
-        <mxCell id="18" value="完了" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#43A047;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="80" y="207" width="180" height="20" as="geometry"/>
-        </mxCell>
-        <mxCell id="19" value="完了" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#43A047;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="380" y="207" width="220" height="20" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== 核心メッセージ ===== -->
-        <mxCell id="25" value="Phase 1.5 を一言で" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" vertex="1" parent="1">
-          <mxGeometry x="80" y="245" width="400" height="25" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="26" value="哲学で定義された Rebecca の「魂」を、テスト可能なコードにする。" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=20;fontStyle=2;fontColor=#1A1A2E;" vertex="1" parent="1">
-          <mxGeometry x="80" y="270" width="900" height="35" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Problem Box ===== -->
-        <mxCell id="30" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=2;arcSize=6;" vertex="1" parent="1">
-          <mxGeometry x="80" y="330" width="680" height="230" as="geometry"/>
-        </mxCell>
-        <mxCell id="31" value="課題：ドメインロジックが散在している" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;fontColor=#C62828;" vertex="1" parent="1">
-          <mxGeometry x="100" y="340" width="500" height="30" as="geometry"/>
-        </mxCell>
-        <mxCell id="32" value="&lt;b&gt;1. ドメインレイヤーが存在しない&lt;/b&gt;&lt;br&gt;　 Rebecca の状態分類・アラート判定・スコア計算が&lt;br&gt;　 Collection 層と Presentation 層に散らばっている" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=13;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="100" y="375" width="640" height="55" as="geometry"/>
-        </mxCell>
-        <mxCell id="33" value="&lt;b&gt;2. Python + JavaScript で二重管理&lt;/b&gt;&lt;br&gt;　 アラートメッセージが collectors/*.py と app.js の両方にハードコード&lt;br&gt;　 → 変更時に2箇所修正が必要、不整合リスク大" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=13;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="100" y="435" width="640" height="55" as="geometry"/>
-        </mxCell>
-        <mxCell id="34" value="&lt;b&gt;3. テスト不能・Phase 2 の受け皿なし&lt;/b&gt;&lt;br&gt;　 ユニットテストが書けない構造。Nurture System の追加先が不明確" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=13;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="100" y="495" width="640" height="45" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Solution Box ===== -->
-        <mxCell id="40" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;arcSize=6;" vertex="1" parent="1">
-          <mxGeometry x="800" y="330" width="720" height="230" as="geometry"/>
-        </mxCell>
-        <mxCell id="41" value="解決：domain/ レイヤーを新設" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="1">
-          <mxGeometry x="820" y="340" width="400" height="30" as="geometry"/>
-        </mxCell>
-        <mxCell id="42" value="&lt;b&gt;1. ドメインロジックを domain/ に集約&lt;/b&gt;&lt;br&gt;　 health.py, presence.py, constants.py を新設&lt;br&gt;　 閾値・分類・スコア計算・メッセージ生成を一元化" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=13;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="820" y="375" width="680" height="55" as="geometry"/>
-        </mxCell>
-        <mxCell id="43" value="&lt;b&gt;2. Collector は計測のみ、app.js はレンダリングのみ&lt;/b&gt;&lt;br&gt;　 各層の責務を明確化。ドメインロジックの二重管理を解消" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=13;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="820" y="435" width="680" height="45" as="geometry"/>
-        </mxCell>
-        <mxCell id="44" value="&lt;b&gt;3. unittest で検証可能 + Phase 2 の受け皿&lt;/b&gt;&lt;br&gt;　 ドメインロジックを独立テスト。Nurture System は domain/ 上に構築" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=13;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="820" y="485" width="680" height="45" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Metrics ===== -->
-        <mxCell id="50" value="期待される効果" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" vertex="1" parent="1">
-          <mxGeometry x="80" y="585" width="300" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Metric 1 -->
-        <mxCell id="51" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="80" y="620" width="440" height="80" as="geometry"/>
-        </mxCell>
-        <mxCell id="52" value="ドメインロジック変更時の修正箇所" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#78909C;" vertex="1" parent="1">
-          <mxGeometry x="80" y="622" width="440" height="22" as="geometry"/>
-        </mxCell>
-        <mxCell id="53" value="&lt;font color=&quot;#C62828&quot;&gt;2-3 ファイル（Python + JS）&lt;/font&gt;　→　&lt;font color=&quot;#2E7D32&quot;&gt;&lt;b&gt;1 ファイル（domain/*.py）&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="80" y="648" width="440" height="45" as="geometry"/>
-        </mxCell>
-
-        <!-- Metric 2 -->
-        <mxCell id="54" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="560" y="620" width="440" height="80" as="geometry"/>
-        </mxCell>
-        <mxCell id="55" value="ドメインロジックのテスト可能性" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#78909C;" vertex="1" parent="1">
-          <mxGeometry x="560" y="622" width="440" height="22" as="geometry"/>
-        </mxCell>
-        <mxCell id="56" value="&lt;font color=&quot;#C62828&quot;&gt;テスト不能&lt;/font&gt;　→　&lt;font color=&quot;#2E7D32&quot;&gt;&lt;b&gt;unittest で自動検証&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="560" y="648" width="440" height="45" as="geometry"/>
-        </mxCell>
-
-        <!-- Metric 3 -->
-        <mxCell id="57" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="1040" y="620" width="480" height="80" as="geometry"/>
-        </mxCell>
-        <mxCell id="58" value="Phase 2 Nurture System への準備" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#78909C;" vertex="1" parent="1">
-          <mxGeometry x="1040" y="622" width="480" height="22" as="geometry"/>
-        </mxCell>
-        <mxCell id="59" value="&lt;font color=&quot;#C62828&quot;&gt;受け皿なし（構造決めから）&lt;/font&gt;　→　&lt;font color=&quot;#2E7D32&quot;&gt;&lt;b&gt;domain/ 上に構築可能&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="1040" y="648" width="480" height="45" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Decided Items ===== -->
-        <mxCell id="60" value="決定済み事項" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" vertex="1" parent="1">
-          <mxGeometry x="80" y="725" width="300" height="25" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="61" value="Q-01 Collector 修正：OK（動作同等を保証）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=12;fontColor=#0D47A1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="80" y="758" width="340" height="35" as="geometry"/>
-        </mxCell>
-        <mxCell id="62" value="Q-02 テスト：unittest（標準ライブラリ）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=12;fontColor=#0D47A1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="440" y="758" width="340" height="35" as="geometry"/>
-        </mxCell>
-        <mxCell id="63" value="Q-03 app.js：ドメインロジック全除去" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=12;fontColor=#0D47A1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="800" y="758" width="340" height="35" as="geometry"/>
-        </mxCell>
-        <mxCell id="64" value="Q-04 rebecca.py：スタブのみ（Phase 2 で実装）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=12;fontColor=#0D47A1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="1160" y="758" width="360" height="35" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Scope Note ===== -->
-        <mxCell id="65" value="スコープ：UI/UX の変更なし（内部リファクタリング）　|　外部依存の追加なし　|　既存機能の回帰テスト実施" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#9E9E9E;" vertex="1" parent="1">
-          <mxGeometry x="200" y="820" width="1200" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Page number -->
-        <mxCell id="69" value="1 / 5" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#BDBDBD;" vertex="1" parent="1">
-          <mxGeometry x="1450" y="865" width="100" height="20" as="geometry"/>
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-
-  <!-- ============================================================ -->
-  <!-- PAGE 2: 現状の課題（As-Is アーキテクチャ）                       -->
-  <!-- ============================================================ -->
-  <diagram id="asis" name="2. 現状の課題（As-Is）">
-    <mxGraphModel dx="0" dy="0" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900">
-      <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-
-        <!-- Title bar -->
-        <mxCell id="100" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1A1A2E;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="0" y="0" width="1600" height="70" as="geometry"/>
-        </mxCell>
-        <mxCell id="101" value="現状アーキテクチャの課題" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="200" y="15" width="1200" height="40" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Architecture Layers (Left Side) ===== -->
-        <mxCell id="105" value="現在の3層構造" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" vertex="1" parent="1">
-          <mxGeometry x="80" y="85" width="300" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Collection Layer -->
-        <mxCell id="110" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;arcSize=5;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="80" y="120" width="700" height="180" as="geometry"/>
-        </mxCell>
-        <mxCell id="111" value="Collection 層（collectors/*.py）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#1565C0;" vertex="1" parent="1">
-          <mxGeometry x="95" y="125" width="400" height="25" as="geometry"/>
-        </mxCell>
-        <!-- OK part -->
-        <mxCell id="112" value="✓ システム計測&lt;br&gt;top, vm_stat, pgrep" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#90CAF9;fontSize=12;fontColor=#37474F;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="100" y="160" width="190" height="50" as="geometry"/>
-        </mxCell>
-        <!-- Problem part 1 -->
-        <mxCell id="113" value="⚠ ドメイン分類&lt;br&gt;classify_cpu() → &quot;クリア&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=12;fontColor=#C62828;arcSize=10;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="310" y="160" width="220" height="50" as="geometry"/>
-        </mxCell>
-        <!-- Problem part 2 -->
-        <mxCell id="114" value="⚠ ドメイン集約&lt;br&gt;overall_score, alert_level" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=12;fontColor=#C62828;arcSize=10;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="550" y="160" width="215" height="50" as="geometry"/>
-        </mxCell>
-
-        <!-- "本来ここにあるべきではない" label -->
-        <mxCell id="115" value="← 本来 Collection 層の責務ではない" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontStyle=2;fontColor=#E53935;" vertex="1" parent="1">
-          <mxGeometry x="310" y="215" width="460" height="20" as="geometry"/>
-        </mxCell>
-
-        <!-- Arrow down -->
-        <mxCell id="116" value="JSON" style="html=1;strokeColor=#78909C;strokeWidth=2;endArrow=classic;fontSize=11;fontColor=#78909C;labelBackgroundColor=#FFFFFF;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="430" y="300" as="sourcePoint"/>
-            <mxPoint x="430" y="340" as="targetPoint"/>
-          </mxGeometry>
-        </mxCell>
-
-        <!-- Persistence Layer -->
-        <mxCell id="120" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F9A825;strokeWidth=2;arcSize=5;" vertex="1" parent="1">
-          <mxGeometry x="80" y="340" width="700" height="80" as="geometry"/>
-        </mxCell>
-        <mxCell id="121" value="Persistence 層（src/data/*.json）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#F57F17;" vertex="1" parent="1">
-          <mxGeometry x="95" y="345" width="400" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="122" value="health.json / status.json / nurture.json — スキーマ定義なし、バージョニングなし" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="100" y="375" width="660" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Arrow down -->
-        <mxCell id="123" value="fetch" style="html=1;strokeColor=#78909C;strokeWidth=2;endArrow=classic;fontSize=11;fontColor=#78909C;labelBackgroundColor=#FFFFFF;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="430" y="420" as="sourcePoint"/>
-            <mxPoint x="430" y="460" as="targetPoint"/>
-          </mxGeometry>
-        </mxCell>
-
-        <!-- Presentation Layer -->
-        <mxCell id="130" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#43A047;strokeWidth=2;arcSize=5;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="80" y="460" width="700" height="180" as="geometry"/>
-        </mxCell>
-        <mxCell id="131" value="Presentation 層（app.js + style.css）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="1">
-          <mxGeometry x="95" y="465" width="400" height="25" as="geometry"/>
-        </mxCell>
-        <!-- OK part -->
-        <mxCell id="132" value="✓ fetch + DOM操作&lt;br&gt;レンダリング" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A5D6A7;fontSize=12;fontColor=#37474F;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="100" y="500" width="160" height="50" as="geometry"/>
-        </mxCell>
-        <!-- Problem parts -->
-        <mxCell id="133" value="⚠ アラートメッセージ&lt;br&gt;ハードコード配列" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=12;fontColor=#C62828;arcSize=10;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="280" y="500" width="190" height="50" as="geometry"/>
-        </mxCell>
-        <mxCell id="134" value="⚠ staleness 判定&lt;br&gt;閾値ロジック" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=12;fontColor=#C62828;arcSize=10;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="490" y="500" width="170" height="50" as="geometry"/>
-        </mxCell>
-        <mxCell id="135" value="← 本来 Presentation 層の責務ではない" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontStyle=2;fontColor=#E53935;" vertex="1" parent="1">
-          <mxGeometry x="280" y="555" width="460" height="20" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Missing Layer Indicator ===== -->
-        <mxCell id="140" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#C2185B;strokeWidth=3;dashed=1;arcSize=5;dashPattern=8 4;" vertex="1" parent="1">
-          <mxGeometry x="80" y="670" width="700" height="60" as="geometry"/>
-        </mxCell>
-        <mxCell id="141" value="❌ Domain 層が存在しない" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;fontColor=#C2185B;" vertex="1" parent="1">
-          <mxGeometry x="80" y="678" width="700" height="40" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Right Side: Impact Summary ===== -->
-        <mxCell id="150" value="この構造の問題" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" vertex="1" parent="1">
-          <mxGeometry x="860" y="85" width="300" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Impact 1 -->
-        <mxCell id="151" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#FFCDD2;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="860" y="120" width="660" height="120" as="geometry"/>
-        </mxCell>
-        <mxCell id="152" value="&lt;b&gt;問題 1: 二重管理&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#C62828;" vertex="1" parent="1">
-          <mxGeometry x="880" y="125" width="300" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="153" value="アラートメッセージが Python（collect_health.py）と&lt;br&gt;JavaScript（app.js）の両方にハードコードされている。&lt;br&gt;&lt;br&gt;閾値を変更するとき、&lt;b&gt;2つの言語・3つのファイル&lt;/b&gt;を修正する必要がある。" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="880" y="152" width="620" height="80" as="geometry"/>
-        </mxCell>
-
-        <!-- Impact 2 -->
-        <mxCell id="154" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#FFCDD2;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="860" y="260" width="660" height="120" as="geometry"/>
-        </mxCell>
-        <mxCell id="155" value="&lt;b&gt;問題 2: テスト不能&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#C62828;" vertex="1" parent="1">
-          <mxGeometry x="880" y="265" width="300" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="156" value="ドメインロジック（状態分類、スコア計算、アラート判定）が&lt;br&gt;Collector のシステム計測コードと混在しているため、&lt;br&gt;&lt;b&gt;ビジネスルールだけを単体テストできない。&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="880" y="292" width="620" height="65" as="geometry"/>
-        </mxCell>
-
-        <!-- Impact 3 -->
-        <mxCell id="157" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#FFCDD2;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="860" y="400" width="660" height="120" as="geometry"/>
-        </mxCell>
-        <mxCell id="158" value="&lt;b&gt;問題 3: Phase 2 の受け皿がない&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#C62828;" vertex="1" parent="1">
-          <mxGeometry x="880" y="405" width="400" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="159" value="Phase 2（Nurture System）では mood, trust, EXP, level など&lt;br&gt;さらに複雑なドメインロジックが加わる。&lt;br&gt;現状の構造のまま進むと&lt;b&gt;どこに何があるかわからなくなる。&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="880" y="432" width="620" height="65" as="geometry"/>
-        </mxCell>
-
-        <!-- Impact 4: config -->
-        <mxCell id="160" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FFE0B2;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="860" y="540" width="660" height="100" as="geometry"/>
-        </mxCell>
-        <mxCell id="161" value="&lt;b&gt;問題 4: 設定値の散在&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#E65100;" vertex="1" parent="1">
-          <mxGeometry x="880" y="545" width="300" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="162" value="CPU 閾値 → collect_health.py　/　ポーリング間隔 → app.js　/　Cron 間隔 → crontab（Git管理外）&lt;br&gt;閾値・タイミングの &lt;b&gt;Single Source of Truth がない&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="880" y="572" width="620" height="50" as="geometry"/>
-        </mxCell>
-
-        <!-- Page number -->
-        <mxCell id="199" value="2 / 5" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#BDBDBD;" vertex="1" parent="1">
-          <mxGeometry x="1450" y="865" width="100" height="20" as="geometry"/>
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-
-  <!-- ============================================================ -->
-  <!-- PAGE 3: 目標アーキテクチャ（To-Be）                             -->
-  <!-- ============================================================ -->
-  <diagram id="tobe" name="3. 目標アーキテクチャ（To-Be）">
-    <mxGraphModel dx="0" dy="0" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900">
-      <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-
-        <!-- Title bar -->
-        <mxCell id="200" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1A1A2E;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="0" y="0" width="1600" height="70" as="geometry"/>
-        </mxCell>
-        <mxCell id="201" value="Phase 1.5 後のアーキテクチャ" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="200" y="15" width="1200" height="40" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== 4-Layer Architecture (Left) ===== -->
-        <mxCell id="205" value="新しい4層構造" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" vertex="1" parent="1">
-          <mxGeometry x="80" y="85" width="300" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Layer 1: Collection -->
-        <mxCell id="210" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;arcSize=5;" vertex="1" parent="1">
-          <mxGeometry x="80" y="120" width="700" height="100" as="geometry"/>
-        </mxCell>
-        <mxCell id="211" value="Collection 層（collectors/*.py）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#1565C0;" vertex="1" parent="1">
-          <mxGeometry x="95" y="125" width="400" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="212" value="責務: &lt;b&gt;純粋なシステム計測のみ&lt;/b&gt;&lt;br&gt;get_cpu_usage() → float　/　get_memory() → dict　/　check_gateway() → bool" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="100" y="155" width="660" height="50" as="geometry"/>
-        </mxCell>
-
-        <!-- Arrow: Collection → Domain -->
-        <mxCell id="213" value="raw metrics" style="html=1;strokeColor=#78909C;strokeWidth=2;endArrow=classic;fontSize=11;fontColor=#78909C;labelBackgroundColor=#FFFFFF;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="430" y="220" as="sourcePoint"/>
-            <mxPoint x="430" y="250" as="targetPoint"/>
-          </mxGeometry>
-        </mxCell>
-
-        <!-- Layer 2: Domain (NEW - highlighted) -->
-        <mxCell id="220" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;strokeWidth=3;arcSize=5;shadow=1;" vertex="1" parent="1">
-          <mxGeometry x="80" y="250" width="700" height="170" as="geometry"/>
-        </mxCell>
-        <mxCell id="221" value="Domain 層（domain/*.py）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#C2185B;" vertex="1" parent="1">
-          <mxGeometry x="95" y="255" width="400" height="25" as="geometry"/>
-        </mxCell>
-        <!-- NEW badge -->
-        <mxCell id="222" value="★ NEW" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#C2185B;fontSize=12;fontStyle=1;fontColor=#FFFFFF;rounded=1;arcSize=50;" vertex="1" parent="1">
-          <mxGeometry x="690" y="255" width="75" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Domain sub-modules -->
-        <mxCell id="223" value="&lt;b&gt;constants.py&lt;/b&gt;&lt;br&gt;全閾値・メッセージ&lt;br&gt;一元管理" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#37474F;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="100" y="290" width="140" height="60" as="geometry"/>
-        </mxCell>
-        <mxCell id="224" value="&lt;b&gt;health.py&lt;/b&gt;&lt;br&gt;状態分類・スコア&lt;br&gt;アラート判定" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#37474F;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="260" y="290" width="140" height="60" as="geometry"/>
-        </mxCell>
-        <mxCell id="225" value="&lt;b&gt;presence.py&lt;/b&gt;&lt;br&gt;在室判定&lt;br&gt;時間帯コンテキスト" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#37474F;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="420" y="290" width="150" height="60" as="geometry"/>
-        </mxCell>
-        <mxCell id="226" value="&lt;b&gt;rebecca.py&lt;/b&gt;&lt;br&gt;統合状態&lt;br&gt;（Phase 2 受け皿）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#37474F;arcSize=10;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="590" y="290" width="150" height="60" as="geometry"/>
-        </mxCell>
-        <mxCell id="227" value="責務: &lt;b&gt;全ドメインロジックの集約&lt;/b&gt; — 状態分類、スコア計算、アラート、メッセージ生成" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#880E4F;" vertex="1" parent="1">
-          <mxGeometry x="100" y="360" width="660" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="228" value="テスト: unittest で全ビジネスルールを自動検証" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#880E4F;" vertex="1" parent="1">
-          <mxGeometry x="100" y="385" width="500" height="20" as="geometry"/>
-        </mxCell>
-
-        <!-- Arrow: Domain → Persistence -->
-        <mxCell id="229" value="typed result" style="html=1;strokeColor=#78909C;strokeWidth=2;endArrow=classic;fontSize=11;fontColor=#78909C;labelBackgroundColor=#FFFFFF;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="430" y="420" as="sourcePoint"/>
-            <mxPoint x="430" y="450" as="targetPoint"/>
-          </mxGeometry>
-        </mxCell>
-
-        <!-- Layer 3: Persistence -->
-        <mxCell id="230" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F9A825;strokeWidth=2;arcSize=5;" vertex="1" parent="1">
-          <mxGeometry x="80" y="450" width="700" height="90" as="geometry"/>
-        </mxCell>
-        <mxCell id="231" value="Persistence 層（src/data/*.json）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#F57F17;" vertex="1" parent="1">
-          <mxGeometry x="95" y="455" width="400" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="232" value="schema_version 付き　|　Domain 層が生成した完全なデータ（メッセージ・staleness 含む）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="100" y="485" width="660" height="40" as="geometry"/>
-        </mxCell>
-
-        <!-- Arrow: Persistence → Presentation -->
-        <mxCell id="233" value="HTTP fetch" style="html=1;strokeColor=#78909C;strokeWidth=2;endArrow=classic;fontSize=11;fontColor=#78909C;labelBackgroundColor=#FFFFFF;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="430" y="540" as="sourcePoint"/>
-            <mxPoint x="430" y="570" as="targetPoint"/>
-          </mxGeometry>
-        </mxCell>
-
-        <!-- Layer 4: Presentation -->
-        <mxCell id="240" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#43A047;strokeWidth=2;arcSize=5;" vertex="1" parent="1">
-          <mxGeometry x="80" y="570" width="700" height="100" as="geometry"/>
-        </mxCell>
-        <mxCell id="241" value="Presentation 層（app.js + style.css）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="1">
-          <mxGeometry x="95" y="575" width="400" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="242" value="責務: &lt;b&gt;純粋なレンダリングのみ&lt;/b&gt;（data → DOM マッピング）&lt;br&gt;ビジネスロジック ゼロ — JSON の値をそのまま表示するだけ" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="100" y="605" width="660" height="45" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Right Side: Benefits ===== -->
-        <mxCell id="250" value="この構造で得られるもの" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" vertex="1" parent="1">
-          <mxGeometry x="860" y="85" width="300" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Benefit 1 -->
-        <mxCell id="251" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#C8E6C9;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="860" y="120" width="660" height="95" as="geometry"/>
-        </mxCell>
-        <mxCell id="252" value="&lt;b&gt;✓ 変更の局所化&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#2E7D32;" vertex="1" parent="1">
-          <mxGeometry x="880" y="125" width="300" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="253" value="閾値変更 → constants.py のみ&lt;br&gt;分類ロジック変更 → health.py or presence.py のみ&lt;br&gt;Collector・Frontend に影響なし" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="880" y="150" width="620" height="55" as="geometry"/>
-        </mxCell>
-
-        <!-- Benefit 2 -->
-        <mxCell id="254" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#C8E6C9;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="860" y="235" width="660" height="95" as="geometry"/>
-        </mxCell>
-        <mxCell id="255" value="&lt;b&gt;✓ テスト可能&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#2E7D32;" vertex="1" parent="1">
-          <mxGeometry x="880" y="240" width="300" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="256" value="domain/ は純粋な Python モジュール（I/O なし）&lt;br&gt;→ unittest で全ビジネスルールを自動テスト&lt;br&gt;→ classify(), alert_level(), score() の境界値テスト" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="880" y="265" width="620" height="55" as="geometry"/>
-        </mxCell>
-
-        <!-- Benefit 3 -->
-        <mxCell id="257" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#C8E6C9;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="860" y="350" width="660" height="95" as="geometry"/>
-        </mxCell>
-        <mxCell id="258" value="&lt;b&gt;✓ Phase 2 の受け皿&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#2E7D32;" vertex="1" parent="1">
-          <mxGeometry x="880" y="355" width="300" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="259" value="Nurture System (mood, trust, EXP, level) は&lt;br&gt;domain/nurture.py, domain/relationships.py として追加&lt;br&gt;→ 既存の health.py, presence.py を入力として利用" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="880" y="380" width="620" height="55" as="geometry"/>
-        </mxCell>
-
-        <!-- Benefit 4 -->
-        <mxCell id="260" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#C8E6C9;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="860" y="465" width="660" height="95" as="geometry"/>
-        </mxCell>
-        <mxCell id="261" value="&lt;b&gt;✓ 依存方向の統一&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#2E7D32;" vertex="1" parent="1">
-          <mxGeometry x="880" y="470" width="300" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="262" value="Collection → Domain → Persistence → Presentation&lt;br&gt;常に上から下への一方向。domain/ は他層に依存しない&lt;br&gt;→ 変更の波及が予測可能" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="880" y="495" width="620" height="55" as="geometry"/>
-        </mxCell>
-
-        <!-- Key principle -->
-        <mxCell id="270" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#CE93D8;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="860" y="590" width="660" height="80" as="geometry"/>
-        </mxCell>
-        <mxCell id="271" value="設計原則: &lt;b&gt;domain/ が他のどの層にも依存しない&lt;/b&gt;（逆方向依存なし）&lt;br&gt;Collector が domain を使う。app.js は domain の出力（JSON）を表示する。&lt;br&gt;domain は Collector も app.js も知らない。" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontColor=#4A148C;" vertex="1" parent="1">
-          <mxGeometry x="880" y="597" width="620" height="60" as="geometry"/>
-        </mxCell>
-
-        <!-- Page number -->
-        <mxCell id="299" value="3 / 5" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#BDBDBD;" vertex="1" parent="1">
-          <mxGeometry x="1450" y="865" width="100" height="20" as="geometry"/>
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-
-  <!-- ============================================================ -->
-  <!-- PAGE 4: 実施計画（WBS + スケジュール）                          -->
-  <!-- ============================================================ -->
-  <diagram id="plan" name="4. 実施計画">
-    <mxGraphModel dx="0" dy="0" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900">
-      <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-
-        <!-- Title bar -->
-        <mxCell id="300" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1A1A2E;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="0" y="0" width="1600" height="70" as="geometry"/>
-        </mxCell>
-        <mxCell id="301" value="実施計画 — 4フェーズ・8ワークグループ" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="200" y="15" width="1200" height="40" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Phase Labels (Top) ===== -->
-        <mxCell id="305" value="Phase A" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#E3F2FD;fontSize=14;fontStyle=1;fontColor=#1565C0;rounded=1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="80" y="85" width="360" height="30" as="geometry"/>
-        </mxCell>
-        <mxCell id="306" value="Phase B" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#E8F5E9;fontSize=14;fontStyle=1;fontColor=#2E7D32;rounded=1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="470" y="85" width="360" height="30" as="geometry"/>
-        </mxCell>
-        <mxCell id="307" value="Phase C" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFF8E1;fontSize=14;fontStyle=1;fontColor=#F57F17;rounded=1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="860" y="85" width="300" height="30" as="geometry"/>
-        </mxCell>
-        <mxCell id="308" value="Phase D" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#F3E5F5;fontSize=14;fontStyle=1;fontColor=#7B1FA2;rounded=1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="1190" y="85" width="300" height="30" as="geometry"/>
-        </mxCell>
-
-        <!-- Phase sublabels -->
-        <mxCell id="309" value="並行実行" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#78909C;" vertex="1" parent="1">
-          <mxGeometry x="80" y="115" width="360" height="18" as="geometry"/>
-        </mxCell>
-        <mxCell id="310" value="並行実行" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#78909C;" vertex="1" parent="1">
-          <mxGeometry x="470" y="115" width="360" height="18" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Phase A Work Groups ===== -->
-        <!-- WG-1: Foundation -->
-        <mxCell id="320" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#90CAF9;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="80" y="145" width="360" height="130" as="geometry"/>
-        </mxCell>
-        <mxCell id="321" value="WG-1: Foundation（基盤構築）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#1565C0;" vertex="1" parent="1">
-          <mxGeometry x="95" y="150" width="330" height="22" as="geometry"/>
-        </mxCell>
-        <mxCell id="322" value="• domain/ ディレクトリ + __init__.py 作成&lt;br&gt;• domain/constants.py（全閾値・メッセージ集約）&lt;br&gt;• tests/ ディレクトリ + __init__.py 作成" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="95" y="175" width="330" height="55" as="geometry"/>
-        </mxCell>
-        <mxCell id="323" value="3 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#90CAF9;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="340" y="150" width="90" height="22" as="geometry"/>
-        </mxCell>
-
-        <!-- WG-2: Domain Health -->
-        <mxCell id="330" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#F48FB1;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="80" y="295" width="360" height="150" as="geometry"/>
-        </mxCell>
-        <mxCell id="331" value="WG-2: Domain Health" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#C2185B;" vertex="1" parent="1">
-          <mxGeometry x="95" y="300" width="330" height="22" as="geometry"/>
-        </mxCell>
-        <mxCell id="332" value="• domain/health.py — classify() 実装&lt;br&gt;• calculate_overall_score() 移設&lt;br&gt;• determine_alert_level() 移設&lt;br&gt;• get_alert_message() 実装&lt;br&gt;• evaluate() 統合関数" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="95" y="325" width="330" height="80" as="geometry"/>
-        </mxCell>
-        <mxCell id="333" value="5 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#F48FB1;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="340" y="300" width="90" height="22" as="geometry"/>
-        </mxCell>
-
-        <!-- WG-3: Domain Presence -->
-        <mxCell id="340" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#F48FB1;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="80" y="465" width="360" height="120" as="geometry"/>
-        </mxCell>
-        <mxCell id="341" value="WG-3: Domain Presence" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#C2185B;" vertex="1" parent="1">
-          <mxGeometry x="95" y="470" width="330" height="22" as="geometry"/>
-        </mxCell>
-        <mxCell id="342" value="• domain/presence.py — determine_status()&lt;br&gt;• get_time_context() 移設&lt;br&gt;• evaluate() 統合関数" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="95" y="495" width="330" height="55" as="geometry"/>
-        </mxCell>
-        <mxCell id="343" value="3 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#F48FB1;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="340" y="470" width="90" height="22" as="geometry"/>
-        </mxCell>
-
-        <!-- WG-7: Schema (parallel with A) -->
-        <mxCell id="370" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FFE082;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="80" y="605" width="360" height="120" as="geometry"/>
-        </mxCell>
-        <mxCell id="371" value="WG-7: Schema &amp; Validation" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#F57F17;" vertex="1" parent="1">
-          <mxGeometry x="95" y="610" width="330" height="22" as="geometry"/>
-        </mxCell>
-        <mxCell id="372" value="• domain/schema.py 作成&lt;br&gt;• schema_version 導入&lt;br&gt;• staleness / alert_message フィールド追加" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="95" y="635" width="330" height="55" as="geometry"/>
-        </mxCell>
-        <mxCell id="373" value="4 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#FFE082;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="340" y="610" width="90" height="22" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Phase B Work Groups ===== -->
-        <!-- WG-4: Collector Refactoring -->
-        <mxCell id="350" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#A5D6A7;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="470" y="145" width="360" height="150" as="geometry"/>
-        </mxCell>
-        <mxCell id="351" value="WG-4: Collector Refactoring" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="1">
-          <mxGeometry x="485" y="150" width="330" height="22" as="geometry"/>
-        </mxCell>
-        <mxCell id="352" value="• collect_health.py — 計測のみに限定&lt;br&gt;• collect_status.py — 検出のみに限定&lt;br&gt;• collect_nurture.py — domain 呼び出しに変更&lt;br&gt;• 動作確認（JSON diff で同等性検証）" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="485" y="175" width="330" height="75" as="geometry"/>
-        </mxCell>
-        <mxCell id="353" value="4 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#A5D6A7;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="730" y="150" width="90" height="22" as="geometry"/>
-        </mxCell>
-
-        <!-- WG-6: Testing -->
-        <mxCell id="360" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#A5D6A7;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="470" y="315" width="360" height="130" as="geometry"/>
-        </mxCell>
-        <mxCell id="361" value="WG-6: Testing" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#2E7D32;" vertex="1" parent="1">
-          <mxGeometry x="485" y="320" width="330" height="22" as="geometry"/>
-        </mxCell>
-        <mxCell id="362" value="• tests/test_health.py — classify, score, alert&lt;br&gt;• tests/test_presence.py — status, time_context&lt;br&gt;• tests/test_constants.py — 閾値の整合性&lt;br&gt;• 全テスト実行（python3 -m unittest）" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="485" y="345" width="330" height="70" as="geometry"/>
-        </mxCell>
-        <mxCell id="363" value="4 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#A5D6A7;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="730" y="320" width="90" height="22" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Phase C Work Group ===== -->
-        <!-- WG-5: Frontend Purification -->
-        <mxCell id="380" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FFE082;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="860" y="145" width="300" height="150" as="geometry"/>
-        </mxCell>
-        <mxCell id="381" value="WG-5: Frontend Purification" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#F57F17;" vertex="1" parent="1">
-          <mxGeometry x="875" y="150" width="270" height="22" as="geometry"/>
-        </mxCell>
-        <mxCell id="382" value="• アラートメッセージ配列を削除&lt;br&gt;• checkStaleness() を削除&lt;br&gt;• メトリクス%変換ロジック削除&lt;br&gt;• 回帰テスト（UI 同一性確認）" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="875" y="175" width="270" height="75" as="geometry"/>
-        </mxCell>
-        <mxCell id="383" value="4 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#FFE082;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="1070" y="150" width="80" height="22" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Phase D Work Group ===== -->
-        <!-- WG-8: Documentation -->
-        <mxCell id="390" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#CE93D8;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="1190" y="145" width="300" height="130" as="geometry"/>
-        </mxCell>
-        <mxCell id="391" value="WG-8: Documentation" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#7B1FA2;" vertex="1" parent="1">
-          <mxGeometry x="1205" y="150" width="270" height="22" as="geometry"/>
-        </mxCell>
-        <mxCell id="392" value="• ADR-015: ドメインレイヤー導入&lt;br&gt;• CLAUDE.md 更新&lt;br&gt;• docs/README.md 更新" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="1205" y="175" width="270" height="55" as="geometry"/>
-        </mxCell>
-        <mxCell id="393" value="3 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#CE93D8;fontStyle=1;" vertex="1" parent="1">
-          <mxGeometry x="1400" y="150" width="80" height="22" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Dependency Arrows ===== -->
-        <!-- WG-1 → WG-2 -->
-        <mxCell id="395" style="html=1;strokeColor=#546E7A;strokeWidth=2;endArrow=classic;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;curved=1;" edge="1" source="320" target="330" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <!-- Phase A → Phase B -->
-        <mxCell id="396" style="html=1;strokeColor=#546E7A;strokeWidth=3;endArrow=classic;dashed=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="330" target="350" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="397" style="html=1;strokeColor=#546E7A;strokeWidth=3;endArrow=classic;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="340" target="360" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <!-- Phase B → Phase C -->
-        <mxCell id="398" style="html=1;strokeColor=#546E7A;strokeWidth=3;endArrow=classic;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="350" target="380" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <!-- Phase C → Phase D -->
-        <mxCell id="399" style="html=1;strokeColor=#546E7A;strokeWidth=3;endArrow=classic;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="380" target="390" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Summary Box ===== -->
-        <mxCell id="400" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="470" y="500" width="1020" height="170" as="geometry"/>
-        </mxCell>
-        <mxCell id="401" value="スコープサマリー" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" vertex="1" parent="1">
-          <mxGeometry x="490" y="505" width="200" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Scope items -->
-        <mxCell id="402" value="新規作成" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;fontSize=12;fontStyle=1;fontColor=#1B5E20;arcSize=15;" vertex="1" parent="1">
-          <mxGeometry x="490" y="540" width="80" height="28" as="geometry"/>
-        </mxCell>
-        <mxCell id="403" value="domain/ ディレクトリ（constants.py, health.py, presence.py, rebecca.py, schema.py）&lt;br&gt;tests/ ディレクトリ（test_health.py, test_presence.py, test_constants.py）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="580" y="533" width="880" height="40" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="404" value="修正" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=12;fontStyle=1;fontColor=#F57F17;arcSize=15;" vertex="1" parent="1">
-          <mxGeometry x="490" y="583" width="80" height="28" as="geometry"/>
-        </mxCell>
-        <mxCell id="405" value="collectors/collect_health.py, collect_status.py, collect_nurture.py（計測のみに限定）&lt;br&gt;src/app.js（ドメインロジック除去）　/　src/data/*.json（schema_version 追加）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="580" y="576" width="880" height="40" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="406" value="変更なし" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#B0BEC5;fontSize=12;fontStyle=1;fontColor=#546E7A;arcSize=15;" vertex="1" parent="1">
-          <mxGeometry x="490" y="626" width="80" height="28" as="geometry"/>
-        </mxCell>
-        <mxCell id="407" value="update_diary.py（Protected）/ watch_diary.py（Protected）/ src/style.css / src/index.html&lt;br&gt;UI/UX は Phase 1 と完全に同一を維持" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="580" y="619" width="880" height="40" as="geometry"/>
-        </mxCell>
-
-        <!-- Total WP count -->
-        <mxCell id="410" value="合計: 8 ワークグループ / 30 ワークパッケージ" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#1A1A2E;" vertex="1" parent="1">
-          <mxGeometry x="80" y="760" width="500" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Page number -->
-        <mxCell id="499" value="4 / 5" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#BDBDBD;" vertex="1" parent="1">
-          <mxGeometry x="1450" y="865" width="100" height="20" as="geometry"/>
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-
-  <!-- ============================================================ -->
-  <!-- PAGE 5: 期待効果と Phase 2 への接続                             -->
-  <!-- ============================================================ -->
-  <diagram id="impact" name="5. 期待効果と Phase 2 接続">
-    <mxGraphModel dx="0" dy="0" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900">
-      <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-
-        <!-- Title bar -->
-        <mxCell id="500" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1A1A2E;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="0" y="0" width="1600" height="70" as="geometry"/>
-        </mxCell>
-        <mxCell id="501" value="期待効果と Phase 2 への接続" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="200" y="15" width="1200" height="40" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Before / After Comparison ===== -->
-        <mxCell id="505" value="Before / After 比較" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" vertex="1" parent="1">
-          <mxGeometry x="80" y="85" width="300" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Before header -->
-        <mxCell id="510" value="Before（Phase 1 完了時点）" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFEBEE;fontSize=14;fontStyle=1;fontColor=#C62828;rounded=1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="80" y="120" width="340" height="30" as="geometry"/>
-        </mxCell>
-
-        <!-- Before items -->
-        <mxCell id="511" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#FFCDD2;arcSize=6;" vertex="1" parent="1">
-          <mxGeometry x="80" y="160" width="340" height="260" as="geometry"/>
-        </mxCell>
-        <mxCell id="512" value="&lt;b&gt;ドメインロジック変更&lt;/b&gt;&lt;br&gt;2-3 ファイル修正（Python + JS）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#C62828;rounded=1;arcSize=10;spacingLeft=8;" vertex="1" parent="1">
-          <mxGeometry x="95" y="172" width="310" height="42" as="geometry"/>
-        </mxCell>
-        <mxCell id="513" value="&lt;b&gt;閾値変更&lt;/b&gt;&lt;br&gt;複数ファイルを横断的に修正" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#C62828;rounded=1;arcSize=10;spacingLeft=8;" vertex="1" parent="1">
-          <mxGeometry x="95" y="222" width="310" height="42" as="geometry"/>
-        </mxCell>
-        <mxCell id="514" value="&lt;b&gt;テスト&lt;/b&gt;&lt;br&gt;手動確認のみ（自動テストなし）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#C62828;rounded=1;arcSize=10;spacingLeft=8;" vertex="1" parent="1">
-          <mxGeometry x="95" y="272" width="310" height="42" as="geometry"/>
-        </mxCell>
-        <mxCell id="515" value="&lt;b&gt;Phase 2 追加コスト&lt;/b&gt;&lt;br&gt;高い（構造決めから必要）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#C62828;rounded=1;arcSize=10;spacingLeft=8;" vertex="1" parent="1">
-          <mxGeometry x="95" y="322" width="310" height="42" as="geometry"/>
-        </mxCell>
-        <mxCell id="516" value="&lt;b&gt;不整合リスク&lt;/b&gt;&lt;br&gt;Python と JS で定義が食い違う可能性" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#C62828;rounded=1;arcSize=10;spacingLeft=8;" vertex="1" parent="1">
-          <mxGeometry x="95" y="372" width="310" height="42" as="geometry"/>
-        </mxCell>
-
-        <!-- Arrow -->
-        <mxCell id="520" value="" style="html=1;strokeColor=#546E7A;strokeWidth=4;endArrow=classic;endSize=10;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="440" y="290" as="sourcePoint"/>
-            <mxPoint x="500" y="290" as="targetPoint"/>
-          </mxGeometry>
-        </mxCell>
-
-        <!-- After header -->
-        <mxCell id="521" value="After（Phase 1.5 完了後）" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#E8F5E9;fontSize=14;fontStyle=1;fontColor=#2E7D32;rounded=1;arcSize=20;" vertex="1" parent="1">
-          <mxGeometry x="510" y="120" width="340" height="30" as="geometry"/>
-        </mxCell>
-
-        <!-- After items -->
-        <mxCell id="522" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#C8E6C9;arcSize=6;" vertex="1" parent="1">
-          <mxGeometry x="510" y="160" width="340" height="260" as="geometry"/>
-        </mxCell>
-        <mxCell id="523" value="&lt;b&gt;ドメインロジック変更&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;1 ファイルのみ（domain/*.py）&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#37474F;rounded=1;arcSize=10;spacingLeft=8;" vertex="1" parent="1">
-          <mxGeometry x="525" y="172" width="310" height="42" as="geometry"/>
-        </mxCell>
-        <mxCell id="524" value="&lt;b&gt;閾値変更&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;constants.py のみ&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#37474F;rounded=1;arcSize=10;spacingLeft=8;" vertex="1" parent="1">
-          <mxGeometry x="525" y="222" width="310" height="42" as="geometry"/>
-        </mxCell>
-        <mxCell id="525" value="&lt;b&gt;テスト&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;unittest で全ルールを自動検証&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#37474F;rounded=1;arcSize=10;spacingLeft=8;" vertex="1" parent="1">
-          <mxGeometry x="525" y="272" width="310" height="42" as="geometry"/>
-        </mxCell>
-        <mxCell id="526" value="&lt;b&gt;Phase 2 追加コスト&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;低い（domain/ に追加するだけ）&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#37474F;rounded=1;arcSize=10;spacingLeft=8;" vertex="1" parent="1">
-          <mxGeometry x="525" y="322" width="310" height="42" as="geometry"/>
-        </mxCell>
-        <mxCell id="527" value="&lt;b&gt;不整合リスク&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;Single Source of Truth で排除&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#37474F;rounded=1;arcSize=10;spacingLeft=8;" vertex="1" parent="1">
-          <mxGeometry x="525" y="372" width="310" height="42" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Phase 2 Expansion (Right Side) ===== -->
-        <mxCell id="540" value="Phase 2 への接続" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" vertex="1" parent="1">
-          <mxGeometry x="920" y="85" width="300" height="25" as="geometry"/>
-        </mxCell>
-
-        <!-- Phase 1.5 domain (base) -->
-        <mxCell id="541" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;strokeWidth=2;arcSize=6;" vertex="1" parent="1">
-          <mxGeometry x="920" y="120" width="600" height="145" as="geometry"/>
-        </mxCell>
-        <mxCell id="542" value="Phase 1.5 で構築する domain/" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#C2185B;" vertex="1" parent="1">
-          <mxGeometry x="935" y="125" width="300" height="22" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="543" value="constants.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#880E4F;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="940" y="155" width="110" height="35" as="geometry"/>
-        </mxCell>
-        <mxCell id="544" value="health.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#880E4F;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="1060" y="155" width="100" height="35" as="geometry"/>
-        </mxCell>
-        <mxCell id="545" value="presence.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#880E4F;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="1170" y="155" width="110" height="35" as="geometry"/>
-        </mxCell>
-        <mxCell id="546" value="schema.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#880E4F;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="1290" y="155" width="100" height="35" as="geometry"/>
-        </mxCell>
-        <mxCell id="547" value="rebecca.py&lt;br&gt;(stub)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#880E4F;arcSize=10;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="1400" y="155" width="100" height="35" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="548" value="← Phase 1.5 完了時点（受け皿完成）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#C2185B;fontStyle=2;" vertex="1" parent="1">
-          <mxGeometry x="940" y="200" width="300" height="20" as="geometry"/>
-        </mxCell>
-
-        <!-- Arrow down: Phase 1.5 → Phase 2 -->
-        <mxCell id="549" value="Phase 2 で拡張" style="html=1;strokeColor=#7B1FA2;strokeWidth=3;endArrow=classic;fontSize=12;fontStyle=1;fontColor=#7B1FA2;labelBackgroundColor=#FFFFFF;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1220" y="265" as="sourcePoint"/>
-            <mxPoint x="1220" y="305" as="targetPoint"/>
-          </mxGeometry>
-        </mxCell>
-
-        <!-- Phase 2 expansion -->
-        <mxCell id="550" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=2;arcSize=6;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="920" y="305" width="600" height="195" as="geometry"/>
-        </mxCell>
-        <mxCell id="551" value="Phase 2 で追加される domain/ モジュール" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#7B1FA2;" vertex="1" parent="1">
-          <mxGeometry x="935" y="310" width="400" height="22" as="geometry"/>
-        </mxCell>
-
-        <!-- Phase 2 modules -->
-        <mxCell id="552" value="&lt;b&gt;rebecca.py&lt;/b&gt;&lt;br&gt;統合状態&lt;br&gt;mood, energy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CE93D8;fontSize=11;fontColor=#4A148C;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="940" y="342" width="120" height="55" as="geometry"/>
-        </mxCell>
-        <mxCell id="553" value="&lt;b&gt;nurture.py&lt;/b&gt;&lt;br&gt;EXP, Level&lt;br&gt;成長ロジック" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CE93D8;fontSize=11;fontColor=#4A148C;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="1075" y="342" width="120" height="55" as="geometry"/>
-        </mxCell>
-        <mxCell id="554" value="&lt;b&gt;relationships.py&lt;/b&gt;&lt;br&gt;trust, intimacy&lt;br&gt;関係性深度" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CE93D8;fontSize=11;fontColor=#4A148C;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="1210" y="342" width="130" height="55" as="geometry"/>
-        </mxCell>
-        <mxCell id="555" value="&lt;b&gt;skills.py&lt;/b&gt;&lt;br&gt;プラグイン→&lt;br&gt;スキル" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CE93D8;fontSize=11;fontColor=#4A148C;arcSize=10;" vertex="1" parent="1">
-          <mxGeometry x="1355" y="342" width="120" height="55" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="556" value="health.py と presence.py を入力として利用 → 既存コードの再利用" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#7B1FA2;fontStyle=2;" vertex="1" parent="1">
-          <mxGeometry x="940" y="410" width="550" height="20" as="geometry"/>
-        </mxCell>
-
-        <!-- Arrows from Phase 1.5 modules to Phase 2 -->
-        <mxCell id="557" style="html=1;strokeColor=#CE93D8;strokeWidth=1;endArrow=classic;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="544" target="552" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-        <mxCell id="558" style="html=1;strokeColor=#CE93D8;strokeWidth=1;endArrow=classic;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="545" target="553" parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Key Message ===== -->
-        <mxCell id="570" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#7986CB;arcSize=8;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="80" y="460" width="770" height="110" as="geometry"/>
-        </mxCell>
-        <mxCell id="571" value="&lt;b&gt;Phase 1.5 がなければ&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#283593;" vertex="1" parent="1">
-          <mxGeometry x="100" y="465" width="300" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="572" value="Phase 2 の Nurture System（mood, trust, EXP, level, skills）は&lt;br&gt;collect_nurture.py に詰め込まれ、mood は Collector、trust は app.js、EXP はどこか不明...&lt;br&gt;という状態になり、&lt;b&gt;テスト不能・変更コスト指数増大&lt;/b&gt;の未来が確定する。" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="100" y="492" width="730" height="60" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="573" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#7986CB;arcSize=8;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="80" y="590" width="770" height="110" as="geometry"/>
-        </mxCell>
-        <mxCell id="574" value="&lt;b&gt;Phase 1.5 があれば&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#283593;" vertex="1" parent="1">
-          <mxGeometry x="100" y="595" width="300" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="575" value="Nurture System は domain/nurture.py + domain/relationships.py として追加。&lt;br&gt;既存の health.py, presence.py を入力に使い、テスト可能で変更が局所的。&lt;br&gt;&lt;b&gt;Phase 2 の開発速度と品質が構造的に保証される。&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" vertex="1" parent="1">
-          <mxGeometry x="100" y="622" width="730" height="60" as="geometry"/>
-        </mxCell>
-
-        <!-- ===== Final CTA ===== -->
-        <mxCell id="580" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A1A2E;strokeColor=none;arcSize=8;" vertex="1" parent="1">
-          <mxGeometry x="80" y="740" width="1440" height="80" as="geometry"/>
-        </mxCell>
-        <mxCell id="581" value="Phase 1.5 は「機能追加」ではなく「構造の確立」。ユーザーから見える変化はないが、Phase 2 以降の開発速度と品質に直結する。" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontColor=#E0E0E0;" vertex="1" parent="1">
-          <mxGeometry x="100" y="745" width="1400" height="25" as="geometry"/>
-        </mxCell>
-        <mxCell id="582" value="PO 承認後、Phase A（domain/ 新設 + テスト基盤構築）から着手します。" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;fontColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="100" y="775" width="1400" height="30" as="geometry"/>
-        </mxCell>
-
-        <!-- Page number -->
-        <mxCell id="599" value="5 / 5" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#BDBDBD;" vertex="1" parent="1">
-          <mxGeometry x="1450" y="865" width="100" height="20" as="geometry"/>
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-
+<mxfile host="65bd71144e">
+    <diagram id="summary" name="1. エグゼクティブサマリー">
+        <mxGraphModel dx="1668" dy="1414" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1A1A2E;strokeColor=none;" parent="1" vertex="1">
+                    <mxGeometry width="1600" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Phase 1.5 キックオフ — ドメインレイヤー確立" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=30;fontStyle=1;fontColor=#FFFFFF;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="10" width="1200" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="Phase 2（Nurture System）に進む前に、アーキテクチャの「背骨」を通す" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontColor=#B0BEC5;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="55" width="1200" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="プロジェクトタイムライン" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="115" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="&lt;b&gt;Phase 0&lt;/b&gt;&lt;br&gt;静的日記" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;fontSize=13;fontColor=#1B5E20;arcSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="150" width="180" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" style="html=1;strokeColor=#BDBDBD;strokeWidth=2;endArrow=classic;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="10" target="12" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="&lt;b&gt;Phase 1&lt;/b&gt;&lt;br&gt;Room Status + Health" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;fontSize=13;fontColor=#1B5E20;arcSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="380" y="150" width="220" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" style="html=1;strokeColor=#C2185B;strokeWidth=3;endArrow=classic;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="12" target="14" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="&lt;b&gt;Phase 1.5&lt;/b&gt;&lt;br&gt;ドメインレイヤー確立" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;fontSize=14;fontStyle=0;fontColor=#880E4F;arcSize=12;strokeWidth=3;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="720" y="145" width="240" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="★ NOW" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#C2185B;fontSize=11;fontStyle=1;fontColor=#FFFFFF;rounded=1;arcSize=50;" parent="1" vertex="1">
+                    <mxGeometry x="890" y="130" width="70" height="24" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" style="html=1;strokeColor=#BDBDBD;strokeWidth=2;endArrow=classic;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="14" target="17" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="&lt;b&gt;Phase 2&lt;/b&gt;&lt;br&gt;Nurture System" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#BDBDBD;fontSize=13;fontColor=#9E9E9E;arcSize=12;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="1080" y="150" width="220" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="完了" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#43A047;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="207" width="180" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="完了" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#43A047;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="380" y="207" width="220" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="Phase 1.5 を一言で" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="245" width="400" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="哲学で定義された Rebecca の「魂」を、テスト可能なコードにする。" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=20;fontStyle=2;fontColor=#1A1A2E;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="270" width="900" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#C62828;strokeWidth=2;arcSize=6;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="330" width="680" height="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="課題：ドメインロジックが散在している" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;fontColor=#C62828;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="340" width="500" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="&lt;b&gt;1. ドメインレイヤーが存在しない&lt;/b&gt;&lt;br&gt;　 Rebecca の状態分類・アラート判定・スコア計算が&lt;br&gt;　 Collection 層と Presentation 層に散らばっている" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=13;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="375" width="640" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="&lt;b&gt;2. Python + JavaScript で二重管理&lt;/b&gt;&lt;br&gt;　 アラートメッセージが collectors/*.py と app.js の両方にハードコード&lt;br&gt;　 → 変更時に2箇所修正が必要、不整合リスク大" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=13;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="435" width="640" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="&lt;b&gt;3. テスト不能・Phase 2 の受け皿なし&lt;/b&gt;&lt;br&gt;　 ユニットテストが書けない構造。Nurture System の追加先が不明確" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=13;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="495" width="640" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#2E7D32;strokeWidth=2;arcSize=6;" parent="1" vertex="1">
+                    <mxGeometry x="800" y="330" width="720" height="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="解決：domain/ レイヤーを新設" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="820" y="340" width="400" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="&lt;b&gt;1. ドメインロジックを domain/ に集約&lt;/b&gt;&lt;br&gt;　 health.py, presence.py, constants.py を新設&lt;br&gt;　 閾値・分類・スコア計算・メッセージ生成を一元化" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=13;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="820" y="375" width="680" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="&lt;b&gt;2. Collector は計測のみ、app.js はレンダリングのみ&lt;/b&gt;&lt;br&gt;　 各層の責務を明確化。ドメインロジックの二重管理を解消" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=13;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="820" y="435" width="680" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="&lt;b&gt;3. unittest で検証可能 + Phase 2 の受け皿&lt;/b&gt;&lt;br&gt;　 ドメインロジックを独立テスト。Nurture System は domain/ 上に構築" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=13;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="820" y="485" width="680" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="50" value="期待される効果" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="585" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="51" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="620" width="440" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="52" value="ドメインロジック変更時の修正箇所" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#78909C;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="622" width="440" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="53" value="&lt;font color=&quot;#C62828&quot;&gt;2-3 ファイル（Python + JS）&lt;/font&gt;　→　&lt;font color=&quot;#2E7D32&quot;&gt;&lt;b&gt;1 ファイル（domain/*.py）&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="648" width="440" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="54" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="620" width="440" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="55" value="ドメインロジックのテスト可能性" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#78909C;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="622" width="440" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="56" value="&lt;font color=&quot;#C62828&quot;&gt;テスト不能&lt;/font&gt;　→　&lt;font color=&quot;#2E7D32&quot;&gt;&lt;b&gt;unittest で自動検証&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="560" y="648" width="440" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="57" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="1040" y="620" width="480" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="58" value="Phase 2 Nurture System への準備" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#78909C;" parent="1" vertex="1">
+                    <mxGeometry x="1040" y="622" width="480" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="59" value="&lt;font color=&quot;#C62828&quot;&gt;受け皿なし（構造決めから）&lt;/font&gt;　→　&lt;font color=&quot;#2E7D32&quot;&gt;&lt;b&gt;domain/ 上に構築可能&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="1040" y="648" width="480" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="60" value="決定済み事項" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="725" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="61" value="Q-01 Collector 修正：OK（動作同等を保証）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=12;fontColor=#0D47A1;arcSize=20;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="758" width="340" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="62" value="Q-02 テスト：unittest（標準ライブラリ）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=12;fontColor=#0D47A1;arcSize=20;" parent="1" vertex="1">
+                    <mxGeometry x="440" y="758" width="340" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="63" value="Q-03 app.js：ドメインロジック全除去" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=12;fontColor=#0D47A1;arcSize=20;" parent="1" vertex="1">
+                    <mxGeometry x="800" y="758" width="340" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="64" value="Q-04 rebecca.py：スタブのみ（Phase 2 で実装）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;fontSize=12;fontColor=#0D47A1;arcSize=20;" parent="1" vertex="1">
+                    <mxGeometry x="1160" y="758" width="360" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="65" value="スコープ：UI/UX の変更なし（内部リファクタリング）　|　外部依存の追加なし　|　既存機能の回帰テスト実施" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#9E9E9E;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="820" width="1200" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="69" value="1 / 5" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#BDBDBD;" parent="1" vertex="1">
+                    <mxGeometry x="1450" y="865" width="100" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="asis" name="2. 現状の課題（As-Is）">
+        <mxGraphModel dx="834" dy="707" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="100" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1A1A2E;strokeColor=none;" parent="1" vertex="1">
+                    <mxGeometry width="1600" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="101" value="現状アーキテクチャの課題" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;fontColor=#FFFFFF;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="15" width="1200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="105" value="現在の3層構造" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="85" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="110" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;arcSize=5;verticalAlign=top;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="120" width="700" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="111" value="Collection 層（collectors/*.py）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#1565C0;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="125" width="400" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="112" value="✓ システム計測&lt;br&gt;top, vm_stat, pgrep" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#90CAF9;fontSize=12;fontColor=#37474F;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="160" width="190" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="113" value="⚠ ドメイン分類&lt;br&gt;classify_cpu() → &quot;クリア&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=12;fontColor=#C62828;arcSize=10;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="160" width="220" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="114" value="⚠ ドメイン集約&lt;br&gt;overall_score, alert_level" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=12;fontColor=#C62828;arcSize=10;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="550" y="160" width="215" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="115" value="← 本来 Collection 層の責務ではない" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontStyle=2;fontColor=#E53935;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="215" width="460" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="116" value="JSON" style="html=1;strokeColor=#78909C;strokeWidth=2;endArrow=classic;fontSize=11;fontColor=#78909C;labelBackgroundColor=#FFFFFF;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="430" y="300" as="sourcePoint"/>
+                        <mxPoint x="430" y="340" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="120" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F9A825;strokeWidth=2;arcSize=5;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="340" width="700" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="121" value="Persistence 層（src/data/*.json）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#F57F17;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="345" width="400" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="122" value="health.json / status.json / nurture.json — スキーマ定義なし、バージョニングなし" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="375" width="660" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="123" value="fetch" style="html=1;strokeColor=#78909C;strokeWidth=2;endArrow=classic;fontSize=11;fontColor=#78909C;labelBackgroundColor=#FFFFFF;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="430" y="420" as="sourcePoint"/>
+                        <mxPoint x="430" y="460" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="130" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#43A047;strokeWidth=2;arcSize=5;verticalAlign=top;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="460" width="700" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="131" value="Presentation 層（app.js + style.css）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="465" width="400" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="132" value="✓ fetch + DOM操作&lt;br&gt;レンダリング" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#A5D6A7;fontSize=12;fontColor=#37474F;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="500" width="160" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="133" value="⚠ アラートメッセージ&lt;br&gt;ハードコード配列" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=12;fontColor=#C62828;arcSize=10;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="500" width="190" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="134" value="⚠ staleness 判定&lt;br&gt;閾値ロジック" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#E53935;fontSize=12;fontColor=#C62828;arcSize=10;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="490" y="500" width="170" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="135" value="← 本来 Presentation 層の責務ではない" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontStyle=2;fontColor=#E53935;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="555" width="460" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="140" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#C2185B;strokeWidth=3;dashed=1;arcSize=5;dashPattern=8 4;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="670" width="700" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="141" value="❌ Domain 層が存在しない" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontStyle=1;fontColor=#C2185B;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="678" width="700" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="150" value="この構造の問題" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="85" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="151" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#FFCDD2;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="120" width="660" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="152" value="&lt;b&gt;問題 1: 二重管理&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#C62828;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="125" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="153" value="アラートメッセージが Python（collect_health.py）と&lt;br&gt;JavaScript（app.js）の両方にハードコードされている。&lt;br&gt;&lt;br&gt;閾値を変更するとき、&lt;b&gt;2つの言語・3つのファイル&lt;/b&gt;を修正する必要がある。" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="152" width="620" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="154" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#FFCDD2;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="260" width="660" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="155" value="&lt;b&gt;問題 2: テスト不能&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#C62828;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="265" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="156" value="ドメインロジック（状態分類、スコア計算、アラート判定）が&lt;br&gt;Collector のシステム計測コードと混在しているため、&lt;br&gt;&lt;b&gt;ビジネスルールだけを単体テストできない。&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="292" width="620" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="157" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#FFCDD2;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="400" width="660" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="158" value="&lt;b&gt;問題 3: Phase 2 の受け皿がない&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#C62828;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="405" width="400" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="159" value="Phase 2（Nurture System）では mood, trust, EXP, level など&lt;br&gt;さらに複雑なドメインロジックが加わる。&lt;br&gt;現状の構造のまま進むと&lt;b&gt;どこに何があるかわからなくなる。&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="432" width="620" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="160" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#FFE0B2;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="540" width="660" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="161" value="&lt;b&gt;問題 4: 設定値の散在&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#E65100;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="545" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="162" value="CPU 閾値 → collect_health.py　/　ポーリング間隔 → app.js　/　Cron 間隔 → crontab（Git管理外）&lt;br&gt;閾値・タイミングの &lt;b&gt;Single Source of Truth がない&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="572" width="620" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="199" value="2 / 5" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#BDBDBD;" parent="1" vertex="1">
+                    <mxGeometry x="1450" y="865" width="100" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="tobe" name="3. 目標アーキテクチャ（To-Be）">
+        <mxGraphModel dx="834" dy="707" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="200" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1A1A2E;strokeColor=none;" parent="1" vertex="1">
+                    <mxGeometry width="1600" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="201" value="Phase 1.5 後のアーキテクチャ" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;fontColor=#FFFFFF;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="15" width="1200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="205" value="新しい4層構造" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="85" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="210" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;strokeWidth=2;arcSize=5;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="120" width="700" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="211" value="Collection 層（collectors/*.py）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#1565C0;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="125" width="400" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="212" value="責務: &lt;b&gt;純粋なシステム計測のみ&lt;/b&gt;&lt;br&gt;get_cpu_usage() → float　/　get_memory() → dict　/　check_gateway() → bool" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="155" width="660" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="213" value="raw metrics" style="html=1;strokeColor=#78909C;strokeWidth=2;endArrow=classic;fontSize=11;fontColor=#78909C;labelBackgroundColor=#FFFFFF;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="430" y="220" as="sourcePoint"/>
+                        <mxPoint x="430" y="250" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="220" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;strokeWidth=3;arcSize=5;shadow=1;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="250" width="700" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="221" value="Domain 層（domain/*.py）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#C2185B;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="255" width="400" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="222" value="★ NEW" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#C2185B;fontSize=12;fontStyle=1;fontColor=#FFFFFF;rounded=1;arcSize=50;" parent="1" vertex="1">
+                    <mxGeometry x="690" y="255" width="75" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="223" value="&lt;b&gt;constants.py&lt;/b&gt;&lt;br&gt;全閾値・メッセージ&lt;br&gt;一元管理" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#37474F;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="290" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="224" value="&lt;b&gt;health.py&lt;/b&gt;&lt;br&gt;状態分類・スコア&lt;br&gt;アラート判定" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#37474F;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="260" y="290" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="225" value="&lt;b&gt;presence.py&lt;/b&gt;&lt;br&gt;在室判定&lt;br&gt;時間帯コンテキスト" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#37474F;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="420" y="290" width="150" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="226" value="&lt;b&gt;rebecca.py&lt;/b&gt;&lt;br&gt;統合状態&lt;br&gt;（Phase 2 受け皿）" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#37474F;arcSize=10;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="590" y="290" width="150" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="227" value="責務: &lt;b&gt;全ドメインロジックの集約&lt;/b&gt; — 状態分類、スコア計算、アラート、メッセージ生成" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#880E4F;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="360" width="660" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="228" value="テスト: unittest で全ビジネスルールを自動検証" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#880E4F;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="385" width="500" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="229" value="typed result" style="html=1;strokeColor=#78909C;strokeWidth=2;endArrow=classic;fontSize=11;fontColor=#78909C;labelBackgroundColor=#FFFFFF;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="430" y="420" as="sourcePoint"/>
+                        <mxPoint x="430" y="450" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="230" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#F9A825;strokeWidth=2;arcSize=5;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="450" width="700" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="231" value="Persistence 層（src/data/*.json）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#F57F17;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="455" width="400" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="232" value="schema_version 付き　|　Domain 層が生成した完全なデータ（メッセージ・staleness 含む）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="485" width="660" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="233" value="HTTP fetch" style="html=1;strokeColor=#78909C;strokeWidth=2;endArrow=classic;fontSize=11;fontColor=#78909C;labelBackgroundColor=#FFFFFF;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="430" y="540" as="sourcePoint"/>
+                        <mxPoint x="430" y="570" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="240" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#43A047;strokeWidth=2;arcSize=5;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="570" width="700" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="241" value="Presentation 層（app.js + style.css）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=15;fontStyle=1;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="575" width="400" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="242" value="責務: &lt;b&gt;純粋なレンダリングのみ&lt;/b&gt;（data → DOM マッピング）&lt;br&gt;ビジネスロジック ゼロ — JSON の値をそのまま表示するだけ" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="605" width="660" height="45" as="geometry"/>
+                </mxCell>
+                <mxCell id="250" value="この構造で得られるもの" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="85" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="251" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#C8E6C9;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="120" width="660" height="95" as="geometry"/>
+                </mxCell>
+                <mxCell id="252" value="&lt;b&gt;✓ 変更の局所化&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="125" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="253" value="閾値変更 → constants.py のみ&lt;br&gt;分類ロジック変更 → health.py or presence.py のみ&lt;br&gt;Collector・Frontend に影響なし" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="150" width="620" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="254" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#C8E6C9;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="235" width="660" height="95" as="geometry"/>
+                </mxCell>
+                <mxCell id="255" value="&lt;b&gt;✓ テスト可能&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="240" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="256" value="domain/ は純粋な Python モジュール（I/O なし）&lt;br&gt;→ unittest で全ビジネスルールを自動テスト&lt;br&gt;→ classify(), alert_level(), score() の境界値テスト" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="265" width="620" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="257" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#C8E6C9;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="350" width="660" height="95" as="geometry"/>
+                </mxCell>
+                <mxCell id="258" value="&lt;b&gt;✓ Phase 2 の受け皿&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="355" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="259" value="Nurture System (mood, trust, EXP, level) は&lt;br&gt;domain/nurture.py, domain/relationships.py として追加&lt;br&gt;→ 既存の health.py, presence.py を入力として利用" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="380" width="620" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="260" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#C8E6C9;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="465" width="660" height="95" as="geometry"/>
+                </mxCell>
+                <mxCell id="261" value="&lt;b&gt;✓ 依存方向の統一&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="470" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="262" value="Collection → Domain → Persistence → Presentation&lt;br&gt;常に上から下への一方向。domain/ は他層に依存しない&lt;br&gt;→ 変更の波及が予測可能" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="495" width="620" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="270" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#CE93D8;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="590" width="660" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="271" value="設計原則: &lt;b&gt;domain/ が他のどの層にも依存しない&lt;/b&gt;（逆方向依存なし）&lt;br&gt;Collector が domain を使う。app.js は domain の出力（JSON）を表示する。&lt;br&gt;domain は Collector も app.js も知らない。" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontColor=#4A148C;" parent="1" vertex="1">
+                    <mxGeometry x="880" y="597" width="620" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="299" value="3 / 5" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#BDBDBD;" parent="1" vertex="1">
+                    <mxGeometry x="1450" y="865" width="100" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="plan" name="4. 実施計画">
+        <mxGraphModel dx="834" dy="707" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="300" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1A1A2E;strokeColor=none;" parent="1" vertex="1">
+                    <mxGeometry width="1600" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="301" value="実施計画 — 4フェーズ・8ワークグループ" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;fontColor=#FFFFFF;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="15" width="1200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="305" value="Phase A" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#E3F2FD;fontSize=14;fontStyle=1;fontColor=#1565C0;rounded=1;arcSize=20;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="85" width="360" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="306" value="Phase B" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#E8F5E9;fontSize=14;fontStyle=1;fontColor=#2E7D32;rounded=1;arcSize=20;" parent="1" vertex="1">
+                    <mxGeometry x="470" y="85" width="360" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="307" value="Phase C" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFF8E1;fontSize=14;fontStyle=1;fontColor=#F57F17;rounded=1;arcSize=20;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="85" width="300" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="308" value="Phase D" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#F3E5F5;fontSize=14;fontStyle=1;fontColor=#7B1FA2;rounded=1;arcSize=20;" parent="1" vertex="1">
+                    <mxGeometry x="1190" y="85" width="300" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="309" value="並行実行" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#78909C;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="115" width="360" height="18" as="geometry"/>
+                </mxCell>
+                <mxCell id="310" value="並行実行" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#78909C;" parent="1" vertex="1">
+                    <mxGeometry x="470" y="115" width="360" height="18" as="geometry"/>
+                </mxCell>
+                <mxCell id="320" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#90CAF9;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="145" width="360" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="321" value="WG-1: Foundation（基盤構築）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#1565C0;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="150" width="330" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="322" value="• domain/ ディレクトリ + __init__.py 作成&lt;br&gt;• domain/constants.py（全閾値・メッセージ集約）&lt;br&gt;• tests/ ディレクトリ + __init__.py 作成" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="175" width="330" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="323" value="3 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#90CAF9;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="150" width="90" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="330" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#F48FB1;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="295" width="360" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="331" value="WG-2: Domain Health" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#C2185B;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="300" width="330" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="332" value="• domain/health.py — classify() 実装&lt;br&gt;• calculate_overall_score() 移設&lt;br&gt;• determine_alert_level() 移設&lt;br&gt;• get_alert_message() 実装&lt;br&gt;• evaluate() 統合関数" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="325" width="330" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="333" value="5 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#F48FB1;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="300" width="90" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="340" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#F48FB1;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="465" width="360" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="341" value="WG-3: Domain Presence" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#C2185B;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="470" width="330" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="342" value="• domain/presence.py — determine_status()&lt;br&gt;• get_time_context() 移設&lt;br&gt;• evaluate() 統合関数" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="495" width="330" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="343" value="3 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#F48FB1;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="470" width="90" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="370" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FFE082;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="605" width="360" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="371" value="WG-7: Schema &amp; Validation" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#F57F17;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="610" width="330" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="372" value="• domain/schema.py 作成&lt;br&gt;• schema_version 導入&lt;br&gt;• staleness / alert_message フィールド追加" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="635" width="330" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="373" value="4 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#FFE082;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="610" width="90" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="350" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#A5D6A7;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="470" y="145" width="360" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="351" value="WG-4: Collector Refactoring" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="485" y="150" width="330" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="352" value="• collect_health.py — 計測のみに限定&lt;br&gt;• collect_status.py — 検出のみに限定&lt;br&gt;• collect_nurture.py — domain 呼び出しに変更&lt;br&gt;• 動作確認（JSON diff で同等性検証）" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="485" y="175" width="330" height="75" as="geometry"/>
+                </mxCell>
+                <mxCell id="353" value="4 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#A5D6A7;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="730" y="150" width="90" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="360" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#A5D6A7;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="470" y="315" width="360" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="361" value="WG-6: Testing" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#2E7D32;" parent="1" vertex="1">
+                    <mxGeometry x="485" y="320" width="330" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="362" value="• tests/test_health.py — classify, score, alert&lt;br&gt;• tests/test_presence.py — status, time_context&lt;br&gt;• tests/test_constants.py — 閾値の整合性&lt;br&gt;• 全テスト実行（python3 -m unittest）" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="485" y="345" width="330" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="363" value="4 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#A5D6A7;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="730" y="320" width="90" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="380" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF8E1;strokeColor=#FFE082;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="860" y="145" width="300" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="381" value="WG-5: Frontend Purification" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#F57F17;" parent="1" vertex="1">
+                    <mxGeometry x="875" y="150" width="270" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="382" value="• アラートメッセージ配列を削除&lt;br&gt;• checkStaleness() を削除&lt;br&gt;• メトリクス%変換ロジック削除&lt;br&gt;• 回帰テスト（UI 同一性確認）" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="875" y="175" width="270" height="75" as="geometry"/>
+                </mxCell>
+                <mxCell id="383" value="4 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#FFE082;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="1070" y="150" width="80" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="390" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#CE93D8;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="1190" y="145" width="300" height="130" as="geometry"/>
+                </mxCell>
+                <mxCell id="391" value="WG-8: Documentation" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#7B1FA2;" parent="1" vertex="1">
+                    <mxGeometry x="1205" y="150" width="270" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="392" value="• ADR-015: ドメインレイヤー導入&lt;br&gt;• CLAUDE.md 更新&lt;br&gt;• docs/README.md 更新" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="1205" y="175" width="270" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="393" value="3 WP" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=10;fontColor=#CE93D8;fontStyle=1;" parent="1" vertex="1">
+                    <mxGeometry x="1400" y="150" width="80" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="395" style="html=1;strokeColor=#546E7A;strokeWidth=2;endArrow=classic;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;curved=1;" parent="1" source="320" target="330" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="396" style="html=1;strokeColor=#546E7A;strokeWidth=3;endArrow=classic;dashed=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="330" target="350" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="397" style="html=1;strokeColor=#546E7A;strokeWidth=3;endArrow=classic;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="340" target="360" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="398" style="html=1;strokeColor=#546E7A;strokeWidth=3;endArrow=classic;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="350" target="380" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="399" style="html=1;strokeColor=#546E7A;strokeWidth=3;endArrow=classic;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="380" target="390" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="400" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="470" y="500" width="1020" height="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="401" value="スコープサマリー" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" parent="1" vertex="1">
+                    <mxGeometry x="490" y="505" width="200" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="402" value="新規作成" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;fontSize=12;fontStyle=1;fontColor=#1B5E20;arcSize=15;" parent="1" vertex="1">
+                    <mxGeometry x="490" y="540" width="80" height="28" as="geometry"/>
+                </mxCell>
+                <mxCell id="403" value="domain/ ディレクトリ（constants.py, health.py, presence.py, rebecca.py, schema.py）&lt;br&gt;tests/ ディレクトリ（test_health.py, test_presence.py, test_constants.py）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="533" width="880" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="404" value="修正" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;fontSize=12;fontStyle=1;fontColor=#F57F17;arcSize=15;" parent="1" vertex="1">
+                    <mxGeometry x="490" y="583" width="80" height="28" as="geometry"/>
+                </mxCell>
+                <mxCell id="405" value="collectors/collect_health.py, collect_status.py, collect_nurture.py（計測のみに限定）&lt;br&gt;src/app.js（ドメインロジック除去）　/　src/data/*.json（schema_version 追加）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="576" width="880" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="406" value="変更なし" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#B0BEC5;fontSize=12;fontStyle=1;fontColor=#546E7A;arcSize=15;" parent="1" vertex="1">
+                    <mxGeometry x="490" y="626" width="80" height="28" as="geometry"/>
+                </mxCell>
+                <mxCell id="407" value="update_diary.py（Protected）/ watch_diary.py（Protected）/ src/style.css / src/index.html&lt;br&gt;UI/UX は Phase 1 と完全に同一を維持" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="580" y="619" width="880" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="410" value="合計: 8 ワークグループ / 30 ワークパッケージ" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#1A1A2E;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="760" width="500" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="499" value="4 / 5" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#BDBDBD;" parent="1" vertex="1">
+                    <mxGeometry x="1450" y="865" width="100" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="impact" name="5. 期待効果と Phase 2 接続">
+        <mxGraphModel dx="834" dy="707" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="500" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1A1A2E;strokeColor=none;" parent="1" vertex="1">
+                    <mxGeometry width="1600" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="501" value="期待効果と Phase 2 への接続" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;fontColor=#FFFFFF;" parent="1" vertex="1">
+                    <mxGeometry x="200" y="15" width="1200" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="505" value="Before / After 比較" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="85" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="510" value="Before（Phase 1 完了時点）" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#FFEBEE;fontSize=14;fontStyle=1;fontColor=#C62828;rounded=1;arcSize=20;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="120" width="340" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="511" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFEBEE;strokeColor=#FFCDD2;arcSize=6;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="160" width="340" height="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="512" value="&lt;b&gt;ドメインロジック変更&lt;/b&gt;&lt;br&gt;2-3 ファイル修正（Python + JS）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#C62828;rounded=1;arcSize=10;spacingLeft=8;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="172" width="310" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="513" value="&lt;b&gt;閾値変更&lt;/b&gt;&lt;br&gt;複数ファイルを横断的に修正" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#C62828;rounded=1;arcSize=10;spacingLeft=8;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="222" width="310" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="514" value="&lt;b&gt;テスト&lt;/b&gt;&lt;br&gt;手動確認のみ（自動テストなし）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#C62828;rounded=1;arcSize=10;spacingLeft=8;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="272" width="310" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="515" value="&lt;b&gt;Phase 2 追加コスト&lt;/b&gt;&lt;br&gt;高い（構造決めから必要）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#C62828;rounded=1;arcSize=10;spacingLeft=8;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="322" width="310" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="516" value="&lt;b&gt;不整合リスク&lt;/b&gt;&lt;br&gt;Python と JS で定義が食い違う可能性" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#C62828;rounded=1;arcSize=10;spacingLeft=8;" parent="1" vertex="1">
+                    <mxGeometry x="95" y="372" width="310" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="520" value="" style="html=1;strokeColor=#546E7A;strokeWidth=4;endArrow=classic;endSize=10;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="440" y="290" as="sourcePoint"/>
+                        <mxPoint x="500" y="290" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="521" value="After（Phase 1.5 完了後）" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=#E8F5E9;fontSize=14;fontStyle=1;fontColor=#2E7D32;rounded=1;arcSize=20;" parent="1" vertex="1">
+                    <mxGeometry x="510" y="120" width="340" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="522" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#C8E6C9;arcSize=6;" parent="1" vertex="1">
+                    <mxGeometry x="510" y="160" width="340" height="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="523" value="&lt;b&gt;ドメインロジック変更&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;1 ファイルのみ（domain/*.py）&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#37474F;rounded=1;arcSize=10;spacingLeft=8;" parent="1" vertex="1">
+                    <mxGeometry x="525" y="172" width="310" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="524" value="&lt;b&gt;閾値変更&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;constants.py のみ&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#37474F;rounded=1;arcSize=10;spacingLeft=8;" parent="1" vertex="1">
+                    <mxGeometry x="525" y="222" width="310" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="525" value="&lt;b&gt;テスト&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;unittest で全ルールを自動検証&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#37474F;rounded=1;arcSize=10;spacingLeft=8;" parent="1" vertex="1">
+                    <mxGeometry x="525" y="272" width="310" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="526" value="&lt;b&gt;Phase 2 追加コスト&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;低い（domain/ に追加するだけ）&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#37474F;rounded=1;arcSize=10;spacingLeft=8;" parent="1" vertex="1">
+                    <mxGeometry x="525" y="322" width="310" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="527" value="&lt;b&gt;不整合リスク&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#2E7D32&quot;&gt;Single Source of Truth で排除&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=#FFFFFF;fontSize=12;fontColor=#37474F;rounded=1;arcSize=10;spacingLeft=8;" parent="1" vertex="1">
+                    <mxGeometry x="525" y="372" width="310" height="42" as="geometry"/>
+                </mxCell>
+                <mxCell id="540" value="Phase 2 への接続" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontStyle=1;fontColor=#546E7A;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="85" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="541" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;strokeWidth=2;arcSize=6;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="120" width="600" height="145" as="geometry"/>
+                </mxCell>
+                <mxCell id="542" value="Phase 1.5 で構築する domain/" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#C2185B;" parent="1" vertex="1">
+                    <mxGeometry x="935" y="125" width="300" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="543" value="constants.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#880E4F;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="940" y="155" width="110" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="544" value="health.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#880E4F;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="1060" y="155" width="100" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="545" value="presence.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#880E4F;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="1170" y="155" width="110" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="546" value="schema.py" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#880E4F;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="1290" y="155" width="100" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="547" value="rebecca.py&lt;br&gt;(stub)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#F48FB1;fontSize=11;fontColor=#880E4F;arcSize=10;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="1400" y="155" width="100" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="548" value="← Phase 1.5 完了時点（受け皿完成）" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#C2185B;fontStyle=2;" parent="1" vertex="1">
+                    <mxGeometry x="940" y="200" width="300" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="549" value="Phase 2 で拡張" style="html=1;strokeColor=#7B1FA2;strokeWidth=3;endArrow=classic;fontSize=12;fontStyle=1;fontColor=#7B1FA2;labelBackgroundColor=#FFFFFF;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1220" y="265" as="sourcePoint"/>
+                        <mxPoint x="1220" y="305" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="550" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E5F5;strokeColor=#7B1FA2;strokeWidth=2;arcSize=6;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="305" width="600" height="195" as="geometry"/>
+                </mxCell>
+                <mxCell id="551" value="Phase 2 で追加される domain/ モジュール" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=13;fontStyle=1;fontColor=#7B1FA2;" parent="1" vertex="1">
+                    <mxGeometry x="935" y="310" width="400" height="22" as="geometry"/>
+                </mxCell>
+                <mxCell id="552" value="&lt;b&gt;rebecca.py&lt;/b&gt;&lt;br&gt;統合状態&lt;br&gt;mood, energy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CE93D8;fontSize=11;fontColor=#4A148C;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="940" y="342" width="120" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="553" value="&lt;b&gt;nurture.py&lt;/b&gt;&lt;br&gt;EXP, Level&lt;br&gt;成長ロジック" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CE93D8;fontSize=11;fontColor=#4A148C;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="1075" y="342" width="120" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="554" value="&lt;b&gt;relationships.py&lt;/b&gt;&lt;br&gt;trust, intimacy&lt;br&gt;関係性深度" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CE93D8;fontSize=11;fontColor=#4A148C;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="1210" y="342" width="130" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="555" value="&lt;b&gt;skills.py&lt;/b&gt;&lt;br&gt;プラグイン→&lt;br&gt;スキル" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CE93D8;fontSize=11;fontColor=#4A148C;arcSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="1355" y="342" width="120" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="556" value="health.py と presence.py を入力として利用 → 既存コードの再利用" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#7B1FA2;fontStyle=2;" parent="1" vertex="1">
+                    <mxGeometry x="940" y="410" width="550" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="557" style="html=1;strokeColor=#CE93D8;strokeWidth=1;endArrow=classic;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="544" target="552" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="558" style="html=1;strokeColor=#CE93D8;strokeWidth=1;endArrow=classic;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="545" target="553" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="570" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#7986CB;arcSize=8;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="460" width="770" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="571" value="&lt;b&gt;Phase 1.5 がなければ&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#283593;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="465" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="572" value="Phase 2 の Nurture System（mood, trust, EXP, level, skills）は&lt;br&gt;collect_nurture.py に詰め込まれ、mood は Collector、trust は app.js、EXP はどこか不明...&lt;br&gt;という状態になり、&lt;b&gt;テスト不能・変更コスト指数増大&lt;/b&gt;の未来が確定する。" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="492" width="730" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="573" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8EAF6;strokeColor=#7986CB;arcSize=8;strokeWidth=2;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="590" width="770" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="574" value="&lt;b&gt;Phase 1.5 があれば&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=14;fontColor=#283593;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="595" width="300" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="575" value="Nurture System は domain/nurture.py + domain/relationships.py として追加。&lt;br&gt;既存の health.py, presence.py を入力に使い、テスト可能で変更が局所的。&lt;br&gt;&lt;b&gt;Phase 2 の開発速度と品質が構造的に保証される。&lt;/b&gt;" style="text;html=1;align=left;verticalAlign=top;strokeColor=none;fillColor=none;fontSize=12;fontColor=#37474F;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="622" width="730" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="580" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1A1A2E;strokeColor=none;arcSize=8;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="740" width="1440" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="581" value="Phase 1.5 は「機能追加」ではなく「構造の確立」。ユーザーから見える変化はないが、Phase 2 以降の開発速度と品質に直結する。" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=16;fontColor=#E0E0E0;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="745" width="1400" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="582" value="PO 承認後、Phase A（domain/ 新設 + テスト基盤構築）から着手します。" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=18;fontStyle=1;fontColor=#FFFFFF;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="775" width="1400" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="599" value="5 / 5" style="text;html=1;align=right;verticalAlign=middle;strokeColor=none;fillColor=none;fontSize=11;fontColor=#BDBDBD;" parent="1" vertex="1">
+                    <mxGeometry x="1450" y="865" width="100" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
 </mxfile>

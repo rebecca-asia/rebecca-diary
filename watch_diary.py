@@ -36,24 +36,26 @@ class DiaryHandler(FileSystemEventHandler):
         self.trigger_update()
 
     def trigger_update(self):
-        print("Triggering diary update...")
+        print("Triggering diary update...", flush=True)
         try:
             subprocess.run([sys.executable, str(UPDATE_SCRIPT)], check=True)
-            print("Update complete.")
+            print("Update complete.", flush=True)
         except subprocess.CalledProcessError as e:
-            print(f"Update failed: {e}")
+            print(f"Update failed: {e}", flush=True)
+        except Exception as e:
+            print(f"Unexpected error during update: {e}", flush=True)
 
 def main():
     observer = Observer()
     handler = DiaryHandler()
 
-    print("Starting Diary Watchdog...")
+    print("Starting Diary Watchdog...", flush=True)
     for d in WATCH_DIRS:
         if d.is_dir():
-            print(f"Watching: {d}")
+            print(f"Watching: {d}", flush=True)
             observer.schedule(handler, str(d), recursive=False)
         else:
-            print(f"Warning: Directory not found: {d}")
+            print(f"Warning: Directory not found: {d}", flush=True)
 
     observer.start()
     try:
