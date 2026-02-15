@@ -235,9 +235,9 @@ Transition:
 
 ### 4.3 CSS Design System (実装値)
 
-**注意:** `style.css` の実装値と `DESIGN_RULES.md` の定義値に差異あり。
+**注意:** `style.css` の実装値と `design/RULES.md` の定義値に差異あり。
 
-| Variable | style.css (実装) | DESIGN_RULES.md (定義) | 差異 |
+| Variable | style.css (実装) | design/RULES.md (定義) | 差異 |
 |----------|-----------------|----------------------|------|
 | `--bg` | `#0c0c10` | `#151519` | **異なる** |
 | `--surface` | `#141418` | `#1c1c22` | **異なる** |
@@ -393,7 +393,7 @@ Status: 未設定 (crontab 空)
 
 ### 9.1 カラーパレット不整合
 
-`style.css` の実装値と `DESIGN_RULES.md` の定義値が乖離している（セクション4.3参照）。どちらを正とするか、統一が必要。
+`style.css` の実装値と `design/RULES.md` の定義値が乖離している（セクション4.3参照）。どちらを正とするか、統一が必要。
 
 ### 9.2 未使用アセット
 

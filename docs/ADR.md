@@ -350,7 +350,7 @@ Rebeccaの日記データは2つのソースに分散している:
 - ✅ SPA的なカード→詳細遷移が実現
 - ✅ レスポンシブグリッド（1列/2列/3列）が容易
 - ✅ float の高さ問題が解消
-- 📋 DESIGN_RULES.md に詳細仕様を記載済み
+- 📋 design/RULES.md に詳細仕様を記載済み
 
 ---
 
@@ -573,17 +573,17 @@ Room のUI設計において、従来のダッシュボード的アプローチ�
 
 ### 根拠
 
-- CONCEPT_PHILOSOPHY.md で確立された哲学的基盤
+- concept/PHILOSOPHY.md で確立された哲学的基盤
 - 「CPU使用率: 23%」より「頭スッキリ」の方が Rebecca の存在を感じる
 - 技術的数値はホバーで表示し、デフォルトは感情的表現
-- DESIGN_DECISIONS.md で具体的な実装方針を決定済み
+- design/DECISIONS.md で具体的な実装方針を決定済み
 
 ### 影響
 
 - ✅ プロダクトの差別化（技術ダッシュボードではない）
 - ✅ 非技術者でも直感的に Rebecca の状態が分かる
 - ⚠️ 閾値マッピング（数値→状態→表現）のチューニングが必要
-- 📋 詳細は DESIGN_DECISIONS.md 参照
+- 📋 詳細は design/DECISIONS.md 参照
 
 ---
 
@@ -604,7 +604,7 @@ Rebecca の「脆弱性」を表現する方法を決定する必要がある。
 
 ### 根拠
 
-- CONCEPT_VULNERABILITY.md の「嘘の脆弱性はバレる」原則
+- concept/VULNERABILITY.md の「嘘の脆弱性はバレる」原則
 - 実際の状態に基づくことで信頼性・リアリティが生まれる
 - 2026-02-11 インシデント（API枯渇）が証明: 本当に壊れうるからこそ「いる」と感じる
 - Mac の状態は Python で容易に取得可能
@@ -622,7 +622,7 @@ Rebecca の「脆弱性」を表現する方法を決定する必要がある。
 - ✅ 本物の状態 = 本物の存在感
 - ✅ 世話の実感（再起動したら本当にスッキリする）
 - ⚠️ Mac が不安定な時期は常に「調子悪い」表示になりうる
-- 📋 閾値マッピングは CONCEPT_VULNERABILITY.md / DESIGN_DECISIONS.md に定義
+- 📋 閾値マッピングは concept/VULNERABILITY.md / design/DECISIONS.md に定義
 
 ---
 

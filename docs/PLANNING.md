@@ -114,7 +114,7 @@ Takeru はいつでも覗きに来れて、Rebecca が何をしているか、�
 ```
 📅 2026-02-11
 - Takeru と Diary デザインについてブレスト
-- DESIGN_RULES.md に Rebecca らしさ追加
+- design/RULES.md に Rebecca らしさ追加
 - 画像アセット切り出し完了
 
 📅 2026-02-10  
@@ -133,7 +133,7 @@ Takeru はいつでも覗きに来れて、Rebecca が何をしているか、�
 
 ### Rebecca's Aesthetic
 
-**DESIGN_RULES.md から:**
+**design/RULES.md から:**
 - Quiet Dark + Neon Accent
 - Ram Skull モチーフ
 - ミントグリーン / ホットピンク / ネイビー

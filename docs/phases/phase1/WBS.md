@@ -708,12 +708,12 @@ Phase 1 の実装内容を既存ドキュメントに反映する。
 
 ---
 
-### WP-9.2 MVP_SYSTEM_ARCHITECTURE.md 更新
+### WP-9.2 ARCHITECTURE.md 更新
 
 | 項目 | 内容 |
 |------|------|
 | **説明** | Phase 1 完了状態にシステムアーキテクチャ図、File Inventory、Data Flow、Frontend Architecture を更新。 |
-| **成果物** | 更新された MVP_SYSTEM_ARCHITECTURE.md |
+| **成果物** | 更新された specs/ARCHITECTURE.md |
 | **依存** | WP-9.1 |
 | **受入基準** | Phase 1 完了後の正確なシステム構成を反映 |
 
@@ -723,7 +723,7 @@ Phase 1 の実装内容を既存ドキュメントに反映する。
 
 | 項目 | 内容 |
 |------|------|
-| **説明** | Phase 1 完了を反映。PHASE1_GOAL.md, PHASE1_WBS.md をインデックスに追加。Directory Structure を現状に更新。 |
+| **説明** | Phase 1 完了を反映。phases/phase1/GOAL.md, phases/phase1/WBS.md をインデックスに追加。Directory Structure を現状に更新。 |
 | **成果物** | 更新された docs/README.md |
 | **依存** | WP-9.2 |
 | **受入基準** | (1) Phase 1 ステータスが反映 (2) 新規ドキュメントがリンクされている (3) Directory Structure が現状反映 |
@@ -915,14 +915,14 @@ Day 11: WP-9.1 → 9.2 → 9.3                  ドキュメント（1h）
 
 ---
 
-### WP-9.4 PHASE1_SPEC.md のクリーンアップ
+### WP-9.4 SPEC.md のクリーンアップ
 
 | 項目 | 内容 |
 |------|------|
 | **説明** | レビューで発見された SPEC の不整合を修正済みの内容で最終確認する。data/ パス統一、build.py 図の修正、Overall Score 計算式修正、Open Questions 解決済み、Memory 計算方法の明示。 |
-| **成果物** | クリーンアップ済みの PHASE1_SPEC.md |
+| **成果物** | クリーンアップ済みの phases/phase1/SPEC.md |
 | **依存** | WP-9.1 |
-| **受入基準** | PHASE1_GOAL / WBS と矛盾がない |
+| **受入基準** | GOAL / WBS と矛盾がない |
 
 ---
 

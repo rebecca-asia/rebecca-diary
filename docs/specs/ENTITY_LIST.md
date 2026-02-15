@@ -277,11 +277,11 @@
 
 | Document | 関係 |
 |----------|------|
-| [PHASE1_SPEC.md](PHASE1_SPEC.md) | JSON スキーマ、閾値テーブル |
-| [PHASE1_WBS.md](PHASE1_WBS.md) | 各エンティティを実装する WP |
+| [SPEC.md](../phases/phase1/SPEC.md) | JSON スキーマ、閾値テーブル |
+| [WBS.md](../phases/phase1/WBS.md) | 各エンティティを実装する WP |
 | [USE_CASE_LIST.md](USE_CASE_LIST.md) | エンティティを操作するユースケース |
-| [MVP_SYSTEM_ARCHITECTURE.md](MVP_SYSTEM_ARCHITECTURE.md) | Phase 0 の詳細構成 |
-| [archive/phase0/ENTITY_LIST.md](archive/phase0/ENTITY_LIST.md) | Phase 0 版（歴史的記録） |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Phase 0 の詳細構成 |
+| [archive/phase0/ENTITY_LIST.md](../archive/phase0/ENTITY_LIST.md) | Phase 0 版（歴史的記録） |
 
 ---
 

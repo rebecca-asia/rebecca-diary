@@ -12,7 +12,7 @@ from pathlib import Path
 # Configuration
 TOKEN_FILE = Path.home() / ".openclaw" / ".asana_token"
 WORKSPACE_NAME = "samuraitechnology.jp"
-OUTPUT_FILE = Path(__file__).parent.parent / "data" / "asana_tasks.json"
+OUTPUT_FILE = Path(__file__).parent.parent / "src" / "data" / "asana_tasks.json"
 
 def read_token():
     """Read Asana Personal Access Token from file"""

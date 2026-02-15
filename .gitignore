@@ -8,6 +8,9 @@ src/data/
 .claude/
 .vscode/
 
+# Logs
+server.log
+
 # Python
 __pycache__/
 *.pyc

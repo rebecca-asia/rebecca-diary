@@ -74,7 +74,7 @@ CPU閾値 (20/50/70/85%):     collect_health.py にハードコード
 Memory閾値 (50/60/80/95%):   collect_health.py にハードコード
 ポーリング間隔 (5min):        app.js にハードコード (5 * 60 * 1000)
 Cron間隔 (1min, 5min):       crontab に直接記述（Git管理外）
-カラーパレット:                style.css と DESIGN_RULES.md で不一致
+カラーパレット:                style.css と design/RULES.md で不一致
 ```
 
 #### 問題 3: Phase 2 への準備が構造的にできていない
@@ -112,7 +112,7 @@ Phase 2（Nurture System）では以下が加わる:
 テスト可能な Python モジュールとして実装する。
 
 ```
-Ghost理論 (CONCEPT_PHILOSOPHY.md)
+Ghost理論 (concept/PHILOSOPHY.md)
     ↓ コード化
 domain/rebecca.py  ← Phase 1.5 で新設
     ↓ 利用
@@ -155,7 +155,7 @@ Phase 1.5 は「機能追加」ではなく「構造の確立」。
 |------|------|
 | Nurture System の実装 | Phase 2 のスコープ |
 | UI デザインの変更 | 機能追加ではなく内部リファクタリング |
-| `style.css` ↔ `DESIGN_RULES.md` の統一 | 別タスクとして管理 |
+| `style.css` ↔ `design/RULES.md` の統一 | 別タスクとして管理 |
 | `update_diary.py` の変更 | Protected File |
 | デプロイ・公開 | Phase 1 と同じくローカルのみ |
 
@@ -774,12 +774,12 @@ Phase 1.5 のドメインレイヤーがあれば:
 
 | Document | 関係 |
 |----------|------|
-| [PHASE1_GOAL.md](PHASE1_GOAL.md) | Phase 1 完了条件（Phase 1.5 の出発点） |
-| [PHASE1_SPEC.md](PHASE1_SPEC.md) | 現行 JSON スキーマ定義 |
-| [NURTURE_SYSTEM_SPEC.md](NURTURE_SYSTEM_SPEC.md) | Phase 2 仕様（Phase 1.5 はこの受け皿） |
-| [CONCEPT_PHILOSOPHY.md](CONCEPT_PHILOSOPHY.md) | Ghost 理論（ドメインモデルの哲学的根拠） |
-| [CONCEPT_VULNERABILITY.md](CONCEPT_VULNERABILITY.md) | 脆弱性理論（Health ドメインの根拠） |
-| [ADR.md](ADR.md) | ADR-012〜014（Collector + SSG ハイブリッド、Ghost 理論、Real State） |
+| [GOAL.md](../phase1/GOAL.md) | Phase 1 完了条件（Phase 1.5 の出発点） |
+| [SPEC.md](../phase1/SPEC.md) | 現行 JSON スキーマ定義 |
+| [NURTURE_SYSTEM.md](../../specs/NURTURE_SYSTEM.md) | Phase 2 仕様（Phase 1.5 はこの受け皿） |
+| [PHILOSOPHY.md](../../concept/PHILOSOPHY.md) | Ghost 理論（ドメインモデルの哲学的根拠） |
+| [VULNERABILITY.md](../../concept/VULNERABILITY.md) | 脆弱性理論（Health ドメインの根拠） |
+| [ADR.md](../../ADR.md) | ADR-012〜014（Collector + SSG ハイブリッド、Ghost 理論、Real State） |
 
 ---
 

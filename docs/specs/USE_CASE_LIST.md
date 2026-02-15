@@ -453,10 +453,10 @@ R = Read, C = Create/Update, X = Execute
 | Document | 関係 |
 |----------|------|
 | [ENTITY_LIST.md](ENTITY_LIST.md) | エンティティの定義・属性・関連 |
-| [PHASE1_SPEC.md](PHASE1_SPEC.md) | JSON スキーマ、閾値テーブル、UI コンポーネント |
-| [PHASE1_GOAL.md](PHASE1_GOAL.md) | 成功基準（UC が実現すべきゴール） |
-| [PHASE1_WBS.md](PHASE1_WBS.md) | 各 UC を実装する WP への対応 |
-| [archive/phase0/USE_CASE_LIST.md](archive/phase0/USE_CASE_LIST.md) | Phase 0 版（歴史的記録） |
+| [SPEC.md](../phases/phase1/SPEC.md) | JSON スキーマ、閾値テーブル、UI コンポーネント |
+| [GOAL.md](../phases/phase1/GOAL.md) | 成功基準（UC が実現すべきゴール） |
+| [WBS.md](../phases/phase1/WBS.md) | 各 UC を実装する WP への対応 |
+| [archive/phase0/USE_CASE_LIST.md](../archive/phase0/USE_CASE_LIST.md) | Phase 0 版（歴史的記録） |
 
 ---
 

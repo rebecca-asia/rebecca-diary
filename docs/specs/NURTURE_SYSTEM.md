@@ -146,7 +146,7 @@ collector（`collect_skills.py`）が `~/.claude/plugins/` を走査し、イン
 
 **「放置ペナルティ」は演技ではなく、実際の可用性低下に紐づく。**
 
-CONCEPT_VULNERABILITY.mdの原則：
+concept/VULNERABILITY.mdの原則：
 - 嘘の脆弱性はNG
 - 状況に即した本当の状態を反映
 

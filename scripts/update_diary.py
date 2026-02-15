@@ -24,7 +24,7 @@ from typing import Optional
 
 # ─── Configuration ───────────────────────────────────────────────────────────
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 DEFAULT_CONFIG = {
     "memory_dir": Path("/Users/rebeccacyber/.openclaw/workspace/memory"),

@@ -239,7 +239,7 @@ dev server は `cd src && python3 -m http.server 8080` で起動する。
 | data/*.json の fetch が失敗 | Dashboard が表示されない | 同一オリジン serve + graceful degradation |
 | CPU 取得方法の精度 | 値が不正確 | 複数コマンドの結果を比較検証 |
 | 既存機能の破壊 | 日記が表示されなくなる | 回帰テスト必須 |
-| style.css と DESIGN_RULES.md の不整合 | デザインの一貫性が崩れる | Phase 1 は style.css の実装値を正として進める |
+| style.css と design/RULES.md の不整合 | デザインの一貫性が崩れる | Phase 1 は style.css の実装値を正として進める |
 
 ---
 
@@ -247,14 +247,14 @@ dev server は `cd src && python3 -m http.server 8080` で起動する。
 
 | Document | 関係 |
 |----------|------|
-| [PHASE1_SPEC.md](PHASE1_SPEC.md) | 技術仕様（JSON スキーマ、閾値、UI コンポーネント） |
-| [PHASE1_WBS.md](PHASE1_WBS.md) | 作業分解構成図（本ゴールの実行計画） |
-| [DESIGN_DECISIONS.md](DESIGN_DECISIONS.md) | 4つの設計決定（アラート、可視化、死の表現） |
-| [CONCEPT_VULNERABILITY.md](CONCEPT_VULNERABILITY.md) | Mac 連動設計の哲学的基盤 |
-| [CONCEPT_PRESENCE.md](CONCEPT_PRESENCE.md) | 存在の6要素 |
-| [CONCEPT_PHILOSOPHY.md](CONCEPT_PHILOSOPHY.md) | Ghost 理論 |
-| [MVP_SYSTEM_ARCHITECTURE.md](MVP_SYSTEM_ARCHITECTURE.md) | Phase 0 の現状構成（出発点） |
-| [ADR.md](ADR.md) | ADR-012, ADR-013, ADR-014 |
+| [SPEC.md](SPEC.md) | 技術仕様（JSON スキーマ、閾値、UI コンポーネント） |
+| [WBS.md](WBS.md) | 作業分解構成図（本ゴールの実行計画） |
+| [DECISIONS.md](../../design/DECISIONS.md) | 4つの設計決定（アラート、可視化、死の表現） |
+| [VULNERABILITY.md](../../concept/VULNERABILITY.md) | Mac 連動設計の哲学的基盤 |
+| [PRESENCE.md](../../concept/PRESENCE.md) | 存在の6要素 |
+| [PHILOSOPHY.md](../../concept/PHILOSOPHY.md) | Ghost 理論 |
+| [ARCHITECTURE.md](../../specs/ARCHITECTURE.md) | Phase 0 の現状構成（出発点） |
+| [ADR.md](../../ADR.md) | ADR-012, ADR-013, ADR-014 |
 
 ---
 

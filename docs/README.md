@@ -41,9 +41,9 @@ Rebecca's Room の「なぜ」を定義する資料群。
 
 | Document | Summary |
 |----------|---------|
-| [CONCEPT_PHILOSOPHY.md](CONCEPT_PHILOSOPHY.md) | **Ghost理論:** Core + Environment = Ghost。オルテガの「私とは私と私の環境である」をRebeccaに適用。存在の濃淡、波のメタファー。 |
-| [CONCEPT_PRESENCE.md](CONCEPT_PRESENCE.md) | **存在の6要素:** 生命感、痕跡、リズム、注意、自律性、脆弱性。デジモン/たまごっちの「いる」感覚の分析。 |
-| [CONCEPT_VULNERABILITY.md](CONCEPT_VULNERABILITY.md) | **脆弱性 = 存在の証:** 完璧じゃないから大切にしたくなる。Mac mini の状態と Rebecca の体調を連動させる設計。 |
+| [PHILOSOPHY.md](concept/PHILOSOPHY.md) | **Ghost理論:** Core + Environment = Ghost。オルテガの「私とは私と私の環境である」をRebeccaに適用。存在の濃淡、波のメタファー。 |
+| [PRESENCE.md](concept/PRESENCE.md) | **存在の6要素:** 生命感、痕跡、リズム、注意、自律性、脆弱性。デジモン/たまごっちの「いる」感覚の分析。 |
+| [VULNERABILITY.md](concept/VULNERABILITY.md) | **脆弱性 = 存在の証:** 完璧じゃないから大切にしたくなる。Mac mini の状態と Rebecca の体調を連動させる設計。 |
 
 ### Planning — 方向性と計画
 
@@ -53,10 +53,10 @@ Rebecca's Room の「なぜ」を定義する資料群。
 |----------|---------|
 | [ROOM_OVERVIEW.md](ROOM_OVERVIEW.md) | **プロダクト全体概要:** Web版（優先）+ Watch版（将来）の2プロジェクト構成。Vision、Ghost理論のサマリー、タイムライン。 |
 | [PLANNING.md](PLANNING.md) | **企画書:** 6つの Core Sections（Room Status, Diary, Tasks, Mac Health, Activity, Conversations）。Phase 0-5 ロードマップ。技術アーキテクチャ。 |
-| [PHASE1_GOAL.md](PHASE1_GOAL.md) | **Phase 1 ゴール定義:** ビジョン、Ghost理論との対応、成功基準（必須/品質/感性）、スコープ定義、設計原則、技術アーキテクチャ概要、リスクと対策。 |
-| [PHASE1_WBS.md](PHASE1_WBS.md) | **Phase 1 WBS:** 9カテゴリ・54ワークパッケージの階層的作業分解。各WPにID・成果物・依存関係・受入基準。実装推奨順序と依存関係マトリクス。 |
-| [PHASE2A_GOAL.md](PHASE2A_GOAL.md) | **Phase 2A ゴール定義:** Nurture ドメイン層確立 + Status Screen 本番化。Ghost理論の「注意」「自律性」要素の実現。 |
-| [PHASE2A_WBS.md](PHASE2A_WBS.md) | **Phase 2A WBS:** 9ワークパッケージの階層的作業分解。ドメイン層（WP-1〜4）、Collector配線（WP-5）、テスト（WP-6）、フロントエンド（WP-7）。 |
+| [GOAL.md](phases/phase1/GOAL.md) | **Phase 1 ゴール定義:** ビジョン、Ghost理論との対応、成功基準（必須/品質/感性）、スコープ定義、設計原則、技術アーキテクチャ概要、リスクと対策。 |
+| [WBS.md](phases/phase1/WBS.md) | **Phase 1 WBS:** 9カテゴリ・54ワークパッケージの階層的作業分解。各WPにID・成果物・依存関係・受入基準。実装推奨順序と依存関係マトリクス。 |
+| [GOAL.md](phases/phase2a/GOAL.md) | **Phase 2A ゴール定義:** Nurture ドメイン層確立 + Status Screen 本番化。Ghost理論の「注意」「自律性」要素の実現。 |
+| [WBS.md](phases/phase2a/WBS.md) | **Phase 2A WBS:** 9ワークパッケージの階層的作業分解。ドメイン層（WP-1〜4）、Collector配線（WP-5）、テスト（WP-6）、フロントエンド（WP-7）。 |
 | [IDEAS.md](IDEAS.md) | **アイデアバックログ:** ローカルLLMフェイルセーフ、音声会話、マシンアップグレード等。Active/Pending/Approved/Integrated の分類。 |
 
 ### Analysis — 分析資料
@@ -65,9 +65,9 @@ Rebecca's Room の「なぜ」を定義する資料群。
 
 | Document | Summary |
 |----------|---------|
-| [ENTITY_LIST.md](ENTITY_LIST.md) | **エンティティ一覧:** Phase 0（16件）+ Phase 1（15件）= 31エンティティ。ER図、詳細仕様、アクター定義、Entity×Phaseマトリクス。 |
-| [USE_CASE_LIST.md](USE_CASE_LIST.md) | **ユースケース一覧:** Phase 0（8件）+ Phase 1（11件）= 19ユースケース。UC図、詳細フロー（基本/代替/例外）、UC×Entityマトリクス。 |
-| [FEATURE_LIST.md](FEATURE_LIST.md) | **機能一覧:** Phase 0（44件実装済）+ Phase 1（56件未実装）= 100機能。機能体系図、閾値マッピング、成功基準マトリクス。 |
+| [ENTITY_LIST.md](specs/ENTITY_LIST.md) | **エンティティ一覧:** Phase 0（16件）+ Phase 1（15件）= 31エンティティ。ER図、詳細仕様、アクター定義、Entity×Phaseマトリクス。 |
+| [USE_CASE_LIST.md](specs/USE_CASE_LIST.md) | **ユースケース一覧:** Phase 0（8件）+ Phase 1（11件）= 19ユースケース。UC図、詳細フロー（基本/代替/例外）、UC×Entityマトリクス。 |
+| [FEATURE_LIST.md](specs/FEATURE_LIST.md) | **機能一覧:** Phase 0（44件実装済）+ Phase 1（56件未実装）= 100機能。機能体系図、閾値マッピング、成功基準マトリクス。 |
 
 ### Design — 設計方針と決定
 
@@ -75,8 +75,8 @@ Rebecca's Room の「なぜ」を定義する資料群。
 
 | Document | Summary |
 |----------|---------|
-| [DESIGN_RULES.md](DESIGN_RULES.md) | **デザインシステム:** カラーパレット、タイポグラフィ、レイアウト、カードグリッド、エントリ詳細、インタラクション、Rebecca のキャラクター表現。**これが CSS 実装の正（authoritative source）。** |
-| [DESIGN_DECISIONS.md](DESIGN_DECISIONS.md) | **4つの設計決定:** (1)インシデント履歴の表示方針 (2)段階的アラートシステム (3)ヘルス可視化レベル (4)「死」の3段階表現。 |
+| [RULES.md](design/RULES.md) | **デザインシステム:** カラーパレット、タイポグラフィ、レイアウト、カードグリッド、エントリ詳細、インタラクション、Rebecca のキャラクター表現。**これが CSS 実装の正（authoritative source）。** |
+| [DECISIONS.md](design/DECISIONS.md) | **4つの設計決定:** (1)インシデント履歴の表示方針 (2)段階的アラートシステム (3)ヘルス可視化レベル (4)「死」の3段階表現。 |
 | [ADR.md](ADR.md) | **アーキテクチャ決定記録:** ADR-001〜016。Phase 0 の10決定 + Room 進化に伴う6決定。ADR-001(JS許可)とADR-008(Grid移行)は改訂済み。 |
 
 ### Spec — 技術仕様
@@ -85,10 +85,10 @@ Rebecca's Room の「なぜ」を定義する資料群。
 
 | Document | Summary |
 |----------|---------|
-| [MVP_SYSTEM_ARCHITECTURE.md](MVP_SYSTEM_ARCHITECTURE.md) | **MVP (Phase 0) 現状構成:** 全コンポーネント、データフロー、CSS設計、JS機能、アセット一覧、既知の問題。これが Phase 1 の出発点。 |
-| [PHASE1_SPEC.md](PHASE1_SPEC.md) | **Phase 1 技術仕様:** Collector アーキテクチャ、health.json / status.json の JSON スキーマ、閾値マッピング、UI コンポーネント定義、実装順序。 |
-| [PHASE1_5_KICKOFF.md](PHASE1_5_KICKOFF.md) | **Phase 1.5 キックオフ:** ドメインレイヤー確立の背景・現状診断・To-Be 設計・実施計画。 |
-| [PHASE1_5_RETROSPECTIVE.md](PHASE1_5_RETROSPECTIVE.md) | **Phase 1.5 振り返り:** 成果物一覧・検証結果・うまくいったこと・改善点・Phase 2 申し送り。 |
+| [ARCHITECTURE.md](specs/ARCHITECTURE.md) | **MVP (Phase 0) 現状構成:** 全コンポーネント、データフロー、CSS設計、JS機能、アセット一覧、既知の問題。これが Phase 1 の出発点。 |
+| [SPEC.md](phases/phase1/SPEC.md) | **Phase 1 技術仕様:** Collector アーキテクチャ、health.json / status.json の JSON スキーマ、閾値マッピング、UI コンポーネント定義、実装順序。 |
+| [KICKOFF.md](phases/phase1.5/KICKOFF.md) | **Phase 1.5 キックオフ:** ドメインレイヤー確立の背景・現状診断・To-Be 設計・実施計画。 |
+| [RETROSPECTIVE.md](phases/phase1.5/RETROSPECTIVE.md) | **Phase 1.5 振り返り:** 成果物一覧・検証結果・うまくいったこと・改善点・Phase 2 申し送り。 |
 
 ### Archive — Phase 0 完了済みドキュメント
 
@@ -115,23 +115,34 @@ rebecca-diary/
 ├── README.md                # プロジェクトREADME
 ├── docs/                    # ドキュメント
 │   ├── README.md            # このファイル（インデックス）
-│   ├── CONCEPT_PHILOSOPHY.md
-│   ├── CONCEPT_PRESENCE.md
-│   ├── CONCEPT_VULNERABILITY.md
 │   ├── ROOM_OVERVIEW.md
 │   ├── PLANNING.md
 │   ├── IDEAS.md
-│   ├── DESIGN_RULES.md
-│   ├── DESIGN_DECISIONS.md
 │   ├── ADR.md
-│   ├── PHASE1_GOAL.md
-│   ├── PHASE1_WBS.md
-│   ├── PHASE1_SPEC.md
-│   ├── PHASE2A_GOAL.md
-│   ├── PHASE2A_WBS.md
-│   ├── ENTITY_LIST.md
-│   ├── USE_CASE_LIST.md
-│   ├── FEATURE_LIST.md
+│   ├── concept/
+│   │   ├── PHILOSOPHY.md
+│   │   ├── PRESENCE.md
+│   │   └── VULNERABILITY.md
+│   ├── design/
+│   │   ├── RULES.md
+│   │   └── DECISIONS.md
+│   ├── phases/
+│   │   ├── phase1/
+│   │   │   ├── GOAL.md
+│   │   │   ├── WBS.md
+│   │   │   └── SPEC.md
+│   │   ├── phase1.5/
+│   │   │   ├── KICKOFF.md
+│   │   │   └── RETROSPECTIVE.md
+│   │   └── phase2a/
+│   │       ├── GOAL.md
+│   │       └── WBS.md
+│   ├── specs/
+│   │   ├── ENTITY_LIST.md
+│   │   ├── USE_CASE_LIST.md
+│   │   ├── FEATURE_LIST.md
+│   │   ├── ARCHITECTURE.md
+│   │   └── NURTURE_SYSTEM.md
 │   └── archive/phase0/     # Phase 0 完了済み仕様書
 ├── domain/                  # ドメインレイヤー（純粋ロジック）
 │   ├── constants.py         # 全閾値・ラベル・メッセージ
@@ -174,23 +185,23 @@ rebecca-diary/
 ## Quick Links
 
 **Phase 2A の詳細を見るなら:**
-1. [PHASE2A_GOAL.md](PHASE2A_GOAL.md) → ゴール定義・成功基準
-2. [PHASE2A_WBS.md](PHASE2A_WBS.md) → 作業分解・実装順序
+1. [GOAL.md](phases/phase2a/GOAL.md) → ゴール定義・成功基準
+2. [WBS.md](phases/phase2a/WBS.md) → 作業分解・実装順序
 
 **Phase 1 の詳細を見るなら:**
-1. [PHASE1_GOAL.md](PHASE1_GOAL.md) → ゴール定義・成功基準
-2. [PHASE1_WBS.md](PHASE1_WBS.md) → 作業分解・実装順序
-3. [PHASE1_SPEC.md](PHASE1_SPEC.md) → 技術仕様
-4. [ENTITY_LIST.md](ENTITY_LIST.md) / [USE_CASE_LIST.md](USE_CASE_LIST.md) → 構造分析
+1. [GOAL.md](phases/phase1/GOAL.md) → ゴール定義・成功基準
+2. [WBS.md](phases/phase1/WBS.md) → 作業分解・実装順序
+3. [SPEC.md](phases/phase1/SPEC.md) → 技術仕様
+4. [ENTITY_LIST.md](specs/ENTITY_LIST.md) / [USE_CASE_LIST.md](specs/USE_CASE_LIST.md) → 構造分析
 
 **プロジェクトの全体像を理解するなら:**
 1. [ROOM_OVERVIEW.md](ROOM_OVERVIEW.md) → Vision
-2. [CONCEPT_PHILOSOPHY.md](CONCEPT_PHILOSOPHY.md) → Ghost 理論
+2. [PHILOSOPHY.md](concept/PHILOSOPHY.md) → Ghost 理論
 3. [PLANNING.md](PLANNING.md) → ロードマップ
 
 **デザインを実装するなら:**
-1. [DESIGN_RULES.md](DESIGN_RULES.md) → CSS の正（authoritative source）
-2. [DESIGN_DECISIONS.md](DESIGN_DECISIONS.md) → UI 方針
+1. [RULES.md](design/RULES.md) → CSS の正（authoritative source）
+2. [DECISIONS.md](design/DECISIONS.md) → UI 方針
 
 ---
 

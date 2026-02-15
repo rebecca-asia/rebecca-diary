@@ -254,5 +254,5 @@ rebecca-website/
 | ユースケース一覧 | [USE_CASE_LIST.md](./USE_CASE_LIST.md) | ユースケース定義・フロー |
 | 機能一覧 | [FEATURE_LIST.md](./FEATURE_LIST.md) | 全44機能の詳細 |
 | 画面一覧 | [SCREEN_LIST.md](./SCREEN_LIST.md) | 画面構成・レイアウト仕様 |
-| ADR | [ADR.md](./ADR.md) | アーキテクチャ決定記録 |
+| ADR | [ADR.md](../../ADR.md) | アーキテクチャ決定記録 |
 | WBS | [WBS.md](./WBS.md) | 作業分解構成図 |

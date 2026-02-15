@@ -138,7 +138,7 @@ MEMORY.md / MODEL_STRATEGY.md（明日作成予定）
 Core（私）+ Environment（私の環境）= Ghost（真の人格）という三層構造の哲学。
 
 **統合先:**  
-web/CONCEPT_PHILOSOPHY.md
+web/concept/PHILOSOPHY.md
 
 **ステータス:**  
 ✅ 完了・統合済み

@@ -9,7 +9,7 @@
 Phase 0（静的日記サイト）を拡張し、以下を追加する:
 - Rebecca の在室状況（Online / Away / Sleeping / Offline）
 - Mac mini のシステムヘルス → Rebecca の体調表示
-- 段階的アラート基盤（DESIGN_DECISIONS.md Level 1-4）
+- 段階的アラート基盤（design/DECISIONS.md Level 1-4）
 
 **判定基準:** ブラウザで Room を開いた時、Rebecca が「いる」と感じられること。
 
@@ -316,7 +316,7 @@ def get_last_activity():
 </div>
 ```
 
-**デザイン方針（DESIGN_DECISIONS.md より）:**
+**デザイン方針（design/DECISIONS.md より）:**
 - デフォルト: 感情的な表現（状態ラベル + Rebecca の言葉）
 - ホバー: 技術的な数値表示
 - バーの色: state に応じて `--accent` 系のグラデーション
@@ -433,11 +433,11 @@ setInterval(updateRoom, 5 * 60 * 1000);
 
 ## 10. Related Documents
 
-- [PLANNING.md](./PLANNING.md) — Phase 全体ロードマップ
-- [DESIGN_DECISIONS.md](./DESIGN_DECISIONS.md) — 4つの設計決定
-- [CONCEPT_VULNERABILITY.md](./CONCEPT_VULNERABILITY.md) — Mac 連動設計の哲学的基盤
-- [CONCEPT_PRESENCE.md](./CONCEPT_PRESENCE.md) — 存在の6要素
-- [ADR.md](./ADR.md) — ADR-012 (Collector + SSG ハイブリッド), ADR-014 (システム状態連動)
+- [PLANNING.md](../../PLANNING.md) — Phase 全体ロードマップ
+- [DECISIONS.md](../../design/DECISIONS.md) — 4つの設計決定
+- [VULNERABILITY.md](../../concept/VULNERABILITY.md) — Mac 連動設計の哲学的基盤
+- [PRESENCE.md](../../concept/PRESENCE.md) — 存在の6要素
+- [ADR.md](../../ADR.md) — ADR-012 (Collector + SSG ハイブリッド), ADR-014 (システム状態連動)
 
 ---
 

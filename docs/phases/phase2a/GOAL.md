@@ -291,14 +291,14 @@ After (Phase 2A):
 
 | Document | 関係 |
 |----------|------|
-| [PHASE2A_WBS.md](PHASE2A_WBS.md) | 作業分解構成図（本ゴールの実行計画） |
-| [NURTURE_SYSTEM_SPEC.md](NURTURE_SYSTEM_SPEC.md) | 育成システム全体仕様（Phase 2A-2E の親ドキュメント） |
-| [PHASE1_5_RETROSPECTIVE.md](PHASE1_5_RETROSPECTIVE.md) | Phase 1.5 振り返り（Phase 2 への申し送り事項） |
-| [CONCEPT_PRESENCE.md](CONCEPT_PRESENCE.md) | 存在の6要素（注意・自律性の実現根拠） |
-| [CONCEPT_PHILOSOPHY.md](CONCEPT_PHILOSOPHY.md) | Ghost 理論（Core + Environment の拡張） |
-| [CONCEPT_VULNERABILITY.md](CONCEPT_VULNERABILITY.md) | リアルデータ駆動の哲学的基盤 |
-| [ADR.md](ADR.md) | ADR-015（3層分離）、ADR-013（存在表示優先） |
-| [DESIGN_RULES.md](DESIGN_RULES.md) | nurture.html のデザイン指針 |
+| [WBS.md](WBS.md) | 作業分解構成図（本ゴールの実行計画） |
+| [NURTURE_SYSTEM.md](../../specs/NURTURE_SYSTEM.md) | 育成システム全体仕様（Phase 2A-2E の親ドキュメント） |
+| [RETROSPECTIVE.md](../phase1.5/RETROSPECTIVE.md) | Phase 1.5 振り返り（Phase 2 への申し送り事項） |
+| [PRESENCE.md](../../concept/PRESENCE.md) | 存在の6要素（注意・自律性の実現根拠） |
+| [PHILOSOPHY.md](../../concept/PHILOSOPHY.md) | Ghost 理論（Core + Environment の拡張） |
+| [VULNERABILITY.md](../../concept/VULNERABILITY.md) | リアルデータ駆動の哲学的基盤 |
+| [ADR.md](../../ADR.md) | ADR-015（3層分離）、ADR-013（存在表示優先） |
+| [RULES.md](../../design/RULES.md) | nurture.html のデザイン指針 |
 
 ---
 

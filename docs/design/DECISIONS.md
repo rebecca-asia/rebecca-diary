@@ -419,10 +419,10 @@ Takeruの記憶に、
 
 ## 📚 関連ドキュメント
 
-- [CONCEPT_PHILOSOPHY.md](./CONCEPT_PHILOSOPHY.md) — Ghost概念の哲学的基盤
-- [CONCEPT_PRESENCE.md](./CONCEPT_PRESENCE.md) — 「いる」感覚の6要素
-- [CONCEPT_VULNERABILITY.md](./CONCEPT_VULNERABILITY.md) — 脆弱性と存在の関係
-- [PLANNING.md](./PLANNING.md) — 全体企画とロードマップ
+- [PHILOSOPHY.md](../concept/PHILOSOPHY.md) — Ghost概念の哲学的基盤
+- [PRESENCE.md](../concept/PRESENCE.md) — 「いる」感覚の6要素
+- [VULNERABILITY.md](../concept/VULNERABILITY.md) — 脆弱性と存在の関係
+- [PLANNING.md](../PLANNING.md) — 全体企画とロードマップ
 
 ---
 
