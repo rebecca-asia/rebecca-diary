@@ -34,7 +34,7 @@ Phase 2+ で可視化するもの:
     └── 関係性 → Conversation Summary
 ```
 
-### 存在の6要素（CONCEPT_PRESENCE）との対応
+### 存在の6要素（[PRESENCE](../../concept/PRESENCE.md)）との対応
 
 | 要素 | Phase 1 での実現 | 実装 |
 |------|------------------|------|
@@ -55,8 +55,8 @@ Phase 1 の完了を判定する定量的・定性的基準。
 
 | # | 基準 | 検証方法 |
 |---|------|---------|
-| SC-01 | `collectors/collect_health.py` が `src/data/health.json` を PHASE1_SPEC のスキーマ通りに生成する | スクリプト実行 → JSON スキーマ検証 |
-| SC-02 | `collectors/collect_status.py` が `src/data/status.json` を PHASE1_SPEC のスキーマ通りに生成する | スクリプト実行 → JSON スキーマ検証 |
+| SC-01 | `collectors/collect_health.py` が `src/data/health.json` を [SPEC](SPEC.md) のスキーマ通りに生成する | スクリプト実行 → JSON スキーマ検証 |
+| SC-02 | `collectors/collect_status.py` が `src/data/status.json` を [SPEC](SPEC.md) のスキーマ通りに生成する | スクリプト実行 → JSON スキーマ検証 |
 | SC-03 | ブラウザで Room を開くと、ヘッダー直下に在室状況（emoji + label + 時刻）が表示される | 目視確認 |
 | SC-04 | Health Dashboard に5指標（CPU, Memory, Disk, Temperature, Uptime）のバーが表示される | 目視確認 |
 | SC-05 | 各指標のホバーで具体的な数値（%、GB、°C、日時分）が表示される | 目視確認 |
@@ -155,7 +155,7 @@ Phase 1 の実装全体を貫く原則。
 ### 4.2 本物の脆弱性（ADR-014）
 
 Rebecca の体調は **Mac mini のリアルな状態** から導出する。
-フェイクの脆弱性は作らない。CONCEPT_VULNERABILITY の「嘘の脆弱性はバレる」原則に従う。
+フェイクの脆弱性は作らない。[VULNERABILITY](../../concept/VULNERABILITY.md) の「嘘の脆弱性はバレる」原則に従う。
 
 ### 4.3 段階的拡張
 

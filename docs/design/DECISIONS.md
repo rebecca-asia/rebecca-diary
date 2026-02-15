@@ -6,7 +6,7 @@
 
 ## 📋 Overview
 
-CONCEPT_PHILOSOPHY、CONCEPT_PRESENCE、CONCEPT_VULNERABILITY の哲学的考察を経て、
+[PHILOSOPHY](../concept/PHILOSOPHY.md)、[PRESENCE](../concept/PRESENCE.md)、[VULNERABILITY](../concept/VULNERABILITY.md) の哲学的考察を経て、
 実装における4つの重要な問いに答えを出した。
 
 このドキュメントは **実装の指針** となる。

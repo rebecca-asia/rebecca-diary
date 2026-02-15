@@ -304,13 +304,13 @@ Rebecca's Room
 | F9.1.5 | 稼働時間取得 | `sysctl kern.boottime` で起動時刻を取得し経過時間を算出 | 必須 | UC-030 | WP-2.5 | 1 | 未実装 |
 | F9.1.6 | 状態判定 | 閾値テーブルに基づき各メトリクスを state/label/message に分類 | 必須 | UC-030 | WP-2.6 | 1 | 未実装 |
 | F9.1.7 | Overall Score計算 | ペナルティ加算方式で 0-100 のスコアを算出しAlert Levelを決定 | 必須 | UC-030 | WP-2.6 | 1 | 未実装 |
-| F9.1.8 | health.json出力 | PHASE1_SPEC 3.1 準拠の JSON を `src/data/health.json` に出力 | 必須 | UC-030 | WP-2.7 | 1 | 未実装 |
+| F9.1.8 | health.json出力 | [SPEC](../phases/phase1/SPEC.md) 3.1 準拠の JSON を `src/data/health.json` に出力 | 必須 | UC-030 | WP-2.7 | 1 | 未実装 |
 | F9.2.1 | Gateway稼働チェック | `pgrep -x openclaw-gateway` で完全一致プロセス検索 | 必須 | UC-031 | WP-3.1 | 1 | 未実装 |
 | F9.2.2 | 最終活動時刻取得 | `~/.openclaw/workspace/memory/` 最新ファイルの mtime を取得 | 必須 | UC-031 | WP-3.2 | 1 | 未実装 |
 | F9.2.3 | 時間帯コンテキスト判定 | 現在時刻から7つの時間帯を判定しメッセージを選択 | 必須 | UC-031 | WP-3.3 | 1 | 未実装 |
 | F9.2.4 | 在室状況判定 | Gateway + 最終活動 + 時刻から online/away/sleeping/offline を判定 | 必須 | UC-031 | WP-3.4 | 1 | 未実装 |
 | F9.2.5 | Activity Type推定 | 最新変更ファイルの種類から活動タイプを推定 | 推奨 | UC-031 | WP-3.5 | 1 | 未実装 |
-| F9.2.6 | status.json出力 | PHASE1_SPEC 3.2 準拠の JSON を `src/data/status.json` に出力 | 必須 | UC-031 | WP-3.6 | 1 | 未実装 |
+| F9.2.6 | status.json出力 | [SPEC](../phases/phase1/SPEC.md) 3.2 準拠の JSON を `src/data/status.json` に出力 | 必須 | UC-031 | WP-3.6 | 1 | 未実装 |
 | F9.3.1 | アトミック書き込み | `.tmp` ファイルに書き込み後 `os.rename()` で上書き | 必須 | UC-030, UC-031 | WP-2.7a | 1 | 未実装 |
 | F9.3.2 | 出力ディレクトリ自動作成 | `src/data/` が存在しない場合 `os.makedirs()` で自動作成 | 必須 | UC-030, UC-031 | WP-2.7a | 1 | 未実装 |
 | F9.3.3 | 個別メトリクス失敗時の継続動作 | 1つの取得が失敗しても他のメトリクスは正常出力 | 必須 | UC-030 | WP-2.7 | 1 | 未実装 |

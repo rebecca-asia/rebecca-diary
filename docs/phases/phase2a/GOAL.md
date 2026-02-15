@@ -45,7 +45,7 @@ Phase 2A で可視化するもの:
     └── 能力の獲得 → Skills（Claude Code プラグイン連動）
 ```
 
-### 存在の6要素（CONCEPT_PRESENCE）との対応
+### 存在の6要素（[PRESENCE](../../concept/PRESENCE.md)）との対応
 
 | 要素 | Phase 1 での実現 | Phase 2A での実現 | 実装 |
 |------|------------------|------------------|------|

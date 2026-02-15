@@ -86,10 +86,10 @@ Phase 1 の全作業の前提となるディレクトリ・ファイル・設定
 
 | 項目 | 内容 |
 |------|------|
-| **説明** | PHASE1_SPEC の JSON スキーマに準拠したモックデータを作成する。Frontend 開発を Collector 完成前に並行して進めるための**開発用データ**。正常・警告・緊急のバリエーションも用意する。 |
+| **説明** | [SPEC](SPEC.md) の JSON スキーマに準拠したモックデータを作成する。Frontend 開発を Collector 完成前に並行して進めるための**開発用データ**。正常・警告・緊急のバリエーションも用意する。 |
 | **成果物** | `src/data/health.json`（正常値サンプル）、`src/data/status.json`（正常値サンプル） |
 | **依存** | WP-1.2 |
-| **受入基準** | (1) PHASE1_SPEC セクション3 のスキーマに完全準拠 (2) `JSON.parse()` でエラーなくパースできる (3) 全フィールドが適切な型で入っている |
+| **受入基準** | (1) [SPEC](SPEC.md) セクション3 のスキーマに完全準拠 (2) `JSON.parse()` でエラーなくパースできる (3) 全フィールドが適切な型で入っている |
 
 ---
 
@@ -160,10 +160,10 @@ Mac mini のシステムメトリクスを収集し、Rebecca の体調データ
 
 | 項目 | 内容 |
 |------|------|
-| **説明** | PHASE1_SPEC の閾値テーブルに基づき、各メトリクスの数値を state / label / message にマッピングする関数群を実装。Overall Score（ペナルティ加算方式）と Alert Level（0-3）の判定も含む。 |
+| **説明** | [SPEC](SPEC.md) の閾値テーブルに基づき、各メトリクスの数値を state / label / message にマッピングする関数群を実装。Overall Score（ペナルティ加算方式）と Alert Level（0-3）の判定も含む。 |
 | **成果物** | `classify_cpu()`, `classify_memory()`, `classify_disk()`, `classify_temperature()`, `classify_uptime()`, `calculate_overall()`, `determine_alert_level()` |
 | **依存** | WP-2.1 ~ WP-2.5 |
-| **受入基準** | (1) PHASE1_SPEC の閾値テーブルと完全一致 (2) Overall Score が 0-100 (3) Alert Level が 0-3 の整数 |
+| **受入基準** | (1) [SPEC](SPEC.md) の閾値テーブルと完全一致 (2) Overall Score が 0-100 (3) Alert Level が 0-3 の整数 |
 
 **閾値テーブル:**
 
@@ -218,7 +218,7 @@ overall_score = max(0, min(100, 100 - sum))
 | **説明** | WP-2.1 ~ WP-2.6 を統合し、`if __name__ == '__main__'` で全メトリクス収集 → 状態判定 → Overall 計算 → JSON 出力のフルパイプラインを実装。出力先は `src/data/health.json`。ISO 8601 タイムスタンプ付き。各メトリクスが個別に失敗しても他は継続する。 |
 | **成果物** | 完成した `collectors/collect_health.py` |
 | **依存** | WP-2.6, WP-1.2 |
-| **受入基準** | (1) `python3 collectors/collect_health.py` で `src/data/health.json` が生成される (2) PHASE1_SPEC セクション 3.1 のスキーマに完全準拠 (3) 個別メトリクス失敗時も JSON 生成される（失敗フィールドは null） (4) Python 3 標準ライブラリのみ (5) `-v` オプションでデバッグ出力 |
+| **受入基準** | (1) `python3 collectors/collect_health.py` で `src/data/health.json` が生成される (2) [SPEC](SPEC.md) セクション 3.1 のスキーマに完全準拠 (3) 個別メトリクス失敗時も JSON 生成される（失敗フィールドは null） (4) Python 3 標準ライブラリのみ (5) `-v` オプションでデバッグ出力 |
 
 ---
 
@@ -259,7 +259,7 @@ Rebecca の在室状況を判定し、時間帯コンテキストとともに JS
 | **説明** | 現在時刻から7つの時間帯（morning, active, afternoon, evening, night, late_night, deep_night）を判定する `get_time_context() -> dict` を実装。Rebecca のメッセージも返す。 |
 | **成果物** | `get_time_context()` 関数。戻り値: `{"period": str, "message": str or null}` |
 | **依存** | WP-1.1 |
-| **受入基準** | (1) 24時間全時間帯をカバー (2) PHASE1_SPEC セクション 3.2 の定義と一致 |
+| **受入基準** | (1) 24時間全時間帯をカバー (2) [SPEC](SPEC.md) セクション 3.2 の定義と一致 |
 
 **時間帯マッピング:**
 
@@ -282,7 +282,7 @@ Rebecca の在室状況を判定し、時間帯コンテキストとともに JS
 | **説明** | Gateway 稼働状態、最終活動時刻、現在時刻から在室状況（online, away, sleeping, offline）を判定する `determine_status() -> dict` を実装。 |
 | **成果物** | `determine_status()` 関数。戻り値: `{"status": str, "label": str, "emoji": str}` |
 | **依存** | WP-3.1, WP-3.2, WP-3.3 |
-| **受入基準** | PHASE1_SPEC の Status Rules に完全準拠 |
+| **受入基準** | [SPEC](SPEC.md) の Status Rules に完全準拠 |
 
 **Status Rules:**
 
@@ -313,7 +313,7 @@ Rebecca の在室状況を判定し、時間帯コンテキストとともに JS
 | **説明** | WP-3.1 ~ WP-3.5 を統合し、Gateway チェック → 最終活動取得 → 時間帯判定 → ステータス判定 → JSON 出力のフルパイプラインを実装。出力先は `src/data/status.json`。 |
 | **成果物** | 完成した `collectors/collect_status.py` |
 | **依存** | WP-3.4, WP-3.5, WP-1.2 |
-| **受入基準** | (1) `python3 collectors/collect_status.py` で `src/data/status.json` が生成される (2) PHASE1_SPEC セクション 3.2 のスキーマに完全準拠 (3) ISO 8601 タイムスタンプ付き (4) Python 3 標準ライブラリのみ (5) `-v` オプションでデバッグ出力 |
+| **受入基準** | (1) `python3 collectors/collect_status.py` で `src/data/status.json` が生成される (2) [SPEC](SPEC.md) セクション 3.2 のスキーマに完全準拠 (3) ISO 8601 タイムスタンプ付き (4) Python 3 標準ライブラリのみ (5) `-v` オプションでデバッグ出力 |
 
 ---
 
@@ -631,7 +631,7 @@ Collector の自動実行環境を構築する。
 
 | 項目 | 内容 |
 |------|------|
-| **説明** | 両 Collector を手動実行し、出力 JSON が PHASE1_SPEC のスキーマに準拠していることを確認。 |
+| **説明** | 両 Collector を手動実行し、出力 JSON が [SPEC](SPEC.md) のスキーマに準拠していることを確認。 |
 | **成果物** | テスト結果 |
 | **依存** | WP-2.7, WP-3.6 |
 | **受入基準** | SC-01, SC-02 を満たす |
@@ -900,7 +900,7 @@ Day 11: WP-9.1 → 9.2 → 9.3                  ドキュメント（1h）
 | **依存** | WP-6.7 |
 | **受入基準** | (1) status.json が5分超: 「接続確認中...」(2) health.json が15分超: バーを dimmed + 「最終更新: XX分前」(3) 1時間超: offline 扱い + 「しばらく応答がないみたい...」 |
 
-**設計根拠:** CONCEPT_VULNERABILITY の「嘘の脆弱性はバレる」原則。古いデータで「online」を表示することは嘘であり、存在感を破壊する。
+**設計根拠:** [VULNERABILITY](../../concept/VULNERABILITY.md) の「嘘の脆弱性はバレる」原則。古いデータで「online」を表示することは嘘であり、存在感を破壊する。
 
 ---
 

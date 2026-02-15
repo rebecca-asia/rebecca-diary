@@ -155,7 +155,7 @@
 |------|------|
 | **アクター** | HealthCollector（cron / launchd、5分間隔） |
 | **事前条件** | Mac mini が稼働中。Python 3.9+ が利用可能 |
-| **事後条件** | `src/data/health.json` が PHASE1_SPEC のスキーマに準拠した JSON で更新される |
+| **事後条件** | `src/data/health.json` が [SPEC](../phases/phase1/SPEC.md) のスキーマに準拠した JSON で更新される |
 | **関連エンティティ** | E-020, E-030, E-032, E-034, E-035, E-037 |
 
 **基本フロー:**
@@ -187,7 +187,7 @@
 |------|------|
 | **アクター** | StatusCollector（cron / launchd、1分間隔） |
 | **事前条件** | Mac mini が稼働中 |
-| **事後条件** | `src/data/status.json` が PHASE1_SPEC のスキーマに準拠した JSON で更新される |
+| **事後条件** | `src/data/status.json` が [SPEC](../phases/phase1/SPEC.md) のスキーマに準拠した JSON で更新される |
 | **関連エンティティ** | E-021, E-031, E-033, E-036 |
 
 **基本フロー:**
@@ -390,7 +390,7 @@ else:
 | health 15分超 | Health Dashboard: バーを dimmed + 「最終更新: XX分前」 |
 | いずれか 1時間超 | offline 扱い + 「しばらく応答がないみたい...」 |
 
-**設計根拠:** CONCEPT_VULNERABILITY — 「嘘の脆弱性はバレる」。古いデータで「online」を表示することは存在感を破壊する。
+**設計根拠:** [VULNERABILITY](../concept/VULNERABILITY.md) — 「嘘の脆弱性はバレる」。古いデータで「online」を表示することは存在感を破壊する。
 
 ---
 

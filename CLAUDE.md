@@ -124,7 +124,7 @@ python3 scripts/update_diary.py -v
 
 1. Reads Markdown files for the given date from both sources
 2. Converts Markdown to HTML (headings, lists, tables, inline formatting)
-3. Inserts the entry after the `<!-- 日記エントリはここに追加される -->` marker in `index.html`
+3. Inserts the entry after the `<!-- 日記エントリはここに追加される -->` marker in `diary.html`
 4. Skips if an entry for that date already exists
 
 ## Conventions

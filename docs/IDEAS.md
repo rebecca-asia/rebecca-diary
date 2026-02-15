@@ -216,7 +216,7 @@ OpenClaw が Chrome プロセスを `--user-data-dir` 付きで起動してい�
 Overall Score に応じてページの `--bg` / `--surface` をごく微かに暖色系にシフトさせる。health が悪い時、訪問者がダッシュボードを見る前に「なんとなく違う」と感じるサブリミナルデザイン。
 
 **動機:**
-- CONCEPT_PRESENCE の「生命感」を視覚の閾値以下で表現
+- [PRESENCE](concept/PRESENCE.md) の「生命感」を視覚の閾値以下で表現
 - ダッシュボードを見なくても「何かおかしい」と感じさせる
 - 技術的にはCSS変数の動的変更で実現可能
 

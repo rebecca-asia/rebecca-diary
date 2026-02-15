@@ -163,9 +163,13 @@ rebecca-diary/
 │   ├── collect_status.py
 │   ├── collect_nurture.py
 │   └── collect_skills.py
+├── scripts/
+│   ├── update_diary.py      # 日記生成スクリプト (Protected)
+│   └── watch_diary.py       # リアルタイム監視 (Protected)
 ├── src/
 │   ├── index.html           # メインページ
-│   ├── nurture.html         # Status Screen（HUD/育成ダッシュボード）
+│   ├── diary.html           # 日記ページ (SSG生成)
+│   ├── nurture-prototype.html # Status Screen（HUD/育成ダッシュボード）
 │   ├── style.css            # 全スタイル
 │   ├── app.js               # JS ロジック
 │   ├── template.html        # SSG テンプレート
@@ -175,8 +179,6 @@ rebecca-diary/
 │   │   ├── skills.json
 │   │   └── status.json
 │   └── assets/rebecca/      # キャラクター画像
-├── update_diary.py          # 日記生成スクリプト (Protected)
-├── watch_diary.py           # リアルタイム監視 (Protected)
 └── screenshot.png
 ```
 

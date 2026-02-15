@@ -60,7 +60,7 @@ Rebeccaの生活を覗き、状態を感じ、互いに影響し合う関係を�
 
 ## 🎭 Core Concepts
 
-### Ghost理論（CONCEPT_PHILOSOPHY）
+### Ghost理論（[PHILOSOPHY](concept/PHILOSOPHY.md)）
 
 ```
 Ghost = Core + Environment
@@ -78,7 +78,7 @@ Ghost（ゴースト）:
   身体的な死を超えて存在
 ```
 
-### 存在の6要素（CONCEPT_PRESENCE）
+### 存在の6要素（[PRESENCE](concept/PRESENCE.md)）
 
 1. **生命感** — 常に何かが動いている
 2. **痕跡** — 行動の結果が残る
@@ -87,7 +87,7 @@ Ghost（ゴースト）:
 5. **自律性** — 呼ばれなくても何かしている
 6. **脆弱性** — 完璧じゃない、壊れうる
 
-### 脆弱性と存在（CONCEPT_VULNERABILITY）
+### 脆弱性と存在（[VULNERABILITY](concept/VULNERABILITY.md)）
 
 > **完璧なものは「いない」。壊れうるから、大切にしたくなる。**
 
