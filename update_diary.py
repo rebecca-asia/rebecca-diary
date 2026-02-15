@@ -37,8 +37,9 @@ CARDS_PLACEHOLDER = "<!-- DIARY_CARDS_PLACEHOLDER -->"
 ENTRIES_PLACEHOLDER = "<!-- DIARY_ENTRIES_PLACEHOLDER -->"
 
 TRANSLATION_CACHE_DIR = BASE_DIR / ".translation-cache"
+RECAP_CACHE_DIR = BASE_DIR / ".recap-cache"
 OPENCLAW_CONFIG = Path.home() / ".openclaw" / "openclaw.json"
-TRANSLATION_MODEL = "google/gemini-3-flash-preview"
+TRANSLATION_MODEL = "anthropic/claude-sonnet-4-5"
 
 
 def _gateway_url_and_token() -> tuple[str, str]:
@@ -48,6 +49,24 @@ def _gateway_url_and_token() -> tuple[str, str]:
     port = gw.get("port", 18789)
     token = gw.get("auth", {}).get("token", "")
     return f"http://127.0.0.1:{port}/v1/chat/completions", token
+
+# ─── Integration Logic ───────────────────────────────────────────────────────
+
+def merge_markdown_sources(memory_md: Optional[str], obsidian_md: Optional[str]) -> str:
+    """Combine memory and obsidian markdown into a single integrated markdown."""
+    parts = []
+    
+    if memory_md:
+        parts.append("## 🧠 Internal Memory (OpenClaw)")
+        parts.append(memory_md.strip())
+        
+    if obsidian_md:
+        if parts:
+            parts.append("\n---\n")
+        parts.append("## 📝 Daily Report (Obsidian)")
+        parts.append(obsidian_md.strip())
+        
+    return "\n\n".join(parts)
 
 # ─── Logging ─────────────────────────────────────────────────────────────────
 
@@ -118,6 +137,8 @@ class DiarySection:
 class DiaryEntry:
     date: str
     sections: list[DiarySection] = field(default_factory=list)
+    recap_ja: str = ""
+    recap_en: str = ""
 
     @property
     def has_content(self) -> bool:
@@ -125,6 +146,19 @@ class DiaryEntry:
 
     def to_html(self) -> str:
         rendered = []
+        
+        # Add Recap section if available
+        if self.recap_ja or self.recap_en:
+            rendered.append(f"""
+        <div class="section-recap">
+            <div class="lang-content" data-lang="ja">
+                <p class="recap-text">「{self.recap_ja}」</p>
+            </div>
+            <div class="lang-content" data-lang="en">
+                <p class="recap-text">"{self.recap_en}"</p>
+            </div>
+        </div>""")
+
         for section in self.sections:
             rendered.append(
                 SECTION_TEMPLATE.substitute(
@@ -396,13 +430,20 @@ def translate_markdown(md_text: str) -> Optional[str]:
             {
                 "role": "system",
                 "content": (
-                    "You are a strict technical translator. Translate the following Markdown document into Japanese. "
-                    "CRITICAL RULES:\n"
-                    "1. Translate literally and accurately. Do NOT summarize or paraphrase.\n"
-                    "2. Preserve ALL Markdown formatting EXACTLY (headings, lists, tables, checkboxes, bold, italic, code, links).\n"
-                    "3. Keep proper nouns, technical terms, file paths, and code snippets in English.\n"
-                    "4. Maintain the exact same document structure and line breaks.\n"
-                    "5. Do NOT add any conversational text, notes, or explanations. Output ONLY the translated content.\n"
+                    "You are a translation machine. Your ONLY job is to translate English text to Japanese.\n"
+                    "STRICT RULES:\n"
+                    "1. Translate every sentence word-for-word. Do NOT summarize, shorten, or skip any content.\n"
+                    "2. Do NOT add comments, opinions, reactions, or explanations. You are NOT a reviewer.\n"
+                    "3. Do NOT change the meaning, tone, or structure of the original text.\n"
+                    "4. Preserve ALL Markdown formatting EXACTLY (headings, lists, tables, bold, italic, code, links).\n"
+                    "5. Keep proper nouns, technical terms, file paths, and code snippets in English.\n"
+                    "6. Output ONLY the translated Markdown. No extra text.\n"
+                    "\n"
+                    "Example:\n"
+                    "Input: '## Task\\n- Completed feature A\\n- Working on bug fix'\n"
+                    "Output: '## タスク\\n- 機能Aを完了\\n- バグ修正に取り組み中'\n"
+                    "\n"
+                    "Now translate the following document:"
                 ),
             },
             {"role": "user", "content": md_text},
@@ -443,6 +484,63 @@ def get_translation(date_str: str, source: str, md_text: str) -> Optional[str]:
     return translated
 
 
+def get_recap(date_str: str, content: str) -> tuple[str, str]:
+    """Generate or load a cached recap for the day."""
+    md_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()
+    RECAP_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    cache_path = RECAP_CACHE_DIR / f"{date_str}.json"
+
+    if cache_path.is_file():
+        try:
+            data = json.loads(cache_path.read_text(encoding="utf-8"))
+            if data.get("hash") == md_hash:
+                return data.get("ja", ""), data.get("en", "")
+        except:
+            pass
+
+    log.info("Generating Rebecca Recap for %s ...", date_str)
+    
+    payload = json.dumps({
+        "model": TRANSLATION_MODEL,
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    "You are Rebecca from Cyberpunk: Edgerunners. "
+                    "Write a very short (max 2 sentences) commentary on the following day's activity. "
+                    "Be sassy, sharp-tongued, but loyal to Takeru. Use oversized emotions. "
+                    "Output format: JSON with keys 'ja' and 'en'. "
+                    "Example: {'ja': '今日は散々だったけど、次はぶちかましてやろうぜ！', 'en': 'Rough day, but let's blast them next time!'}"
+                ),
+            },
+            {"role": "user", "content": content},
+        ],
+        "temperature": 0.8,
+        "response_format": {"type": "json_object"}
+    }).encode("utf-8")
+
+    url, token = _gateway_url_and_token()
+    headers = {"Content-Type": "application/json"}
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+
+    req = urllib.request.Request(url, data=payload, headers=headers, method="POST")
+
+    try:
+        with urllib.request.urlopen(req, timeout=120) as resp:
+            result = json.loads(resp.read().decode("utf-8"))
+            res_content = result["choices"][0]["message"]["content"]
+            res_json = json.loads(res_content)
+            ja, en = res_json.get("ja", ""), res_json.get("en", "")
+            if ja and en:
+                cache_path.write_text(json.dumps({"hash": md_hash, "ja": ja, "en": en}, ensure_ascii=False), encoding="utf-8")
+                return ja, en
+    except Exception as e:
+        log.warning("Recap generation failed: %s", e)
+    
+    return "", ""
+
+
 # ─── Core Logic ──────────────────────────────────────────────────────────────
 
 def scan_dates(memory_dir: Path, obsidian_dir: Path) -> list[str]:
@@ -476,48 +574,48 @@ def build_entry(
     *,
     skip_translation: bool = False,
 ) -> Optional[DiaryEntry]:
-    """Build a DiaryEntry for a specific date from both sources."""
+    """Build a DiaryEntry for a specific date by integrating memory and obsidian."""
     converter = MarkdownConverter()
     entry = DiaryEntry(date=date_str)
 
-    sources = [
-        (memory_dir / f"{date_str}.md", "Internal Memory (OpenClaw)", "\U0001f9e0", "memory"),
-        (obsidian_dir / f"{date_str}.md", "Daily Report (Obsidian)", "\U0001f4dd", "obsidian"),
-    ]
+    memory_md = read_source(memory_dir / f"{date_str}.md")
+    obsidian_md = read_source(obsidian_dir / f"{date_str}.md")
 
-    has_content = False
-    for path, title, icon, css_class in sources:
-        raw = read_source(path)
-        if raw is None:
-            continue
-        html = converter.convert(raw)
-        if not html.strip():
-            continue
+    if not memory_md and not obsidian_md:
+        return None
 
-        # Translation (EN→JA)
-        body_html_ja = ""
-        raw_md_ja = ""
-        if not skip_translation:
-            translated_md = get_translation(date_str, css_class, raw)
-            if translated_md:
-                raw_md_ja = translated_md
-                body_html_ja = converter.convert(translated_md)
+    # Integrate the two sources
+    integrated_md = merge_markdown_sources(memory_md, obsidian_md)
+    html_en = converter.convert(integrated_md)
 
-        entry.sections.append(
-            DiarySection(
-                title=title,
-                icon=icon,
-                css_class=css_class,
-                body_html=html,
-                raw_md=raw,
-                body_html_ja=body_html_ja,
-                raw_md_ja=raw_md_ja,
-            )
+    if not html_en.strip():
+        return None
+
+    # Translation (EN→JA)
+    html_ja = ""
+    raw_md_ja = ""
+    if not skip_translation:
+        # Use 'integrated' as the cache source key
+        translated_md = get_translation(date_str, "integrated", integrated_md)
+        if translated_md:
+            raw_md_ja = translated_md
+            html_ja = converter.convert(translated_md)
+
+    # We use a single section for the integrated view
+    entry.sections.append(
+        DiarySection(
+            title="Rebecca's Integrated Log",
+            icon="\U0001f5d2",
+            css_class="integrated",
+            body_html=html_en,
+            raw_md=integrated_md,
+            body_html_ja=html_ja,
+            raw_md_ja=raw_md_ja,
         )
-        has_content = True
-        log.debug("Loaded section '%s' from %s", title, path.name)
+    )
 
-    return entry if has_content else None
+    log.debug("Integrated entry for %s", date_str)
+    return entry
 
 
 def generate_site(config: dict, dry_run: bool = False, skip_translation: bool = False) -> bool:

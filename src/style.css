@@ -712,7 +712,41 @@ main:has(.diary-entry:target) .diary-grid {
     line-height: 1.8;
 }
 
-/* ─── Sections (Memory / Obsidian) ───────────────────────────────── */
+/* ─── Sections (Memory / Obsidian / Recap) ───────────────────────── */
+
+.section-recap {
+    margin-top: var(--rb-space-lg);
+    margin-bottom: var(--rb-space-xl);
+    padding: 1.5rem;
+    border: 1px dashed var(--rb-neon-pink-dim);
+    border-radius: var(--rb-radius-lg);
+    background: rgba(255, 42, 109, 0.03);
+    position: relative;
+    text-align: center;
+}
+
+.section-recap::before {
+    content: 'REBECCA\'S RECAP';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--rb-bg-base);
+    padding: 0 10px;
+    font-family: var(--rb-font-display);
+    font-size: 0.65rem;
+    color: var(--rb-neon-pink);
+    letter-spacing: 0.2em;
+}
+
+.recap-text {
+    font-family: var(--rb-font-body), var(--rb-font-jp);
+    font-size: var(--rb-text-lg);
+    font-weight: 500;
+    color: var(--rb-text-primary);
+    font-style: italic;
+    line-height: 1.4;
+    margin: 0 !important;
+}
 
 .section-memory,
 .section-obsidian {
@@ -1426,6 +1460,119 @@ html[data-active-lang="en"] .diary-card .card-preview.lang-content[data-lang="en
 .lang-label-en.lang-active {
     color: var(--rb-neon-cyan);
     text-shadow: var(--rb-glow-text-cyan);
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   DIARY ENTRY NAVIGATION (Prev / Next)
+   ═══════════════════════════════════════════════════════════════════ */
+
+.entry-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--rb-space-sm);
+    margin-bottom: var(--rb-space-lg);
+    padding-bottom: var(--rb-space-lg);
+    border-bottom: 1px solid var(--rb-border-subtle);
+    position: relative;
+}
+
+.entry-nav::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--rb-neon-cyan-dim) 20%,
+        var(--rb-neon-pink-dim) 80%,
+        transparent
+    );
+    opacity: 0.4;
+}
+
+.entry-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--rb-border-subtle);
+    border-radius: var(--rb-radius-sm);
+    text-decoration: none;
+    font-family: var(--rb-font-mono);
+    font-size: var(--rb-text-xs);
+    color: var(--rb-text-secondary);
+    letter-spacing: 0.08em;
+    transition: all var(--rb-duration-normal);
+}
+
+.entry-nav-btn:hover {
+    color: var(--rb-text-primary);
+    border-color: var(--rb-neon-pink-dim);
+    box-shadow: 0 0 16px rgba(255, 42, 109, 0.1);
+}
+
+.entry-nav-prev:hover {
+    border-color: var(--rb-neon-cyan-dim);
+    box-shadow: 0 0 16px rgba(5, 217, 232, 0.1);
+}
+
+.entry-nav-arrow {
+    color: var(--rb-neon-pink-dim);
+    font-size: 0.6rem;
+    transition: transform var(--rb-duration-fast), color var(--rb-duration-fast);
+}
+
+.entry-nav-prev .entry-nav-arrow {
+    color: var(--rb-neon-cyan-dim);
+}
+
+.entry-nav-prev:hover .entry-nav-arrow {
+    transform: translateX(-3px);
+    color: var(--rb-neon-cyan);
+}
+
+.entry-nav-next:hover .entry-nav-arrow {
+    transform: translateX(3px);
+    color: var(--rb-neon-pink);
+}
+
+.entry-nav-label {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+}
+
+.entry-nav-date {
+    color: var(--rb-text-muted);
+}
+
+.entry-nav-list {
+    color: var(--rb-text-muted);
+    border-color: transparent;
+    background: none;
+}
+
+.entry-nav-list:hover {
+    color: var(--rb-neon-cyan);
+    border-color: rgba(5, 217, 232, 0.15);
+    box-shadow: 0 0 12px rgba(5, 217, 232, 0.08);
+    text-shadow: var(--rb-glow-text-cyan);
+}
+
+/* ─── Status Screen Link ────────────────────────────────────────── */
+
+.status-screen-link {
+    border-color: rgba(255, 42, 109, 0.15);
+}
+
+.status-screen-link:hover {
+    border-color: var(--rb-neon-pink-dim);
+    box-shadow: 0 0 20px rgba(255, 42, 109, 0.15);
 }
 
 /* ─── Scrollbar (Webkit) ─────────────────────────────────────────── */

@@ -57,6 +57,80 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    // ─── Prev / Next Diary Navigation ───────────────────────────────
+
+    var diaryEntries = Array.prototype.slice.call(
+        document.querySelectorAll('.diary-entry[id^="diary-"]')
+    ).map(function (el) { return el.id; });
+
+    function buildEntryNav(entryId) {
+        var idx = diaryEntries.indexOf(entryId);
+        if (idx === -1) return;
+
+        var entry = document.getElementById(entryId);
+        if (!entry) return;
+
+        // Remove existing nav if present
+        var existing = entry.querySelector('.entry-nav');
+        if (existing) existing.remove();
+
+        var nav = document.createElement('nav');
+        nav.className = 'entry-nav';
+
+        // Newer entry (previous in array = newer date)
+        if (idx > 0) {
+            var prevId = diaryEntries[idx - 1];
+            var prevDate = prevId.replace('diary-', '');
+            var prevLink = document.createElement('a');
+            prevLink.href = '#' + prevId;
+            prevLink.className = 'entry-nav-btn entry-nav-prev';
+            prevLink.innerHTML = '<span class="entry-nav-arrow">&#9664;</span><span class="entry-nav-label">NEWER</span><span class="entry-nav-date">' + prevDate + '</span>';
+            nav.appendChild(prevLink);
+        } else {
+            var spacer = document.createElement('div');
+            nav.appendChild(spacer);
+        }
+
+        // Back to list
+        var backLink = document.createElement('a');
+        backLink.href = '#top';
+        backLink.className = 'entry-nav-btn entry-nav-list';
+        backLink.innerHTML = '<span class="entry-nav-label">LIST</span>';
+        nav.appendChild(backLink);
+
+        // Older entry (next in array = older date)
+        if (idx < diaryEntries.length - 1) {
+            var nextId = diaryEntries[idx + 1];
+            var nextDate = nextId.replace('diary-', '');
+            var nextLink = document.createElement('a');
+            nextLink.href = '#' + nextId;
+            nextLink.className = 'entry-nav-btn entry-nav-next';
+            nextLink.innerHTML = '<span class="entry-nav-date">' + nextDate + '</span><span class="entry-nav-label">OLDER</span><span class="entry-nav-arrow">&#9654;</span>';
+            nav.appendChild(nextLink);
+        } else {
+            var spacer2 = document.createElement('div');
+            nav.appendChild(spacer2);
+        }
+
+        // Insert after entry-header (top of entry)
+        var header = entry.querySelector('.entry-header');
+        if (header && header.nextSibling) {
+            entry.insertBefore(nav, header.nextSibling);
+        } else {
+            entry.insertBefore(nav, entry.firstChild);
+        }
+    }
+
+    function updateEntryNav() {
+        var hash = location.hash.replace('#', '');
+        if (hash && hash.indexOf('diary-') === 0) {
+            buildEntryNav(hash);
+        }
+    }
+
+    updateEntryNav();
+    window.addEventListener('hashchange', updateEntryNav);
+
     // ═══════════════════════════════════════════════════════════════════
     // Phase 1: Room Status + Health Dashboard
     // ═══════════════════════════════════════════════════════════════════

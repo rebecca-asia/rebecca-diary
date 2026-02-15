@@ -440,6 +440,93 @@ canvas#particleCanvas{position:fixed;inset:0;z-index:2;pointer-events:none}
   0%,100%{opacity:.4;transform:translateX(-50%) scale(1)}
   50%{opacity:.8;transform:translateX(-50%) scale(1.2)}
 }
+
+/* ================ RESPONSIVE: MOBILE (<768px) ================ */
+@media(max-width:767px){
+  html,body{overflow:auto;height:auto}
+  .room-bg{position:fixed}
+  .scanlines{position:fixed}
+
+  /* Panels: static vertical stack */
+  .glass{
+    position:static !important;
+    width:calc(100% - 32px) !important;
+    margin:8px 16px;
+    max-height:none;
+    animation:none;
+  }
+  .glass.collapsed .panel-body{max-height:0 !important}
+  .p-skills .panel-body{max-height:none}
+  .p-activity .panel-body{max-height:none}
+  .p-skills{max-height:none}
+  .p-activity{max-height:none}
+
+  /* Disable hover lift on mobile */
+  .glass:not(.dragging):hover{transform:none}
+
+  /* Drag handle: hide grip, disable grab cursor */
+  .panel-hdr{cursor:default}
+  .panel-hdr:active{cursor:default}
+  .ph-grip{display:none}
+
+  /* Rebecca presence: relative, constrained height */
+  .rebecca-presence{
+    position:relative;z-index:5;
+    left:auto;transform:none;
+    height:200px;width:100%;max-width:100%;
+    bottom:auto;
+    margin:0;
+    justify-content:center;
+  }
+  .rebecca-presence img{max-height:200px}
+  .rebecca-presence::after{display:none}
+
+  /* Top nav: sticky horizontal bar */
+  .top-nav{
+    position:sticky;top:0;left:0;
+    transform:none;
+    flex-direction:row;
+    justify-content:center;
+    gap:8px;
+    z-index:40;
+    padding:8px 16px;
+    background:rgba(21,21,25,.85);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  }
+
+  /* HUD bar: simplified */
+  .hud-bar{position:fixed;z-index:40}
+  .hud-hide-mobile{display:none !important}
+
+  /* Lighter backdrop-filter for performance */
+  .glass{
+    backdrop-filter:blur(12px) saturate(1.1) brightness(.95);
+    -webkit-backdrop-filter:blur(12px) saturate(1.1) brightness(.95);
+  }
+
+  /* Particle canvas stays fixed */
+  canvas#particleCanvas{position:fixed}
+
+  /* Panel order via flexbox on body */
+  body{display:flex;flex-direction:column;min-height:100vh;padding-bottom:56px}
+  .room-bg,.scanlines,canvas#particleCanvas,.toast-wrap,.lvup-overlay{order:-1}
+  .top-nav{order:1}
+  .rebecca-presence{order:2}
+  .p-character{order:3}
+  .p-vitals{order:4}
+  .p-skills{order:5}
+  .p-activity{order:6}
+  .hud-bar{order:7}
+}
+
+/* ================ RESPONSIVE: TABLET (768px - 1023px) ================ */
+@media(min-width:768px) and (max-width:1023px){
+  .p-character{width:220px}
+  .p-vitals{width:220px}
+  .p-skills{width:200px}
+  .p-activity{width:220px}
+  .rebecca-presence{max-width:40vw}
+}
 </style>
 </head>
 <body>
@@ -578,20 +665,20 @@ canvas#particleCanvas{position:fixed;inset:0;z-index:2;pointer-events:none}
   <span class="hud-dot" id="hudDot"></span>
   <span class="hud-val" id="hudStatus">—</span>
   <span class="hud-sep"></span>
-  <span class="hud-lbl">uptime</span><span class="hud-val" id="hudUptime">—</span>
-  <span class="hud-sep"></span>
+  <span class="hud-lbl hud-hide-mobile">uptime</span><span class="hud-val hud-hide-mobile" id="hudUptime">—</span>
+  <span class="hud-sep hud-hide-mobile"></span>
   <span class="hud-lbl">time</span><span class="hud-val" id="hClock">--:--:--</span>
-  <span class="hud-sep"></span>
-  <div class="hud-voice">
+  <span class="hud-sep hud-hide-mobile"></span>
+  <div class="hud-voice hud-hide-mobile">
     <div class="voice-bars"><div class="vb"></div><div class="vb"></div><div class="vb"></div><div class="vb"></div><div class="vb"></div></div>
     <div class="hud-voice-text" id="vText">&#12300;......&#12301;</div>
   </div>
   <div class="hud-right">
     <div class="hud-stat"><span class="hud-stat-v" id="hudStreak">—</span><span class="hud-stat-l">streak</span></div>
-    <span class="hud-sep"></span>
-    <div class="hud-stat"><span class="hud-stat-v" id="hudTotal">—</span><span class="hud-stat-l">total</span></div>
-    <span class="hud-sep"></span>
-    <div class="hud-stat"><span class="hud-stat-v" id="hudLast">—</span><span class="hud-stat-l">last</span></div>
+    <span class="hud-sep hud-hide-mobile"></span>
+    <div class="hud-stat hud-hide-mobile"><span class="hud-stat-v" id="hudTotal">—</span><span class="hud-stat-l">total</span></div>
+    <span class="hud-sep hud-hide-mobile"></span>
+    <div class="hud-stat hud-hide-mobile"><span class="hud-stat-v" id="hudLast">—</span><span class="hud-stat-l">last</span></div>
     <span class="hud-sep"></span>
     <span class="hud-lbl">day</span><span class="hud-val" id="hudDay">—</span>
   </div>
@@ -1069,6 +1156,40 @@ function scheduleNextChange() {
 scheduleNextChange();
 
 // ---------------------------------------------------------------------------
+// Responsive handling
+// ---------------------------------------------------------------------------
+const MOBILE_BREAKPOINT = 768;
+let isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+
+function handleResponsive() {
+  const nowMobile = window.innerWidth < MOBILE_BREAKPOINT;
+  if (nowMobile === isMobile) return;
+  isMobile = nowMobile;
+
+  const panels = document.querySelectorAll('.glass[data-panel]');
+  if (isMobile) {
+    // Entering mobile: clear inline position styles so CSS static layout takes over
+    panels.forEach(panel => {
+      panel.style.removeProperty('left');
+      panel.style.removeProperty('top');
+      panel.style.removeProperty('right');
+      panel.style.removeProperty('bottom');
+    });
+  } else {
+    // Returning to desktop: restore saved positions from localStorage
+    const state = loadPanelState();
+    panels.forEach(panel => {
+      const key = panel.dataset.panel;
+      if (state[key] && state[key].x != null && state[key].y != null) {
+        applyPosition(panel, state[key].x, state[key].y);
+      }
+    });
+  }
+}
+
+window.addEventListener('resize', handleResponsive);
+
+// ---------------------------------------------------------------------------
 // Panel Drag & Drop + Collapse (localStorage persistent)
 // ---------------------------------------------------------------------------
 const PANEL_STORAGE_KEY = 'rebecca-panels';
@@ -1092,7 +1213,7 @@ function savePanelState(state) {
     if (!hdr) return;
 
     if (state[key]) {
-      if (state[key].x != null && state[key].y != null) {
+      if (!isMobile && state[key].x != null && state[key].y != null) {
         applyPosition(panel, state[key].x, state[key].y);
       }
       if (state[key].collapsed) {
@@ -1115,6 +1236,7 @@ function savePanelState(state) {
     let isDragging = false, startX, startY, origX, origY;
 
     hdr.addEventListener('mousedown', e => {
+      if (isMobile) return;
       if (e.target.closest('.collapse-btn')) return;
       e.preventDefault();
       isDragging = true;
@@ -1143,6 +1265,7 @@ function savePanelState(state) {
     });
 
     hdr.addEventListener('touchstart', e => {
+      if (isMobile) return;
       if (e.target.closest('.collapse-btn')) return;
       const t = e.touches[0];
       isDragging = true;
